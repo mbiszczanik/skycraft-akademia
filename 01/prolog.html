@@ -230,6 +230,87 @@ blockquote {
   padding: 0.1em 0 0.1em 1em;
 }
 
+/* Nawigacja stron spotkania: okruszki pod H1, sąsiednie spotkania na dole. */
+.pagenav {
+  font-family: var(--sc-mono);
+  font-size: 13px;
+  color: var(--sc-meta);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin: 0 0 1.6em;
+}
+
+.pagenav a {
+  color: var(--sc-meta);
+  text-decoration-color: var(--sc-rule);
+}
+
+.pagenav a:hover {
+  color: var(--sc-accent);
+}
+
+.pagenav .current {
+  color: var(--sc-ink);
+  font-weight: 600;
+}
+
+.pagenav .sep {
+  color: var(--sc-rule);
+}
+
+.pagenav.bottom {
+  justify-content: space-between;
+  border-top: 1px solid var(--sc-rule);
+  margin: 3em 0 0;
+  padding-top: 14px;
+}
+
+.eyebrow a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.eyebrow a:hover {
+  color: var(--sc-accent);
+}
+
+/* Spis treści z nagłówków H2. */
+.toc {
+  border-left: 2px solid var(--sc-accent);
+  padding: 0.2em 0 0.2em 1em;
+  margin: 0 0 2em;
+  font-size: 15px;
+}
+
+.toc-title {
+  font-family: var(--sc-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sc-meta);
+  margin-bottom: 0.4em;
+}
+
+.toc ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  columns: 2;
+  column-gap: 2em;
+}
+
+.toc li {
+  margin: 0.15em 0;
+  break-inside: avoid;
+}
+
+.toc a {
+  color: var(--sc-ink);
+  text-decoration-color: var(--sc-rule);
+}
+
 .sig {
   border-top: 1px solid var(--sc-rule);
   margin-top: 4em;
@@ -264,6 +345,11 @@ blockquote {
 }
 
 @media print {
+  .pagenav,
+  .toc {
+    display: none;
+  }
+
   html,
   body {
     background: #fff;
@@ -311,8 +397,10 @@ blockquote {
   }
 }
 </style></head>
-<body><main><div class="eyebrow">SkyCraft: Akademia Chmury</div>
+<body><main><div class="eyebrow"><a href="../index.html">SkyCraft: Akademia Chmury</a></div>
 <h1 id="prolog-spotkania-1-założenie-studia">Prolog spotkania 1: Założenie studia</h1>
+<nav class="pagenav"><a href="../index.html">Strona główna</a><span class="sep">›</span><span>Spotkanie 1: Założenie studia</span><span class="sep">›</span><span class="current">Prolog</span></nav>
+<nav class="toc"><div class="toc-title">Na tej stronie</div><ul><li><a href="#1-tenant-katalog-subskrypcja">1. Tenant, katalog, subskrypcja</a></li><li><a href="#2-dwa-systemy-uprawnień-entra-id-i-azure-rbac">2. Dwa systemy uprawnień: Entra ID i Azure RBAC</a></li><li><a href="#3-tożsamość-jako-perymetr">3. Tożsamość jako perymetr</a></li><li><a href="#4-model-b2b-gość-który-nie-ma-u-ciebie-hasła">4. Model B2B: gość, który nie ma u Ciebie hasła</a></li><li><a href="#sprawdź-się">Sprawdź się</a></li></ul></nav>
 <p>Teoria dla dociekliwych. Deck daje mapę, ten dokument tłumaczy mechanizmy. Czytasz go przed zajęciami, jeśli chcesz wejść głębiej, albo po zajęciach, gdy coś Cię zaskoczyło. Każdy koncept ma ten sam układ: co to jest, po co istnieje, jak działa, gdzie się łamie, jak pyta o to egzamin AZ-104.</p>
 <p>Cztery koncepty tego spotkania:</p>
 <ol>
@@ -390,5 +478,6 @@ blockquote {
 <li>Illidan przestał współpracować ze studiem. Które dwie operacje mają sens, a która nie ma sensu: reset hasła, blokada logowania, usunięcie obiektu?</li>
 </ol>
 
+<nav class="pagenav bottom"><span></span><a href="../index.html">Strona główna</a><a href="../02/prolog.html">Spotkanie 2: Zasady studia →</a></nav>
 <div class="sig"><div><div class="sig-name">Marcin Biszczanik</div><div class="sig-motto">Złożone systemy. Ludzki język.</div></div><a class="sig-url" href="https://www.linkedin.com/in/marcin-biszczanik">in/marcin-biszczanik</a></div>
 </main></body></html>

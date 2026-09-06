@@ -232,6 +232,87 @@ blockquote {
   padding: 0.1em 0 0.1em 1em;
 }
 
+/* Nawigacja stron spotkania: okruszki pod H1, sąsiednie spotkania na dole. */
+.pagenav {
+  font-family: var(--sc-mono);
+  font-size: 13px;
+  color: var(--sc-meta);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin: 0 0 1.6em;
+}
+
+.pagenav a {
+  color: var(--sc-meta);
+  text-decoration-color: var(--sc-rule);
+}
+
+.pagenav a:hover {
+  color: var(--sc-accent);
+}
+
+.pagenav .current {
+  color: var(--sc-ink);
+  font-weight: 600;
+}
+
+.pagenav .sep {
+  color: var(--sc-rule);
+}
+
+.pagenav.bottom {
+  justify-content: space-between;
+  border-top: 1px solid var(--sc-rule);
+  margin: 3em 0 0;
+  padding-top: 14px;
+}
+
+.eyebrow a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.eyebrow a:hover {
+  color: var(--sc-accent);
+}
+
+/* Spis treści z nagłówków H2. */
+.toc {
+  border-left: 2px solid var(--sc-accent);
+  padding: 0.2em 0 0.2em 1em;
+  margin: 0 0 2em;
+  font-size: 15px;
+}
+
+.toc-title {
+  font-family: var(--sc-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sc-meta);
+  margin-bottom: 0.4em;
+}
+
+.toc ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  columns: 2;
+  column-gap: 2em;
+}
+
+.toc li {
+  margin: 0.15em 0;
+  break-inside: avoid;
+}
+
+.toc a {
+  color: var(--sc-ink);
+  text-decoration-color: var(--sc-rule);
+}
+
 .sig {
   border-top: 1px solid var(--sc-rule);
   margin-top: 4em;
@@ -266,6 +347,11 @@ blockquote {
 }
 
 @media print {
+  .pagenav,
+  .toc {
+    display: none;
+  }
+
   html,
   body {
     background: #fff;
