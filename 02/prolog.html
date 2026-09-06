@@ -489,7 +489,7 @@ blockquote {
 <ul>
 <li>Policy przypisana z efektem <code>Audit</code>, a oczekiwana jest blokada. Zasób powstaje, raport świeci na czerwono i nikt tego nie czyta.</li>
 <li>Zły zakres przypisania policy. Reguła na jednej grupie zasobów nie chroni reszty subskrypcji.</li>
-<li>Blokada <code>CanNotDelete</code> na grupie zasobów uniemożliwia sprzątanie skryptem. Od spotkania 6 kasujecie zasoby po każdych zajęciach, więc blokadę zakładamy tam, gdzie ma sens, i pamiętamy o niej.</li>
+<li>Blokada <code>CanNotDelete</code> na grupie zasobów blokuje też usuwanie zasobów w niej, więc uniemożliwia sprzątanie. Od spotkania 3 kasujecie zasoby w <code>prod</code> po każdych zajęciach, dlatego blokadę zakładamy na <code>platform</code>, gdzie stoją tylko rzeczy trwałe.</li>
 <li>Tagi z literówką w kluczu. <code>Enviroment</code> i <code>Environment</code> to dwa różne tagi, a raport kosztów pokaże dwie kolumny.</li>
 </ul>
 <p><strong>Jak pyta AZ-104.</strong> „Reguła ma raportować niezgodność, ale nie blokować wdrożeń. Jaki efekt?” (<code>Audit</code>). „Jak wymusić tag na istniejących zasobach?” (policy z efektem <code>Modify</code> plus zadanie naprawcze). „Owner nie może usunąć grupy zasobów, brak policy. Co sprawdzić?” (blokadę, także dziedziczoną).</p>

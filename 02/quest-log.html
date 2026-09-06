@@ -468,8 +468,8 @@ blockquote {
 <li>ma wyjść: grupa bez tagu odrzucona, z tagiem <code>Environment</code> przechodzi</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>10.</strong> Blokada <code>CanNotDelete</code> na <code>prod-skycraft-swc-rg</code> i próba usunięcia → <a href="https://github.com/mbiszczanik/skycraft/blob/94c600c8c8ab07100eed3e155a4d176d5a26396d/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1310-apply-cannotdelete-lock-to-production-resource-group">1.3.10</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/94c600c8c8ab07100eed3e155a4d176d5a26396d/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1311-test-the-lock">1.3.11</a><ul>
-<li>ma wyjść: usunięcie grupy zasobów zablokowane komunikatem o blokadzie</li>
+<li><input type="checkbox"> <strong>10.</strong> Blokada <code>CanNotDelete</code> na <code>platform-skycraft-swc-rg</code> i próba usunięcia grupy → <a href="https://github.com/mbiszczanik/skycraft/blob/94c600c8c8ab07100eed3e155a4d176d5a26396d/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1312-apply-cannotdelete-lock-to-platform-resource-group">1.3.12</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/94c600c8c8ab07100eed3e155a4d176d5a26396d/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1311-test-the-lock">1.3.11</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/94c600c8c8ab07100eed3e155a4d176d5a26396d/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1310-apply-cannotdelete-lock-to-production-resource-group">1.3.10</a><ul>
+<li>ma wyjść: usunięcie <code>platform-skycraft-swc-rg</code> zablokowane komunikatem o blokadzie; <code>prod</code> bez blokady, bo od spotkania 3 sprzątamy w nim zasoby</li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>11.</strong> Budżet na <code>prod-skycraft-swc-rg</code> z alertami 50/80/100 procent → <a href="https://github.com/mbiszczanik/skycraft/blob/94c600c8c8ab07100eed3e155a4d176d5a26396d/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1316-create-resource-group-budget">1.3.16</a><ul>
@@ -481,7 +481,7 @@ blockquote {
 <p>Kroki poniżej mijasz świadomie. Jeśli lab guide każe Ci coś zrobić, a nie ma tego na liście wyżej, to jest to jeden z nich.</p>
 <ul>
 <li><strong>Lab 1.2:</strong> 1.2.13 · jeśli starczy czasu (Check access (1.2.10-1.2.11) pokazuje to samo szybciej)</li>
-<li><strong>Lab 1.3:</strong> 1.3.7, 1.3.9, 1.3.12, 1.3.17 · jeśli starczy czasu (powtórzenie mechanizmu z 1.3.5; wynik pojawia się z opóźnieniem; jedna blokada wystarczy, żeby zobaczyć efekt; druga utrudni sprzątanie na spotkaniu 3; bez płatnych zasobów wykres jest pusty; wraca na spotkaniu 3); 1.3.8 · side quest 2; 1.3.13 · do domu; 1.3.14-1.3.15 · spotkanie 1; 1.3.18-1.3.21 · side quest 3; 1.3.22 · side quest 4</li>
+<li><strong>Lab 1.3:</strong> 1.3.7, 1.3.9, 1.3.17 · jeśli starczy czasu (powtórzenie mechanizmu z 1.3.5; wynik pojawia się z opóźnieniem; bez płatnych zasobów wykres jest pusty; wraca na spotkaniu 3); 1.3.8 · side quest 2; 1.3.13 · do domu; 1.3.14-1.3.15 · spotkanie 1; 1.3.18-1.3.21 · side quest 3; 1.3.22 · side quest 4</li>
 </ul>
 <p>Lab 1.2 numeruje kroki 1.2.1-1.2.13 kolejno, bez przeskoków; Section 6 „Understanding Role Assignment Properties” to sam tekst, bez numerowanego kroku (nie ma 1.2.14). Lab 1.3 numeruje kroki 1.3.1-1.3.22 kolejno, bez przeskoków.</p>
 <!-- quest-log:end --><h2 id="gdy-coś-nie-działa">Gdy coś nie działa</h2>
@@ -522,7 +522,7 @@ blockquote {
 <tr>
 <td>Nie mogę skasować grupy zasobów mimo roli Owner</td>
 <td>blokada <em>CanNotDelete</em>, także dziedziczona z góry</td>
-<td>tak ma być na <code>prod</code>; blokadę zdejmuje się świadomie, nie dziś</td>
+<td>tak ma być na <code>platform</code>; blokadę zdejmuje się świadomie, nie dziś</td>
 <td><a href="prolog.html#3-governance-tagi-policy-blokady">koncept 3</a></td>
 </tr>
 <tr>
@@ -533,7 +533,7 @@ blockquote {
 </tr>
 </tbody></table>
 <h2 id="sprzątanie-dziś-nic">Sprzątanie: dziś nic</h2>
-<p>Grupy zasobów są puste, a tagi, przypisania ról, policy, blokada i budżet nic nie kosztują. Wszystko zostaje do spotkania 3: sieci wchodzą do <code>platform-skycraft-swc-rg</code> i <code>prod-skycraft-swc-rg</code>. Blokady <code>CanNotDelete</code> na <code>prod</code> nie zdejmuj.</p>
+<p>Grupy zasobów są puste, a tagi, przypisania ról, policy, blokada i budżet nic nie kosztują. Wszystko zostaje do spotkania 3: sieci wchodzą do <code>platform-skycraft-swc-rg</code> i <code>prod-skycraft-swc-rg</code>. Blokady <code>CanNotDelete</code> na <code>platform</code> nie zdejmuj: ta grupa nigdy nie jest sprzątana.</p>
 <ul>
 <li><input type="checkbox"> Trzy grupy zasobów z czterema tagami każda widoczne w usłudze Tags</li>
 <li><input type="checkbox"> W Cost Management kredyt nadal blisko 100 USD</li>
