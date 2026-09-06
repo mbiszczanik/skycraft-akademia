@@ -189,6 +189,35 @@ hr {
   margin: 2.5em 0;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.4em 0;
+  font-size: 0.95em;
+  line-height: 1.45;
+}
+
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5em 1.1em 0.5em 0;
+  border-bottom: 1px solid var(--sc-rule);
+}
+
+th {
+  font-weight: 500;
+  color: var(--sc-ink);
+  border-bottom-color: var(--sc-ink);
+  white-space: nowrap;
+}
+
+/* Strona główna: numer i kolumna „Materiały” bez łamania. */
+.index td:first-child,
+.index td:last-child {
+  white-space: nowrap;
+}
+
 code {
   font-family: var(--sc-mono);
   font-size: 0.9em;
