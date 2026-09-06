@@ -408,9 +408,9 @@ blockquote {
 </style></head>
 <body><main><div class="eyebrow"><a href="../index.html">SkyCraft: Akademia Chmury</a></div>
 <h1 id="prolog-spotkania-2-zasady-studia">Prolog spotkania 2: Zasady studia</h1>
-<nav class="pagenav"><a href="../index.html">Strona główna</a><span class="sep">›</span><span>Spotkanie 2: Zasady studia</span><span class="sep">›</span><span class="current">Prolog</span></nav>
-<nav class="toc"><div class="toc-title">Na tej stronie</div><ul><li><a href="#1-anatomia-przypisania-roli">1. Anatomia przypisania roli</a></li><li><a href="#2-zakres-dziedziczenie-i-sumowanie-uprawnień">2. Zakres, dziedziczenie i sumowanie uprawnień</a></li><li><a href="#3-governance-tagi-policy-blokady">3. Governance: tagi, policy, blokady</a></li><li><a href="#4-koszty-budżet-alert-i-to-czego-one-nie-robią">4. Koszty: budżet, alert i to, czego one nie robią</a></li><li><a href="#sprawdź-się">Sprawdź się</a></li></ul></nav>
-<p>Teoria dla dociekliwych. Deck daje mapę, ten dokument tłumaczy mechanizmy. Czytasz go przed zajęciami, jeśli chcesz wejść głębiej, albo po zajęciach, gdy coś Cię zaskoczyło. Każdy koncept ma ten sam układ: co to jest, po co istnieje, jak działa, gdzie się łamie, jak pyta o to egzamin AZ-104.</p>
+<nav class="pagenav"><a href="../index.html">Strona główna</a><span class="sep">›</span><span>Spotkanie 2: Zasady studia</span><span class="sep">›</span><span class="current">Prolog</span><span class="sep">·</span><a href="quest-log.html">Quest log</a></nav>
+<nav class="toc"><div class="toc-title">Na tej stronie</div><ul><li><a href="#1-anatomia-przypisania-roli">1. Anatomia przypisania roli</a></li><li><a href="#2-zakres-dziedziczenie-i-sumowanie-uprawnień">2. Zakres, dziedziczenie i sumowanie uprawnień</a></li><li><a href="#3-governance-tagi-policy-blokady">3. Governance: tagi, policy, blokady</a></li><li><a href="#4-koszty-budżet-alert-i-to-czego-one-nie-robią">4. Koszty: budżet, alert i to, czego one nie robią</a></li><li><a href="#sprawdź-się">Sprawdź się</a></li><li><a href="#dalej-microsoft-learn">Dalej: Microsoft Learn</a></li></ul></nav>
+<p>Pre-read tego spotkania, ok. 20 minut. Czytasz przed zajęciami: quiz na starcie sięga do tego, co tu jest, a deck na zajęciach tylko to porządkuje. Wracasz tu po zajęciach, gdy coś w labie zaskoczyło. Każdy koncept ma ten sam układ: co to jest, po co istnieje, jak działa, gdzie się łamie, jak pyta o to egzamin AZ-104. Na końcu „Sprawdź się” jako próba przed quizem i linki do źródeł.</p>
 <p>Cztery koncepty tego spotkania:</p>
 <ol>
 <li><a href="#1-anatomia-przypisania-roli">Anatomia przypisania roli</a></li>
@@ -510,6 +510,7 @@ blockquote {
 <p><strong>Jak pyta AZ-104.</strong> „Po przekroczeniu budżetu zasoby mają się zatrzymać. Co jest potrzebne?” (action group z automatyzacją, sam budżet nie wystarczy). „Jak rozliczyć koszty per projekt?” (tagi na zasobach plus filtr w Cost Analysis). „Gdzie znaleźć rekomendacje o niewykorzystanych maszynach?” (Azure Advisor, kategoria Cost).</p>
 <hr>
 <h2 id="sprawdź-się">Sprawdź się</h2>
+<p>Próba przed quizem. Pytania bez odpowiedzi: jeśli któreś sprawia trudność, wróć do odpowiedniego konceptu. Quiz na zajęciach zada inne pytania o te same mechanizmy.</p>
 <ol>
 <li>Khadgar ma <em>Contributor</em> na subskrypcji. Chce nadać Chromie rolę <em>Reader</em> na grupie zasobów. Co się stanie i jakiej roli potrzebuje?</li>
 <li>Grupa zasobów ma tag <code>Project=SkyCraft</code>. Tworzysz w niej maszynę wirtualną bez tagów. Czy pojawi się w raporcie kosztów przefiltrowanym po tym tagu?</li>
@@ -517,6 +518,17 @@ blockquote {
 <li>Na grupie <code>prod-skycraft-swc-rg</code> zakładasz blokadę <code>ReadOnly</code>. Które codzienne operacje przestaną działać, choć wyglądają na odczyt?</li>
 <li>Budżet 50 USD z alertem na 100 procent został przekroczony w sobotę o 3:00. Kiedy i w jakiej formie się o tym dowiesz, i co w tym czasie dzieje się z zasobami?</li>
 </ol>
+<hr>
+<h2 id="dalej-microsoft-learn">Dalej: Microsoft Learn</h2>
+<p>Źródła, z których powstały koncepty. Po angielsku.</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/overview">What is Azure role-based access control?</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps">Steps to assign an Azure role</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview">Understand scope for Azure RBAC</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/governance/policy/overview">Azure Policy overview</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources">Use tags to organize your Azure resources</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets">Create and manage budgets</a></li>
+</ul>
 
 <nav class="pagenav bottom"><a href="../01/prolog.html">← Spotkanie 1: Założenie studia</a><a href="../index.html">Strona główna</a><a href="../03/prolog.html">Spotkanie 3: Fundamenty i mury świata →</a></nav>
 <div class="sig"><div><div class="sig-name">Marcin Biszczanik</div><div class="sig-motto">Złożone systemy. Ludzki język.</div></div><a class="sig-url" href="https://www.linkedin.com/in/marcin-biszczanik">in/marcin-biszczanik</a></div>
