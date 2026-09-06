@@ -191,6 +191,13 @@ hr {
   margin: 2.5em 0;
 }
 
+/* H2 ma własną linię; „---” tuż przed nim dałoby podwójną. */
+hr + h2 {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 0;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -264,9 +271,11 @@ blockquote {
 
 .pagenav.bottom {
   justify-content: space-between;
-  border-top: 1px solid var(--sc-rule);
   margin: 3em 0 0;
-  padding-top: 14px;
+}
+
+.pagenav.bottom + .sig {
+  margin-top: 1.2em;
 }
 
 .eyebrow a {
