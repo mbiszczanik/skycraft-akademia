@@ -423,40 +423,40 @@ blockquote {
 <p><strong>SkyCraft Choice: statyczne grupy zabezpieczeń, jedna persona na grupę.</strong> Model uprawnień ma być przejrzysty na pierwszym spotkaniu i kosztować zero (Entra ID Free). Gość to prawdziwy kolega z koła zaproszony na jego e-mail, nie fikcyjny adres z labu: dzięki temu zaproszenie da się przyjąć, a gość realnie istnieje na spotkaniu 2. Alternatywa w produkcji: grupy dynamiczne na atrybutach (dział, stanowisko) i MFA przez Conditional Access (oba wymagają Entra ID P1), grupy zagnieżdżone, provisioning z systemu HR.</p>
 </blockquote>
 <!-- quest-log:start -->
-<p>Laby: <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md">Lab 1.1: użytkownicy i grupy Entra ID</a></p>
+<p>Laby: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md">Lab 1.1: użytkownicy i grupy Entra ID</a></p>
 <h2 id="blok-1-konto-i-portal-45-min">Blok 1: konto i portal (45 min)</h2>
 <ul>
 <li><input type="checkbox"> <strong>1.</strong> Konto Azure for Students z potwierdzeniem statusu studenta, MFA (Microsoft Authenticator), wniosek o GitHub Student Developer Pack → <a href="https://azure.microsoft.com/free/students/">Azure for Students</a> · <a href="https://education.github.com/pack">GitHub Student Developer Pack</a><ul>
 <li>ma wyjść: konto aktywne, MFA skonfigurowane, wniosek o GitHub Pack złożony</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>2.</strong> Orientacja w portalu (wyszukiwarka, Entra ID, Subscriptions, Cost Management) i alert budżetowy 50 USD na subskrypcji: Cost Management → Budgets, progi 50/80/100 procent, e-mail własny → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-111-access-microsoft-entra-id">1.1.1</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#-section-4-manage-costs-with-budgets-and-alerts-45-minutes">Lab 1.3, sekcja Budgets</a><ul>
+<li><input type="checkbox"> <strong>2.</strong> Orientacja w portalu (wyszukiwarka, Entra ID, Subscriptions, Cost Management) i alert budżetowy 50 USD na subskrypcji: Cost Management → Budgets, progi 50/80/100 procent, e-mail własny → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-111-access-microsoft-entra-id">1.1.1</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#-section-4-manage-costs-with-budgets-and-alerts-45-minutes">Lab 1.3, sekcja Budgets</a><ul>
 <li>ma wyjść: Entra ID otwarte we własnym tenancie; budżet z trzema alertami na subskrypcji</li>
 </ul>
 </li>
 </ul>
 <h2 id="blok-2-użytkownicy-i-grupy-45-min">Blok 2: użytkownicy i grupy (45 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>3.</strong> Trzej użytkownicy wewnętrzni: Malfurion Stormrage, Khadgar Archmage, Chromie Timewalker → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-112-create-first-user-malfurion-stormrage">1.1.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-113-create-second-user-khadgar-archmage">1.1.3</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-114-create-third-user-chromie-timewalker">1.1.4</a><ul>
+<li><input type="checkbox"> <strong>3.</strong> Trzej użytkownicy wewnętrzni: Malfurion Stormrage, Khadgar Archmage, Chromie Timewalker → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-112-create-first-user-malfurion-stormrage">1.1.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-113-create-second-user-khadgar-archmage">1.1.3</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-114-create-third-user-chromie-timewalker">1.1.4</a><ul>
 <li>ma wyjść: trzech użytkowników na liście All Users</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>4.</strong> Trzy grupy zabezpieczeń z członkostwem: <code>SkyCraft-Admins</code> (Malfurion), <code>SkyCraft-Developers</code> (Khadgar), <code>SkyCraft-Testers</code> (Chromie) → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-116-create-first-group-admins">1.1.6</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-117-add-members-to-admin-group">1.1.7</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-118-create-second-group-developers">1.1.8</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-119-create-third-group-testers">1.1.9</a><ul>
+<li><input type="checkbox"> <strong>4.</strong> Trzy grupy zabezpieczeń z członkostwem: <code>SkyCraft-Admins</code> (Malfurion), <code>SkyCraft-Developers</code> (Khadgar), <code>SkyCraft-Testers</code> (Chromie) → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-116-create-first-group-admins">1.1.6</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-117-add-members-to-admin-group">1.1.7</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-118-create-second-group-developers">1.1.8</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-119-create-third-group-testers">1.1.9</a><ul>
 <li>ma wyjść: trzy grupy z poprawnymi członkostwami</li>
 </ul>
 </li>
 </ul>
 <h2 id="blok-3-konto-w-czasie-50-min">Blok 3: konto w czasie (50 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>5.</strong> Właściwości konta Malfuriona: job title <code>Cloud Infrastructure Manager</code>, department <code>IT Operations</code>, office <code>Remote</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-1110-configure-user-properties">1.1.10</a><ul>
+<li><input type="checkbox"> <strong>5.</strong> Właściwości konta Malfuriona: job title <code>Cloud Infrastructure Manager</code>, department <code>IT Operations</code>, office <code>Remote</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-1110-configure-user-properties">1.1.10</a><ul>
 <li>ma wyjść: właściwości zapisane na koncie Malfuriona</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>6.</strong> Gość w parach: zaproszenie prawdziwego kolegi jako Illidana na jego prawdziwy e-mail (zamiast fikcyjnego adresu z labu), akceptacja zaproszenia, weryfikacja User type = Guest → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-115-create-guest-user-illidan-stormrage">1.1.5</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-1113-accept-guest-invitation-simulated">1.1.13</a><ul>
+<li><input type="checkbox"> <strong>6.</strong> Gość w parach: zaproszenie prawdziwego kolegi jako Illidana na jego prawdziwy e-mail (zamiast fikcyjnego adresu z labu), akceptacja zaproszenia, weryfikacja User type = Guest → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-115-create-guest-user-illidan-stormrage">1.1.5</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#step-1113-accept-guest-invitation-simulated">1.1.13</a><ul>
 <li>ma wyjść: gość widoczny na liście All Users z typem Guest</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>7.</strong> Cykl życia konta: reset hasła Chromie, blokada logowania Khadgara i odblokowanie (Users → użytkownik → Reset password / Edit properties); walidacja <code>Test-Lab.ps1</code> w Cloud Shell (PowerShell) → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-checklist-1.1.md">lab-checklist-1.1</a><ul>
+<li><input type="checkbox"> <strong>7.</strong> Cykl życia konta: reset hasła Chromie, blokada logowania Khadgara i odblokowanie (Users → użytkownik → Reset password / Edit properties); walidacja <code>Test-Lab.ps1</code> w Cloud Shell (PowerShell) → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-checklist-1.1.md">lab-checklist-1.1</a><ul>
 <li>ma wyjść: hasło Chromie zresetowane, konto Khadgara odblokowane, <code>Test-Lab.ps1</code> zielony</li>
 </ul>
 </li>
@@ -494,13 +494,13 @@ blockquote {
 <td>„Insufficient privileges” przy tworzeniu użytkownika</td>
 <td>brak roli <em>Global Administrator</em> lub <em>User Administrator</em>, zwykle przez zły tenant</td>
 <td>Entra ID → <em>My role assignments</em>; na własnym tenancie jesteś Global Admin</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-troubleshooting">1.1, Troubleshooting</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-troubleshooting">1.1, Troubleshooting</a></td>
 </tr>
 <tr>
 <td>Nazwa użytkownika z polskimi znakami nie przechodzi</td>
 <td>UPN dopuszcza tylko ASCII</td>
 <td><code>malfurion.stormrage</code>, bez ogonków; display name może mieć ogonki</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-troubleshooting">1.1, Troubleshooting</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-troubleshooting">1.1, Troubleshooting</a></td>
 </tr>
 <tr>
 <td>Gość nie dostał zaproszenia</td>
@@ -540,7 +540,7 @@ blockquote {
 <td>2</td>
 <td>⭐⭐</td>
 <td>20 min</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/scripts/New-LabUser.ps1">New-LabUser.ps1</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/scripts/New-LabUser.ps1">New-LabUser.ps1</a></td>
 </tr>
 <tr>
 <td>2</td>
@@ -548,7 +548,7 @@ blockquote {
 <td>2</td>
 <td>⭐</td>
 <td>10 min</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-section-3-manage-user-properties-and-licenses-30-minutes">Step 1.1.12</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-section-3-manage-user-properties-and-licenses-30-minutes">Step 1.1.12</a></td>
 </tr>
 <tr>
 <td>3</td>
@@ -572,12 +572,12 @@ blockquote {
 <td>1</td>
 <td>⭐</td>
 <td>10 min</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-section-3-manage-user-properties-and-licenses-30-minutes">Step 1.1.11</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-section-3-manage-user-properties-and-licenses-30-minutes">Step 1.1.11</a></td>
 </tr>
 </tbody></table>
 <h3 id="sq1-użytkownicy-i-grupy-z-powershella">SQ1: Użytkownicy i grupy z PowerShella</h3>
 <p><strong>Cel:</strong> to samo, co zrobiłeś w portalu, jednym skryptem. Pierwszy kontakt z automatyzacją, która wraca na spotkaniu 4.
-<strong>Kroki:</strong> usuń ręcznie utworzonych użytkowników i grupy (albo użyj <code>Remove-LabResource.ps1</code>), otwórz Cloud Shell (PowerShell), sklonuj skycraft na wersji <code>2b4b3cc</code>, uruchom <code>New-LabUser.ps1</code>, potem <code>Test-Lab.ps1</code>.
+<strong>Kroki:</strong> usuń ręcznie utworzonych użytkowników i grupy (albo użyj <code>Remove-LabResource.ps1</code>), otwórz Cloud Shell (PowerShell), sklonuj skycraft na wersji <code>ae56ac2</code>, uruchom <code>New-LabUser.ps1</code>, potem <code>Test-Lab.ps1</code>.
 <strong>Jak sprawdzić:</strong> <code>Test-Lab.ps1</code> zielony; w portalu 3 użytkowników i 3 grupy z poprawnymi członkostwami.</p>
 <h3 id="sq2-self-service-password-reset">SQ2: Self-Service Password Reset</h3>
 <p><strong>Cel:</strong> użytkownik resetuje hasło sam, bez administratora.
@@ -601,7 +601,7 @@ blockquote {
 <li><input type="checkbox"> Sprawdź w skrzynce: akceptacja <strong>GitHub Student Pack</strong>, zaproszenie od kolegi (Ty jesteś jego Illidanem)</li>
 <li><input type="checkbox"> Jeśli Azure for Students nie został jeszcze zatwierdzony, napisz do prowadzącego przed zajęciami</li>
 <li><input type="checkbox"> Do przeczytania: prolog spotkania 2 „Zasady studia” (RBAC, tagi, policy, budżet) i „Sprawdź się” na końcu</li>
-<li><input type="checkbox"> Jeśli coś się wysypało: <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-troubleshooting">Troubleshooting labu 1.1</a></li>
+<li><input type="checkbox"> Jeśli coś się wysypało: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-troubleshooting">Troubleshooting labu 1.1</a></li>
 </ul>
 
 <nav class="pagenav bottom"><span></span><a href="../index.html">Strona główna</a><a href="../02/prolog.html">Spotkanie 2: Zasady studia →</a></nav>

@@ -424,51 +424,51 @@ blockquote {
 <p><strong>SkyCraft Choice: VS Code, Azure CLI i Bicep na komputerze w sali, nic nie wdrażamy do Azure.</strong> Cloud Shell wystarczyłby do samego Bicepa, ale Copilot działa w edytorze, a od dziś edytor jest Twoim głównym narzędziem. Dzisiejszy rdzeń kończy się na <code>bicep build</code> i <code>what-if</code>: pierwsze wdrożenie z kodu to save game na spotkaniu 5, więc dziś nie powstaje żaden zasób i nie ma czego kasować. Alternatywa w produkcji: Terraform lub OpenTofu (jeden język dla wielu chmur), Pulumi (infrastruktura w Pythonie lub TypeScripcie), a niezależnie od narzędzia: pipeline CI, który robi what-if na każdym pull requeście.</p>
 </blockquote>
 <!-- quest-log:start -->
-<p>Laby: <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md">Lab 3.1: infrastruktura jako kod</a></p>
+<p>Laby: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md">Lab 3.1: infrastruktura jako kod</a></p>
 <h2 id="blok-1-eksport-arm-z-portalu-30-min">Blok 1: eksport ARM z portalu (30 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>1.</strong> Eksport grupy <code>prod-skycraft-swc-rg</code> jako szablon ARM, pobranie ZIP i otwarcie <code>template.json</code> w VS Code → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-311-export-resource-group-as-arm-template">3.1.1</a><ul>
+<li><input type="checkbox"> <strong>1.</strong> Eksport grupy <code>prod-skycraft-swc-rg</code> jako szablon ARM, pobranie ZIP i otwarcie <code>template.json</code> w VS Code → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-311-export-resource-group-as-arm-template">3.1.1</a><ul>
 <li>ma wyjść: katalog z <code>template.json</code> i <code>parameters.json</code>; w <code>resources</code> widzisz sieć, trzy NSG i strefę DNS ze spotkania 3</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>2.</strong> Anatomia eksportu: cztery sekcje szablonu, siedem pól zasobu VNet, funkcje <code>parameters()</code>, <code>resourceId()</code> i <code>concat()</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-312-analyze-exported-arm-template-structure">3.1.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-313-identify-key-arm-template-components">3.1.3</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-314-understand-arm-template-functions">3.1.4</a><ul>
+<li><input type="checkbox"> <strong>2.</strong> Anatomia eksportu: cztery sekcje szablonu, siedem pól zasobu VNet, funkcje <code>parameters()</code>, <code>resourceId()</code> i <code>concat()</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-312-analyze-exported-arm-template-structure">3.1.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-313-identify-key-arm-template-components">3.1.3</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-314-understand-arm-template-functions">3.1.4</a><ul>
 <li>ma wyjść: na kartce: liczba zasobów, liczba parametrów i trzy miejsca, w których eksport zakodował na sztywno coś, co powinno być parametrem</li>
 </ul>
 </li>
 </ul>
 <h2 id="blok-2-pierwszy-bicep-35-min">Blok 2: pierwszy Bicep (35 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>3.</strong> Sprawdzenie narzędzi w sali: <code>az bicep version</code>, rozszerzenie Bicep w VS Code, folder roboczy <code>skycraft-platform</code> na dysku → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-315-install-bicep-tools-if-you-dont-have-one-yet">3.1.5</a><ul>
+<li><input type="checkbox"> <strong>3.</strong> Sprawdzenie narzędzi w sali: <code>az bicep version</code>, rozszerzenie Bicep w VS Code, folder roboczy <code>skycraft-platform</code> na dysku → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-315-install-bicep-tools-if-you-dont-have-one-yet">3.1.5</a><ul>
 <li>ma wyjść: <code>az bicep version</code> odpowiada numerem wersji, VS Code podświetla składnię <code>.bicep</code></li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>4.</strong> <code>first-resource.bicep</code> wg labu z własnym loginem w tagu <code>Owner</code>, potem <code>az bicep build --file first-resource.bicep</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-316-create-your-first-bicep-file">3.1.6</a><ul>
+<li><input type="checkbox"> <strong>4.</strong> <code>first-resource.bicep</code> wg labu z własnym loginem w tagu <code>Owner</code>, potem <code>az bicep build --file first-resource.bicep</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-316-create-your-first-bicep-file">3.1.6</a><ul>
 <li>ma wyjść: obok pliku <code>.bicep</code> pojawia się <code>first-resource.json</code>; niczego nie wdrażasz</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>5.</strong> Porównanie obu plików obok siebie: linie, cudzysłowy, <code>dependsOn</code>, odwołania do wyjść → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-317-bicep-vs-arm-side-by-side-comparison">3.1.7</a><ul>
+<li><input type="checkbox"> <strong>5.</strong> Porównanie obu plików obok siebie: linie, cudzysłowy, <code>dependsOn</code>, odwołania do wyjść → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-317-bicep-vs-arm-side-by-side-comparison">3.1.7</a><ul>
 <li>ma wyjść: potrafisz wskazać w JSON-ie każdą linię, którą napisałeś w Bicepie</li>
 </ul>
 </li>
 </ul>
 <h2 id="blok-3-dekompilacja-40-min">Blok 3: dekompilacja (40 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>6.</strong> Dekompilacja własnego eksportu: <code>az bicep decompile --file template.json</code>, otwarcie <code>template.bicep</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-318-decompile-arm-template-to-bicep">3.1.8</a><ul>
+<li><input type="checkbox"> <strong>6.</strong> Dekompilacja własnego eksportu: <code>az bicep decompile --file template.json</code>, otwarcie <code>template.bicep</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-318-decompile-arm-template-to-bicep">3.1.8</a><ul>
 <li>ma wyjść: plik <code>template.bicep</code> i ostrzeżenie <em>best-effort</em> w konsoli</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>7.</strong> Przegląd zdekompilowanego kodu: nazwy parametrów, hardkody, brak opisów, kolejność zasobów → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-319-analyze-decompiled-bicep">3.1.9</a><ul>
+<li><input type="checkbox"> <strong>7.</strong> Przegląd zdekompilowanego kodu: nazwy parametrów, hardkody, brak opisów, kolejność zasobów → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-319-analyze-decompiled-bicep">3.1.9</a><ul>
 <li>ma wyjść: lista co najmniej pięciu rzeczy do poprawy, każda z numerem linii</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>8.</strong> Sprzątanie zasobu VNet wg wzorca <em>Before / After</em>: czytelne nazwy parametrów, <code>@description</code>, <code>@allowed</code> dla <code>location</code>, adresacja jako parametr, wyjście <code>vnetId</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-3110-clean-up-and-improve-decompiled-bicep">3.1.10</a><ul>
+<li><input type="checkbox"> <strong>8.</strong> Sprzątanie zasobu VNet wg wzorca <em>Before / After</em>: czytelne nazwy parametrów, <code>@description</code>, <code>@allowed</code> dla <code>location</code>, adresacja jako parametr, wyjście <code>vnetId</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-3110-clean-up-and-improve-decompiled-bicep">3.1.10</a><ul>
 <li>ma wyjść: <code>az bicep build</code> przechodzi bez błędów na posprzątanym pliku; NSG i strefa DNS mogą zostać nietknięte</li>
 </ul>
 </li>
 </ul>
 <h2 id="blok-4-moduł-sieci-dwa-razy-40-min">Blok 4: moduł sieci dwa razy (40 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>9.</strong> <code>modules/network.bicep</code> ręcznie wg labu, z parametrami dla huba: <code>namePrefix</code> <code>platform-skycraft-swc</code>, <code>10.0.0.0/16</code>, dwie podsieci bez <code>nsgId</code>, tagi z własnym loginem → <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-3111-create-network-module">3.1.11</a><ul>
+<li><input type="checkbox"> <strong>9.</strong> <code>modules/network.bicep</code> ręcznie wg labu, z parametrami dla huba: <code>namePrefix</code> <code>platform-skycraft-swc</code>, <code>10.0.0.0/16</code>, dwie podsieci bez <code>nsgId</code>, tagi z własnym loginem → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-3111-create-network-module">3.1.11</a><ul>
 <li>ma wyjść: <code>az bicep build --file modules/network.bicep</code> przechodzi; plik ma parametry, pętlę po podsieciach i wyjścia</li>
 </ul>
 </li>
@@ -517,13 +517,13 @@ blockquote {
 <td><code>az bicep</code> odpowiada, że nie zna polecenia</td>
 <td>Azure CLI bez zainstalowanego Bicepa</td>
 <td><code>az bicep install</code>, potem <code>az bicep version</code></td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-315-install-bicep-tools-if-you-dont-have-one-yet">3.1.5</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-315-install-bicep-tools-if-you-dont-have-one-yet">3.1.5</a></td>
 </tr>
 <tr>
 <td><code>bicep build</code> zgłasza <em>Invalid template</em></td>
 <td>literówka w typie zasobu albo brak przecinka, którego Bicep nie chce, a Ty go wkleiłeś z JSON-a</td>
 <td>czytaj numer linii z błędu; w Bicepie nie ma przecinków między właściwościami</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#-troubleshooting">3.1, Issue 1</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#-troubleshooting">3.1, Issue 1</a></td>
 </tr>
 <tr>
 <td>Czerwone podkreślenie na <code>@2023-05-01</code></td>
@@ -535,7 +535,7 @@ blockquote {
 <td>Dekompilacja ostrzega <em>best-effort</em></td>
 <td>tak działa zawsze: dekompilator nie zna Twoich intencji, tylko wynik</td>
 <td>to jest cały blok 3; ostrzeżenie zostaje, kod sprzątasz</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-318-decompile-arm-template-to-bicep">3.1.8</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-318-decompile-arm-template-to-bicep">3.1.8</a></td>
 </tr>
 <tr>
 <td>What-if pokazuje <em>Create</em> zamiast <em>NoChange</em></td>
@@ -606,7 +606,7 @@ blockquote {
 <td>4</td>
 <td>⭐⭐</td>
 <td>20 min</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#-section-4-convert-arm-templates-to-bicep-20-minutes">Lab 3.1, Section 4</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#-section-4-convert-arm-templates-to-bicep-20-minutes">Lab 3.1, Section 4</a></td>
 </tr>
 <tr>
 <td>4</td>
@@ -640,7 +640,7 @@ blockquote {
 <li><input type="checkbox"> Zrzut ekranu <em>Network Watcher → Topology</em> ze spotkania 3 jest pod ręką: na spotkaniu 5 porównasz go z tym, co postawi kod</li>
 <li><input type="checkbox"> Do przeczytania: prolog spotkania 5 „Warsztat rzemieślnika II” (moduły NSG i load balancera, <code>main.bicep</code> na zakresie subskrypcji, pierwszy save game) i „Sprawdź się” na końcu</li>
 <li><input type="checkbox"> Opcjonalnie: dokończ sprzątanie zdekompilowanego kodu z bloku 3 i side quest 3</li>
-<li><input type="checkbox"> Jeśli coś się wysypało: <a href="https://github.com/mbiszczanik/skycraft/blob/2b4b3cca21521022bb2937516c07e2a17392e594/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#-troubleshooting">Troubleshooting labu 3.1</a></li>
+<li><input type="checkbox"> Jeśli coś się wysypało: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#-troubleshooting">Troubleshooting labu 3.1</a></li>
 </ul>
 
 <nav class="pagenav bottom"><a href="../03/prolog.html">← Spotkanie 3: Fundamenty i mury świata</a><a href="../index.html">Strona główna</a><span></span></nav>
