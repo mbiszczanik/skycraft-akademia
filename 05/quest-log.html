@@ -421,7 +421,7 @@ blockquote {
 <li>Wykonać <strong>load game</strong>: odtworzyć <code>prod</code> jednym wdrożeniem i wskazać, co wróciło inne</li>
 </ol>
 <blockquote>
-<p><strong>SkyCraft Choice: cała platforma sieciowa w jednym <code>main.bicep</code>, governance zostaje w portalu, prod kasujemy na koniec zajęć.</strong> Lab 3.1 stawia trzy grupy i spoke Development; u nas są dwie grupy i prod, bo tylko to istnieje po spotkaniu 3. Role, policy, blokada i budżet ze spotkania 2 nie wchodzą do kodu (side quest 2): save game ich nie dotyka, a hub z blokadą <code>CanNotDelete</code> nigdy nie jest kasowany. Od dziś prod żyje tylko w czasie zajęć: kosztuje ok. 22 USD miesięcznie, gdy stoi, i ok. 0,60 USD, gdy stoi tylko hub ze strefami. Alternatywa w produkcji: deployment stacks (side quest 4) albo Terraform ze stanem, w obu przypadkach z pipeline&#39;em, który robi what-if na każdym pull requeście.</p>
+<p><strong>SkyCraft Choice: cała platforma sieciowa w jednym <code>main.bicep</code>, governance zostaje w portalu, prod kasujemy na koniec zajęć.</strong> Lab 3.1 stawia trzy grupy i spoke Development; u nas są dwie grupy i prod, bo tylko to istnieje po spotkaniu 3. Role, policy, blokada i budżet ze spotkania 2 nie wchodzą do kodu (side quest 2): save game zdejmuje blokadę <code>CanNotDelete</code> tylko na czas kasowania linku strefy i zakłada ją z powrotem, a hub nigdy nie jest kasowany. Od dziś prod żyje tylko w czasie zajęć: kosztuje ok. 22 USD miesięcznie, gdy stoi, i ok. 0,60 USD, gdy stoi tylko hub ze strefami. Alternatywa w produkcji: deployment stacks (side quest 4) albo Terraform ze stanem, w obu przypadkach z pipeline&#39;em, który robi what-if na każdym pull requeście.</p>
 </blockquote>
 <!-- quest-log:start -->
 <p>Laby: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md">Lab 3.1: infrastruktura jako kod</a></p>
@@ -476,8 +476,8 @@ blockquote {
 </ul>
 <h2 id="blok-4-przejmij-prod-35-min">Blok 4: przejmij prod (35 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>11.</strong> <code>az deployment sub what-if --location swedencentral --template-file main.bicep --parameters prod.bicepparam</code> na żywą subskrypcję; czytanie wyniku zasób po zasobie i poprawianie kodu (nazwy, tagi, TTL, nazwy linków), aż grupy, hub, NSG i strefy pokażą <em>NoChange</em> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-3118-preview-changes-with-what-if">3.1.18</a><ul>
-<li>ma wyjść: <em>Create</em> dla <code>prod-skycraft-swc-lb-pip</code> i <code>prod-skycraft-swc-lb</code>; <em>NoChange</em> dla grup, huba, trzech NSG i obu stref; <em>Modify</em> na sieci prod, obu peeringach, obu linkach i rekordzie <code>play</code> tylko w polach, które biorą wartość z wyjścia modułu (po prawej stronie stoi <code>[reference(...)]</code>, nie konkretna wartość). Poprawiasz tylko <em>Create</em> dla czegoś, co stoi, i <em>Modify</em> z konkretną wartością po obu stronach</li>
+<li><input type="checkbox"> <strong>11.</strong> <code>az deployment sub what-if --location swedencentral --template-file main.bicep --parameters prod.bicepparam</code> na żywą subskrypcję; czytanie wyniku zasób po zasobie i poprawianie kodu (nazwy, tagi, TTL, nazwy linków), aż zostanie tylko szum → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-3118-preview-changes-with-what-if">3.1.18</a><ul>
+<li>ma wyjść: <em>Create</em> dla <code>prod-skycraft-swc-lb-pip</code> i <code>prod-skycraft-swc-lb</code>; <em>NoChange</em> dla grup, stref, linków i trzech NSG; <em>Modify</em> na rekordzie <code>play</code> z <code>[reference(...)]</code> po prawej (adres z wyjścia modułu) oraz na obu sieciach i obu peeringach wyłącznie liniami <code>-</code> z właściwościami, których nie pisałeś (<code>peeringSyncLevel</code>, <code>remoteAddressSpace</code>): to szum. Dryf to <em>Modify</em> z konkretną wartością po obu stronach <code>=&gt;</code> albo <em>Create</em> dla czegoś, co stoi</li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>12.</strong> <code>az deployment sub create --name skycraft-adopt-$(Get-Date -Format yyyyMMdd-HHmm) --location swedencentral --template-file main.bicep --parameters prod.bicepparam --confirm-with-what-if</code>; potwierdzenie <code>y</code>; postęp przez <code>az deployment sub show --name &lt;nazwa&gt; --query properties.provisioningState</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-3119-deploy-bicep-template">3.1.19</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-3120-monitor-deployment-progress">3.1.20</a><ul>
@@ -491,12 +491,12 @@ blockquote {
 </ul>
 <h2 id="blok-5-pierwszy-save-game-35-min">Blok 5: pierwszy save game (35 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>14.</strong> <code>save-game.ps1</code> wg wzorca z sekcji „Skrypty save game i load game” poniżej; uruchomienie; w portalu grupa <code>prod-skycraft-swc-rg</code> w stanie <em>Deleting</em>, potem znika; hub i strefy zostają → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-3124-clean-up-optional">3.1.24</a> · <a href="https://learn.microsoft.com/en-us/cli/azure/network/private-dns/link/vnet">MS Learn: az network private-dns link vnet</a><ul>
-<li>ma wyjść: <code>az group list</code> nie pokazuje już <code>prod-skycraft-swc-rg</code> (zostają <code>platform-skycraft-swc-rg</code>, pusta <code>dev-skycraft-swc-rg</code> ze spotkania 2 i <code>NetworkWatcherRG</code>); strefa <code>skycraft.internal</code> ma jeden link</li>
+<li><input type="checkbox"> <strong>14.</strong> <code>save-game.ps1</code> wg wzorca z sekcji „Skrypty save game i load game” poniżej: zdejmuje blokadę z huba, kasuje link strefy prywatnej, kasuje grupę prod, zakłada blokadę z powrotem; w portalu grupa <code>prod-skycraft-swc-rg</code> w stanie <em>Deleting</em>, potem znika; hub, strefy i blokada zostają → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-3124-clean-up-optional">3.1.24</a> · <a href="https://learn.microsoft.com/en-us/cli/azure/network/private-dns/link/vnet">MS Learn: az network private-dns link vnet</a><ul>
+<li>ma wyjść: <code>az group list</code> nie pokazuje już <code>prod-skycraft-swc-rg</code> (zostają <code>platform-skycraft-swc-rg</code>, pusta <code>dev-skycraft-swc-rg</code> ze spotkania 2 i <code>NetworkWatcherRG</code>); strefa <code>skycraft.internal</code> ma jeden link; blokada <code>lock-no-delete-platform</code> jest na hubie</li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>15.</strong> <code>load-game.ps1</code> wg wzorca; uruchomienie; porównanie listy zasobów prod z zrzutem <em>Network Watcher → Topology</em> ze spotkania 3 → <a href="https://learn.microsoft.com/en-us/cli/azure/deployment/sub">MS Learn: az deployment sub</a><ul>
-<li>ma wyjść: prod wrócił z siecią, trzema NSG, publicznym adresem IP, load balancerem i peeringiem; publiczny adres jest inny niż przed save game, rekord <code>play</code> wskazuje na nowy</li>
+<li>ma wyjść: prod wrócił z siecią, trzema NSG, publicznym adresem IP, load balancerem i peeringiem; publiczny adres jest inny niż przed save game, rekord <code>play</code> wskazuje na nowy; peering <code>hub-to-prod</code> w hubie znów <em>Connected</em></li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>16.</strong> <code>README.md</code> z sekcją „Save / load game” (dwa polecenia i co po nich zostaje), <code>git add -A</code>, commit, <code>git push</code><ul>
@@ -511,7 +511,7 @@ blockquote {
 </ul>
 <p>Lab 3.1 numeruje kroki ciągle od 3.1.1 do 3.1.24 i nie ma luk. Kroki 3.1.1-3.1.11 zrobiliśmy na spotkaniu 4; dziś od 3.1.12.</p>
 <!-- quest-log:end --><h2 id="skrypty-save-game-i-load-game">Skrypty save game i load game</h2>
-<p>Wzorce dla kroków 14 i 15. Przepisujesz je do repozytorium, zmieniasz tylko nazwy, jeśli w portalu masz inne. Oba wypisują nazwę subskrypcji na początku, ale nie czekają: sprawdź <code>az account show</code> przed uruchomieniem.</p>
+<p>Wzorce dla kroków 14 i 15. Przepisujesz je do repozytorium, zmieniasz tylko nazwy, jeśli w portalu masz inne. Oba wypisują nazwę subskrypcji na początku, ale nie czekają: sprawdź <code>az account show</code> przed uruchomieniem. Save game robi trzy rzeczy: kasuje link strefy prywatnej do prod (link leży w hubie i nie znika razem z siecią, a load game nie utworzy nowego, dopóki stary wskazuje na skasowaną sieć), kasuje grupę prod i czeka, aż zniknie, a na koniec pokazuje, co zostało. Blokada ze spotkania 2 nie pozwala skasować niczego w hubie, także linku strefy; skrypt zdejmuje ją świadomie i zakłada z powrotem.</p>
 <pre><code class="language-powershell"># save-game.ps1: zapis gry. Kasuje grupę prod; platforma zostaje w kodzie.
 # Uruchom z folderu repozytorium: .\save-game.ps1
 $ErrorActionPreference = &#39;Stop&#39;
@@ -520,23 +520,30 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 $prodRg      = &#39;prod-skycraft-swc-rg&#39;
 $platformRg  = &#39;platform-skycraft-swc-rg&#39;
-$hubVnet     = &#39;platform-skycraft-swc-vnet&#39;
-$hubPeering  = &#39;hub-to-prod&#39;
+$lockName    = &#39;lock-no-delete-platform&#39;
 $privateZone = &#39;skycraft.internal&#39;
 $prodLink    = &#39;prod-vnet-link&#39;
 
 Write-Host &quot;Subskrypcja: $(az account show --query name -o tsv)&quot;
 
-Write-Host &#39;1/4 Link strefy prywatnej do prod (porządek w hubie, zanim zniknie sieć)&#39;
-az network private-dns link vnet delete --resource-group $platformRg --zone-name $privateZone --name $prodLink --yes
+Write-Host &quot;1/5 Zdejmuję blokadę $lockName z huba (link strefy jest w hubie, a blokada nie pozwala nic w nim skasować)&quot;
+az lock delete --name $lockName --resource-group $platformRg
 
-Write-Host &#39;2/4 Peering po stronie huba (po odtworzeniu prod wskazywałby na starą sieć)&#39;
-az network vnet peering delete --resource-group $platformRg --vnet-name $hubVnet --name $hubPeering
+Write-Host &#39;2/5 Link strefy prywatnej do prod (bez tego load game nie utworzy nowego linku)&#39;
+$ok = $false
+for ($i = 1; $i -le 12 -and -not $ok; $i++) {
+  try { az network private-dns link vnet delete --resource-group $platformRg --zone-name $privateZone --name $prodLink --yes 2&gt;$null; $ok = $true }
+  catch { Write-Host &quot;   blokada jeszcze działa, próba $i/12&quot;; Start-Sleep -Seconds 10 }
+}
+if (-not $ok) { throw &quot;Nie udało się skasować linku $prodLink&quot; }
 
-Write-Host &quot;3/4 Grupa $prodRg (skrypt czeka, aż zniknie: 2-5 minut)&quot;
+Write-Host &quot;3/5 Grupa $prodRg (skrypt czeka, aż zniknie: ok. 2 minuty)&quot;
 az group delete --name $prodRg --yes
 
-Write-Host &#39;4/4 Co zostało:&#39;
+Write-Host &quot;4/5 Blokada $lockName wraca na huba&quot;
+az lock create --name $lockName --resource-group $platformRg --lock-type CanNotDelete --output none
+
+Write-Host &#39;5/5 Co zostało:&#39;
 az group list --query &#39;[].{Grupa:name, Stan:properties.provisioningState}&#39; -o table
 </code></pre>
 <pre><code class="language-powershell"># load-game.ps1: wczytanie gry. Odtwarza platformę z main.bicep i prod.bicepparam.
@@ -588,9 +595,9 @@ az resource list --resource-group $prodRg --query &#39;[].{Nazwa:name, Typ:type}
 <td><a href="prolog.html#1-existing-i-przejmowanie-zasob%C3%B3w-kod-opisuje-to-co-ju%C5%BC-stoi">koncept 1</a></td>
 </tr>
 <tr>
-<td>What-if pokazuje <em>Modify</em> z <code>[reference(...)]</code> po prawej stronie</td>
-<td>wartość pochodzi z wyjścia modułu, a what-if nie zna jej przed wdrożeniem</td>
-<td>to szum, nie dryf; nic nie poprawiasz</td>
+<td>What-if pokazuje <em>Modify</em> z <code>[reference(...)]</code> po prawej stronie (rekord <code>play</code>) albo same linie <code>-</code> z właściwościami, których nie pisałeś (<code>peeringSyncLevel</code>, <code>remoteAddressSpace</code> na sieciach i peeringach)</td>
+<td>pierwsze: wartość pochodzi z wyjścia modułu, a what-if nie zna jej przed wdrożeniem; drugie: właściwości tylko do odczytu, które Azure dopisuje sam, a what-if zgłasza jako usunięte</td>
+<td>to szum, nie dryf; nic nie poprawiasz. Dryf ma konkretną wartość po obu stronach <code>=&gt;</code></td>
 <td><a href="prolog.html#1-existing-i-przejmowanie-zasob%C3%B3w-kod-opisuje-to-co-ju%C5%BC-stoi">koncept 1</a></td>
 </tr>
 <tr>
@@ -630,15 +637,15 @@ az resource list --resource-group $prodRg --query &#39;[].{Nazwa:name, Typ:type}
 <td><a href="prolog.html#2-zale%C5%BCno%C5%9Bci-mi%C4%99dzy-modu%C5%82ami-wyj%C5%9Bcie-jednego-jest-wej%C5%9Bciem-drugiego">koncept 2</a></td>
 </tr>
 <tr>
-<td><code>load-game.ps1</code>: peering <code>prod-to-hub</code> nie przechodzi w <em>Connected</em> albo wdrożenie zgłasza błąd na <code>hub-to-prod</code></td>
-<td>stary peering huba w stanie <em>Disconnected</em>: save game go nie zdjął (inna nazwa albo błąd w kroku 2)</td>
-<td>skasuj <code>hub-to-prod</code> w hubie w portalu, uruchom <code>load-game.ps1</code> ponownie</td>
+<td><code>save-game.ps1</code> staje w kroku 2 mimo ponawiania</td>
+<td>blokada <code>lock-no-delete-platform</code> nadal działa (propagacja do minuty) albo inna nazwa blokady/linku</td>
+<td><code>az lock list -g platform-skycraft-swc-rg -o table</code>; popraw nazwę w nagłówku, uruchom ponownie</td>
 <td><a href="prolog.html#5-save-game-i-load-game-co-wraca-takie-samo-a-co-inne">koncept 5</a></td>
 </tr>
 <tr>
-<td><code>save-game.ps1</code> nie skasował grupy</td>
-<td>błąd w kroku 1 lub 2 (zła nazwa w nagłówku) zatrzymał skrypt</td>
-<td>przeczytaj pierwszy błąd w konsoli, popraw nazwę w nagłówku skryptu, uruchom ponownie</td>
+<td><code>load-game.ps1</code>: moduł <code>dns</code> kończy się <code>Conflict ... stale virtual network links</code></td>
+<td>link <code>prod-vnet-link</code> w hubie wskazuje na skasowaną sieć (save game nie doszedł do kroku 2 albo prod skasowano ręcznie)</td>
+<td>skasuj link w portalu (strefa <code>skycraft.internal</code> → <em>Virtual network links</em>), uruchom <code>load-game.ps1</code> ponownie</td>
 <td><a href="prolog.html#5-save-game-i-load-game-co-wraca-takie-samo-a-co-inne">koncept 5</a></td>
 </tr>
 <tr>
@@ -653,7 +660,7 @@ az resource list --resource-group $prodRg --query &#39;[].{Nazwa:name, Typ:type}
 <ul>
 <li><input type="checkbox"> <code>save-game.ps1</code> uruchomiony raz jeszcze; <code>az group list</code> nie pokazuje <code>prod-skycraft-swc-rg</code> (zostają hub, pusta <code>dev-skycraft-swc-rg</code> i <code>NetworkWatcherRG</code>)</li>
 <li><input type="checkbox"> Cost Management → <em>Cost analysis</em>: następnego dnia <code>prod-skycraft-swc-lb</code> i <code>-lb-pip</code> mają tylko dzisiejszą datę, za 2-3 godziny pracy: grosze</li>
-<li><input type="checkbox"> Zostaje: hub, dwie strefy DNS z jednym linkiem i blokada <code>CanNotDelete</code>; peeringu po stronie huba nie ma, wróci z load game</li>
+<li><input type="checkbox"> Zostaje: hub z blokadą <code>CanNotDelete</code> (skrypt założył ją z powrotem: <code>az lock list -g platform-skycraft-swc-rg</code> pokazuje <code>lock-no-delete-platform</code>), dwie strefy DNS z jednym linkiem; peering <code>hub-to-prod</code> w hubie jest <em>Disconnected</em> do następnego load game, który go nadpisze</li>
 <li><input type="checkbox"> Repozytorium wypchnięte: <code>main.bicep</code>, <code>prod.bicepparam</code>, <code>modules/</code> (sześć plików), <code>save-game.ps1</code>, <code>load-game.ps1</code> i <code>README.md</code></li>
 <li><input type="checkbox"> Wylogowanie z portalu Azure i z konta GitHub w VS Code na komputerze sali</li>
 </ul>
