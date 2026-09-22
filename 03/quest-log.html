@@ -556,8 +556,17 @@ blockquote {
 <li><input type="checkbox"> Kasujesz <code>prod-skycraft-swc-lb</code> (load balancer), potem <code>prod-skycraft-swc-lb-pip</code> (adres). W tej kolejności: adres podpięty do load balancera nie da się usunąć</li>
 <li><input type="checkbox"> Zostają: sieci, podsieci, peering, trzy NSG i dwie strefy DNS (razem ok. 0,60 USD miesięcznie, potrzebne na spotkaniu 5)</li>
 <li><input type="checkbox"> Sprawdzasz w <code>platform-skycraft-swc-rg</code> i <code>prod-skycraft-swc-rg</code>, że lista zasobów się zgadza</li>
+<li><input type="checkbox"> Przenosisz blokadę <code>CanNotDelete</code> z grupy <code>platform-skycraft-swc-rg</code> na sieć huba i strefę publiczną (jak, czytasz niżej)</li>
 <li><input type="checkbox"> Rekord <code>play.skycraft.example.com</code> wskazuje teraz na adres, którego nie ma. Zostaw go: to pytanie na refleksję i side quest 5</li>
 </ul>
+<h3 id="przeniesienie-blokady-na-zasoby-huba">Przeniesienie blokady na zasoby huba</h3>
+<p>Na spotkaniu 2 grupa <code>platform-skycraft-swc-rg</code> była pusta i blokada mogła stać tylko na niej. Dziś grupa przestała być pusta, więc blokada chroni od teraz to, czego nie dałoby się odtworzyć: sieć huba <code>platform-skycraft-swc-vnet</code> i strefę publiczną <code>skycraft.example.com</code> (odtworzona dostaje inny zestaw serwerów nazw, a delegacja u rejestratora przestaje pasować). Strefa prywatna <code>skycraft.internal</code> zostaje bez blokady, bo od spotkania 5 skrypt save game kasuje jej link do prod.</p>
+<p>W portalu: <em>Resource group <code>platform-skycraft-swc-rg</code> → Locks</em> i kasujesz <code>lock-no-delete-platform</code>; potem <em>Virtual network <code>platform-skycraft-swc-vnet</code> → Locks → Add</em> i <em>DNS zone <code>skycraft.example.com</code> → Locks → Add</em>, oba typu <em>Delete</em>. To samo z wiersza poleceń:</p>
+<pre><code class="language-text">az lock delete --name lock-no-delete-platform --resource-group platform-skycraft-swc-rg
+az lock create --name lock-no-delete-hub-vnet --resource-group platform-skycraft-swc-rg --resource platform-skycraft-swc-vnet --resource-type Microsoft.Network/virtualNetworks --lock-type CanNotDelete
+az lock create --name lock-no-delete-dns --resource-group platform-skycraft-swc-rg --resource skycraft.example.com --resource-type Microsoft.Network/dnsZones --lock-type CanNotDelete
+</code></pre>
+<p>Blokada zaczyna działać do minuty po założeniu i tyle samo przestaje po zdjęciu, więc jeśli zaraz po zmianie coś kasujesz, daj jej chwilę. Test ze spotkania 2 działa dalej: próba skasowania całej grupy nadal kończy się błędem, tylko komunikat wymienia teraz jeden z zablokowanych zasobów (sieć albo strefę) zamiast grupy.</p>
 <h2 id="side-questy">Side questy</h2>
 <p>Zadania dla tych, którzy skończyli blok przed czasem, i do samodzielnej pracy po zajęciach. Każdy side quest jest niezależny od rdzenia. Kolumna „Po bloku” mówi, od kiedy da się go zacząć. Zrobione side questy pokaż prowadzącemu na następnym spotkaniu.</p>
 <p>Uwaga o kosztach: żaden z poniższych questów nie tworzy zasobu płatnego poza questem 2, gdzie doliczy się druga strefa peeringu (opłata za przesłane dane, groszowa przy pustych sieciach). Jeśli w queście utworzysz load balancer albo publiczny adres IP, skasuj je tak samo jak w rdzeniu.</p>
