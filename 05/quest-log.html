@@ -598,6 +598,18 @@ az resource list --resource-group $prodRg --query &#39;[].{Nazwa:name, Typ:type}
 <td><a href="prolog.html#1-existing-i-przejmowanie-zasob%C3%B3w-kod-opisuje-to-co-ju%C5%BC-stoi">koncept 1</a></td>
 </tr>
 <tr>
+<td>What-if na sieci huba pokazuje <code>name: &quot;hub-to-dev&quot; =&gt; &quot;hub-to-prod&quot;</code> i cały <code>hub-to-prod</code> z minusem</td>
+<td>hub ma drugi peering (spoke Development z side questu spotkania 3); what-if składa peeringi z kodu w listę na sieci i porównuje ją z listą w Azure pozycja po pozycji</td>
+<td>to też szum: wdrożenie nie rusza peeringów, których nie ma w kodzie, oba zostają <em>Connected</em>; nic nie poprawiasz</td>
+<td><a href="prolog.html#1-existing-i-przejmowanie-zasob%C3%B3w-kod-opisuje-to-co-ju%C5%BC-stoi">koncept 1</a></td>
+</tr>
+<tr>
+<td>What-if pokazuje <code>- zones: [1, 2, 3]</code> na <code>prod-skycraft-swc-lb-pip</code>, a wdrożenie staje z <code>ResourceAvailabilityZonesCannotBeModified</code></td>
+<td>adres z portalu został po spotkaniu 3 (nie skasowałeś go w sprzątaniu) i ma strefy, bo portal tak tworzy adres Standard; moduł z labu stref nie ma, a stref na istniejącym adresie nie da się zmienić</td>
+<td>skasuj w portalu load balancer (jeśli został) i adres, wdróż ponownie: kod postawi adres od nowa, a rekord <code>play</code> dostanie nowy adres. Jeśli chcesz zostawić adres z portalu, dopisz do modułu <code>zones: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</code></td>
+<td><a href="prolog.html#1-existing-i-przejmowanie-zasob%C3%B3w-kod-opisuje-to-co-ju%C5%BC-stoi">koncept 1</a></td>
+</tr>
+<tr>
 <td>What-if pokazuje <em>Modify</em> na <code>prod-skycraft-swc-db-nsg</code>: <code>sourceAddressPrefix: &quot;*&quot;</code> albo znika <code>description</code></td>
 <td>moduł NSG z labu zna tylko jedno źródło i nie przekazuje opisu</td>
 <td>nie wdrażaj; dopisz do <code>modules/nsg.bicep</code> <code>sourceAddressPrefixes: rule.?sourceAddressPrefixes</code> i <code>description: rule.?description</code>, w regule db podaj oba źródła</td>
