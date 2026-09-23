@@ -628,9 +628,9 @@ az resource list --resource-group $prodRg --query &#39;[].{Nazwa:name, Typ:type}
 <td><a href="prolog.html#4-wdro%C5%BCenie-na-zakresie-subskrypcji-grupy-powstaj%C4%85-z-kodu">koncept 4</a></td>
 </tr>
 <tr>
-<td>Wdrożenie odrzucone: <code>RequestDisallowedByPolicy</code></td>
-<td>grupa zasobów bez tagu <code>Environment</code>; policy <em>Deny</em> ze spotkania 2</td>
-<td>dodaj tag do zasobu <code>resourceGroups</code> w <code>main.bicep</code>; policy sprawdza grupę zasobów w chwili zapisu, nie zasoby w niej</td>
+<td>What-if (albo <code>create</code>) kończy się <code>InvalidTemplateDeployment ... policy violation</code> z <code>RequestDisallowedByPolicy - Resource &#39;prod-skycraft-swc-rg&#39; was disallowed by policy</code></td>
+<td>grupa zasobów bez tagu <code>Environment</code>; policy <em>Deny</em> ze spotkania 2 sprawdza grupę w chwili zapisu, nie zasoby w niej, a what-if uruchamia tę samą walidację co wdrożenie</td>
+<td>dodaj tag do zasobu <code>resourceGroups</code> w <code>main.bicep</code> i uruchom what-if ponownie; nic nie powstało ani nie zmieniło się, także gdy grupy już stały</td>
 <td><a href="prolog.html#4-wdro%C5%BCenie-na-zakresie-subskrypcji-grupy-powstaj%C4%85-z-kodu">koncept 4</a></td>
 </tr>
 <tr>
