@@ -552,6 +552,7 @@ blockquote {
 </tbody></table>
 <h2 id="sprzątanie-15-min-wszyscy">Sprzątanie (15 min, wszyscy)</h2>
 <p>Dziś powstały pierwsze płatne zasoby kursu. Load balancer Standard z regułą i statyczny publiczny adres IP to razem ok. 22 USD miesięcznie za bramę bez serwera; na spotkaniu 5 odtworzy je Bicep w kilkanaście sekund.</p>
+<p>To jest pierwsza połowa mechaniki <strong>save game</strong>, o której mówi strona kursu: na koniec zajęć kasujesz to, co kosztuje, a stan platformy ma zostać zapisany gdzie indziej. Dziś „gdzie indziej” to jeszcze Twoje notatki i portal, bo kodu nie ma. Na spotkaniu 4 napiszesz pierwszy Bicep, a na spotkaniu 5 cała ta sieć trafi do jednego pliku i wróci z niego jednym poleceniem. Od tamtej pory sprzątanie po zajęciach będzie skryptem, nie klikaniem.</p>
 <ul>
 <li><input type="checkbox"> Kasujesz <code>prod-skycraft-swc-lb</code> (load balancer), potem <code>prod-skycraft-swc-lb-pip</code> (adres). W tej kolejności: adres podpięty do load balancera nie da się usunąć</li>
 <li><input type="checkbox"> Zostają: sieci, podsieci, peering, trzy NSG i dwie strefy DNS (razem ok. 0,60 USD miesięcznie, potrzebne na spotkaniu 5)</li>
