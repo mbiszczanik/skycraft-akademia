@@ -610,6 +610,12 @@ az resource list --resource-group $prodRg --query &#39;[].{Nazwa:name, Typ:type}
 <td><a href="prolog.html#1-existing-i-przejmowanie-zasob%C3%B3w-kod-opisuje-to-co-ju%C5%BC-stoi">koncept 1</a></td>
 </tr>
 <tr>
+<td>What-if pokazuje <code>- properties.serviceEndpoints</code> na <code>WorldSubnet</code> i <code>DatabaseSubnet</code> albo Twoją regułę z ASG jako usuniętą z NSG</td>
+<td>zrobiłeś side quest 4 (service endpoints) albo 1 (ASG) ze spotkania 3, a kod z labu tego nie opisuje; podsieci i reguły NSG kod zapisuje w całości, więc czego w nim nie ma, to zniknie</td>
+<td>to dryf, nie szum: wdrożenie zdejmie endpointy i regułę. Albo dopisz je do kodu (<code>serviceEndpoints</code> w <code>modules/network.bicep</code>, reguła z <code>sourceApplicationSecurityGroups</code> w <code>modules/nsg.bicep</code>), albo świadomie przyjmij, że po spotkaniu 5 platforma wygląda tak, jak opisuje kod</td>
+<td><a href="prolog.html#1-existing-i-przejmowanie-zasob%C3%B3w-kod-opisuje-to-co-ju%C5%BC-stoi">koncept 1</a></td>
+</tr>
+<tr>
 <td>What-if pokazuje <em>Modify</em> na <code>prod-skycraft-swc-db-nsg</code>: <code>sourceAddressPrefix: &quot;*&quot;</code> albo znika <code>description</code></td>
 <td>moduł NSG z labu zna tylko jedno źródło i nie przekazuje opisu</td>
 <td>nie wdrażaj; dopisz do <code>modules/nsg.bicep</code> <code>sourceAddressPrefixes: rule.?sourceAddressPrefixes</code> i <code>description: rule.?description</code>, w regule db podaj oba źródła</td>
