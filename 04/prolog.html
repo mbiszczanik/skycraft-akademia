@@ -409,7 +409,7 @@ blockquote {
 <body><main><div class="eyebrow"><a href="../index.html">SkyCraft: Akademia Chmury</a></div>
 <h1 id="prolog-spotkania-4-warsztat-rzemieślnika-i">Prolog spotkania 4: Warsztat rzemieślnika I</h1>
 <nav class="pagenav"><a href="../index.html">Strona główna</a><span class="sep">›</span><span>Spotkanie 4: Warsztat rzemieślnika I</span><span class="sep">›</span><span class="current">Prolog</span><span class="sep">·</span><a href="quest-log.html">Quest log</a></nav>
-<nav class="toc"><div class="toc-title">Na tej stronie</div><ul><li><a href="#1-infrastruktura-jako-kod-stan-pożądany-zamiast-klikania">1. Infrastruktura jako kod: stan pożądany zamiast klikania</a></li><li><a href="#2-arm-template-eksport-z-portalu-to-nie-kod-źródłowy">2. ARM template: eksport z portalu to nie kod źródłowy</a></li><li><a href="#3-bicep-ten-sam-arm-czytelny-dla-człowieka">3. Bicep: ten sam ARM, czytelny dla człowieka</a></li><li><a href="#4-moduły-zakres-wdrożenia-i-what-if">4. Moduły, zakres wdrożenia i what-if</a></li><li><a href="#5-copilot-w-warsztacie-najpierw-zrozum-potem-generuj">5. Copilot w warsztacie: najpierw zrozum, potem generuj</a></li><li><a href="#sprawdź-się">Sprawdź się</a></li><li><a href="#dalej-microsoft-learn">Dalej: Microsoft Learn</a></li></ul></nav>
+<nav class="toc"><div class="toc-title">Na tej stronie</div><ul><li><a href="#1-infrastruktura-jako-kod-stan-pożądany-zamiast-klikania">1. Infrastruktura jako kod: stan pożądany zamiast klikania</a></li><li><a href="#2-arm-template-eksport-z-portalu-to-nie-kod-źródłowy">2. ARM template: eksport z portalu to nie kod źródłowy</a></li><li><a href="#3-bicep-ten-sam-arm-czytelny-dla-człowieka">3. Bicep: ten sam ARM, czytelny dla człowieka</a></li><li><a href="#4-moduły-zakres-wdrożenia-i-what-if">4. Moduły, zakres wdrożenia i what-if</a></li><li><a href="#5-copilot-prompt-przegląd-kodu-lista-kontrolna">5. Copilot: prompt, przegląd kodu, lista kontrolna</a></li><li><a href="#sprawdź-się">Sprawdź się</a></li><li><a href="#dalej-microsoft-learn">Dalej: Microsoft Learn</a></li></ul></nav>
 <p>Lektura przed spotkaniem, ok. 20 minut. Czytasz przed zajęciami: quiz na początku zajęć sprawdza to, co tu przeczytasz, a slajdy na zajęciach tylko to porządkują. Wracasz tu po zajęciach, gdy coś w labie Cię zaskoczyło. Każdy koncept ma ten sam układ: co to jest, jaki problem rozwiązuje, jak działa, typowe błędy, jak sprawdza to egzamin AZ-104. Na końcu „Sprawdź się” jako próba przed quizem i linki do źródeł.</p>
 <p>Od tego spotkania zmienia się nośnik platformy: to, co przez trzy spotkania klikałeś w portalu, ma zacząć istnieć jako tekst w Twoim repozytorium. Pięć konceptów tego spotkania:</p>
 <ol>
@@ -417,7 +417,7 @@ blockquote {
 <li><a href="#2-arm-template-eksport-z-portalu-to-nie-kod-%C5%BAr%C3%B3d%C5%82owy">ARM template: eksport z portalu to nie kod źródłowy</a></li>
 <li><a href="#3-bicep-ten-sam-arm-czytelny-dla-cz%C5%82owieka">Bicep: ten sam ARM, czytelny dla człowieka</a></li>
 <li><a href="#4-modu%C5%82y-zakres-wdro%C5%BCenia-i-what-if">Moduły, zakres wdrożenia i what-if</a></li>
-<li><a href="#5-copilot-w-warsztacie-najpierw-zrozum-potem-generuj">Copilot w warsztacie: najpierw zrozum, potem generuj</a></li>
+<li><a href="#5-copilot-prompt-przegl%C4%85d-kodu-lista-kontrolna">Copilot: prompt, przegląd kodu, lista kontrolna</a></li>
 </ol>
 <hr>
 <h2 id="1-infrastruktura-jako-kod-stan-pożądany-zamiast-klikania">1. Infrastruktura jako kod: stan pożądany zamiast klikania</h2>
@@ -491,7 +491,7 @@ output vnetId string = vnet.id
 </ul>
 <p><strong>Na egzaminie AZ-104.</strong> „Szablon musi utworzyć grupę zasobów i zasoby w niej. Jaki zakres ustawisz?” (subskrypcja, z modułem kierowanym do grupy). „Chcesz zobaczyć zmiany, które wprowadzi szablon, bez ich wykonywania. Jakiej opcji użyjesz?” (what-if; w PowerShellu <code>-WhatIf</code>). „Ten sam moduł sieci ma być użyty dla trzech środowisk. Co zmieniasz między wdrożeniami?” (plik parametrów).</p>
 <hr>
-<h2 id="5-copilot-w-warsztacie-najpierw-zrozum-potem-generuj">5. Copilot w warsztacie: najpierw zrozum, potem generuj</h2>
+<h2 id="5-copilot-prompt-przegląd-kodu-lista-kontrolna">5. Copilot: prompt, przegląd kodu, lista kontrolna</h2>
 <p><strong>Co to jest.</strong> GitHub Copilot to asystent kodu w VS Code (masz go w GitHub Student Developer Pack ze spotkania 1). Uzupełnia kod w edytorze na podstawie kontekstu pliku i odpowiada na pytania w oknie czatu. Dla Bicepa działa dobrze, bo składnia jest regularna, a typy zasobów są publicznie udokumentowane.</p>
 <p><strong>Jaki problem rozwiązuje.</strong> Odciąża od pisania rzeczy, które umiesz napisać: szkielet modułu, pętlę po podsieciach, dekoratory na parametrach. Nie zastępuje wiedzy o tym, co ma wyjść; dlatego na tym spotkaniu moduł sieci piszesz najpierw ręcznie według labu, a dopiero potem prosisz Copilota o to samo. Wtedy wiesz, jak wygląda dobry wynik, i potrafisz ocenić zły.</p>
 <p><strong>Jak działa.</strong> Najskuteczniejszy sposób w Bicepie to <strong>komentarz-prompt</strong> na górze pustego pliku: kilka linii opisujących, co ma powstać, z parametrami, konwencją nazw, tagami i wyjściami. Copilot dopisuje kod pod komentarzem. Im konkretniejszy prompt, tym mniej poprawek: model nie zna konwencji SkyCraft ani tego, że region ma być parametrem, dopóki mu tego nie napiszesz. Przykład promptu użyjesz w bloku 4:</p>

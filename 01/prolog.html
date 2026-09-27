@@ -409,13 +409,13 @@ blockquote {
 <body><main><div class="eyebrow"><a href="../index.html">SkyCraft: Akademia Chmury</a></div>
 <h1 id="prolog-spotkania-1-założenie-studia">Prolog spotkania 1: Założenie studia</h1>
 <nav class="pagenav"><a href="../index.html">Strona główna</a><span class="sep">›</span><span>Spotkanie 1: Założenie studia</span><span class="sep">›</span><span class="current">Prolog</span><span class="sep">·</span><a href="quest-log.html">Quest log</a></nav>
-<nav class="toc"><div class="toc-title">Na tej stronie</div><ul><li><a href="#1-tenant-katalog-subskrypcja">1. Tenant, katalog, subskrypcja</a></li><li><a href="#2-dwa-systemy-uprawnień-entra-id-i-azure-rbac">2. Dwa systemy uprawnień: Entra ID i Azure RBAC</a></li><li><a href="#3-tożsamość-jako-perymetr">3. Tożsamość jako perymetr</a></li><li><a href="#4-model-b2b-gość-który-nie-ma-u-ciebie-hasła">4. Model B2B: gość, który nie ma u Ciebie hasła</a></li><li><a href="#sprawdź-się">Sprawdź się</a></li><li><a href="#dalej-microsoft-learn">Dalej: Microsoft Learn</a></li></ul></nav>
+<nav class="toc"><div class="toc-title">Na tej stronie</div><ul><li><a href="#1-tenant-katalog-subskrypcja">1. Tenant, katalog, subskrypcja</a></li><li><a href="#2-dwa-systemy-uprawnień-entra-id-i-azure-rbac">2. Dwa systemy uprawnień: Entra ID i Azure RBAC</a></li><li><a href="#3-mfa-tożsamość-jako-granica-bezpieczeństwa">3. MFA: tożsamość jako granica bezpieczeństwa</a></li><li><a href="#4-model-b2b-gość-który-nie-ma-u-ciebie-hasła">4. Model B2B: gość, który nie ma u Ciebie hasła</a></li><li><a href="#sprawdź-się">Sprawdź się</a></li><li><a href="#dalej-microsoft-learn">Dalej: Microsoft Learn</a></li></ul></nav>
 <p>Lektura przed spotkaniem, ok. 20 minut. Czytasz przed zajęciami: quiz na początku zajęć sprawdza to, co tu przeczytasz, a slajdy na zajęciach tylko to porządkują. Wracasz tu po zajęciach, gdy coś w labie Cię zaskoczyło. Każdy koncept ma ten sam układ: co to jest, jaki problem rozwiązuje, jak działa, typowe błędy, jak sprawdza to egzamin AZ-104. Na końcu „Sprawdź się” jako próba przed quizem i linki do źródeł.</p>
 <p>Cztery koncepty tego spotkania:</p>
 <ol>
 <li><a href="#1-tenant-katalog-subskrypcja">Tenant, katalog, subskrypcja</a></li>
 <li><a href="#2-dwa-systemy-uprawnie%C5%84-entra-id-i-azure-rbac">Dwa systemy uprawnień: Entra ID i Azure RBAC</a></li>
-<li><a href="#3-to%C5%BCsamo%C5%9B%C4%87-jako-perymetr">Tożsamość jako perymetr</a></li>
+<li><a href="#3-mfa-to%C5%BCsamo%C5%9B%C4%87-jako-granica-bezpiecze%C5%84stwa">MFA: tożsamość jako granica bezpieczeństwa</a></li>
 <li><a href="#4-model-b2b-go%C5%9B%C4%87-kt%C3%B3ry-nie-ma-u-ciebie-has%C5%82a">Model B2B: gość, który nie ma u Ciebie hasła</a></li>
 </ol>
 <hr>
@@ -446,8 +446,8 @@ blockquote {
 </ul>
 <p><strong>Na egzaminie AZ-104.</strong> „Użytkownik ma tworzyć VM w jednej grupie zasobów, ale nie może nadawać ról. Minimalna rola?” (Contributor na grupie zasobów). „Kto może przypisać rolę Reader innej osobie, nie mając dostępu do zasobów?” (User Access Administrator). „Reader na subskrypcji i Contributor na RG. Co może w RG?” (modyfikować, uprawnienia się sumują).</p>
 <hr>
-<h2 id="3-tożsamość-jako-perymetr">3. Tożsamość jako perymetr</h2>
-<p><strong>Co to jest.</strong> W tradycyjnej serwerowni granicą bezpieczeństwa był mur: sieć firmowa, firewall, fizyczne drzwi. W chmurze portal Azure jest dostępny z każdego miejsca na świecie, więc jedyną granicą jest odpowiedź na pytanie „kim jesteś i czy na pewno”. Tożsamość i sposób jej potwierdzania stają się perymetrem.</p>
+<h2 id="3-mfa-tożsamość-jako-granica-bezpieczeństwa">3. MFA: tożsamość jako granica bezpieczeństwa</h2>
+<p><strong>Co to jest.</strong> W tradycyjnej serwerowni granicą bezpieczeństwa był mur: sieć firmowa, firewall, fizyczne drzwi. W chmurze portal Azure jest dostępny z każdego miejsca na świecie, więc jedyną granicą jest odpowiedź na pytanie „kim jesteś i czy na pewno”. Tożsamość i sposób jej potwierdzania stają się granicą bezpieczeństwa.</p>
 <p><strong>Jaki problem rozwiązuje.</strong> Konto z aktywną subskrypcją i kredytem to cel: przejęte konta studenckie służą do kopania kryptowalut do wyczerpania limitu. Hasło samo w sobie nie wystarcza, bo wycieka, jest zgadywane albo podawane na fałszywej stronie logowania.</p>
 <p><strong>Jak działa.</strong> MFA (multi-factor authentication) dokłada drugi składnik: coś, co masz (aplikacja Microsoft Authenticator na telefonie, klucz sprzętowy), do czegoś, co wiesz (hasło). W Entra ID Free mechanizm nazywa się security defaults: włączony w nowych tenantach, wymusza rejestrację MFA dla wszystkich użytkowników i blokuje przestarzałe protokoły logowania. Bardziej precyzyjne reguły (MFA tylko spoza sieci firmowej, tylko dla administratorów, tylko dla ryzykownych logowań) to Conditional Access, który wymaga licencji Entra ID P1.</p>
 <p>Perymetr tożsamościowy to też higiena: konto administratora używane tylko do administracji, osobne konto do codziennej pracy, dziennik logowań (sign-in logs) przeglądany po każdym incydencie, grupy zamiast uprawnień per osoba, gość usuwany po zakończeniu współpracy.</p>
