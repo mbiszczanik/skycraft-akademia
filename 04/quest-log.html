@@ -295,6 +295,24 @@ blockquote {
   padding: 0.1em 0 0.1em 1em;
 }
 
+/* Zwinięte rozwiązanie wzorcowe w quest logu: widać jedną linię, treść po kliknięciu. */
+details {
+  border-left: 2px solid var(--sc-rule);
+  margin: 1em 0;
+  padding: 0.1em 0 0.1em 1em;
+}
+
+details > summary {
+  cursor: pointer;
+  font-family: var(--sc-mono);
+  font-size: 13px;
+  color: var(--sc-meta);
+}
+
+details[open] > summary {
+  margin-bottom: 0.8em;
+}
+
 /* Nawigacja stron spotkania: okruszki pod H1, sąsiednie spotkania na dole. */
 .pagenav {
   font-family: var(--sc-mono);

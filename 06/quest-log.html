@@ -295,6 +295,24 @@ blockquote {
   padding: 0.1em 0 0.1em 1em;
 }
 
+/* Zwinięte rozwiązanie wzorcowe w quest logu: widać jedną linię, treść po kliknięciu. */
+details {
+  border-left: 2px solid var(--sc-rule);
+  margin: 1em 0;
+  padding: 0.1em 0 0.1em 1em;
+}
+
+details > summary {
+  cursor: pointer;
+  font-family: var(--sc-mono);
+  font-size: 13px;
+  color: var(--sc-meta);
+}
+
+details[open] > summary {
+  margin-bottom: 0.8em;
+}
+
 /* Nawigacja stron spotkania: okruszki pod H1, sąsiednie spotkania na dole. */
 .pagenav {
   font-family: var(--sc-mono);
@@ -884,11 +902,12 @@ output serverUrl string = &#39;http://${lbPip.outputs.ipAddress}:8085&#39;
 <li><input type="checkbox"> Raz w domu, w tej kolejności: <code>load-game.ps1</code>, przeglądarka pod adresem z <code>serverUrl</code>, <code>save-game.ps1</code>; spotkanie 7 zaczyna się od load game i nie ma na to bufora</li>
 <li><input type="checkbox"> Kto nie skończył bloku 5: moduł i zmiany w <code>main.bicep</code> wg sekcji „Moduł maszyny” w domu, potem cykl z punktu wyżej</li>
 <li><input type="checkbox"> Do przeczytania: prolog spotkania 7 „Portal gracza” i „Sprawdź się” na końcu</li>
+<li><input type="checkbox"> Gość ze spotkania 1 (kolega z pary) jest nadal w Twoim tenancie i przyjął zaproszenie: na spotkaniu 7 siadacie obok siebie i logujecie się nawzajem do swoich paneli</li>
 <li><input type="checkbox"> Opcjonalnie: side quest 1 albo 3; side quest 2 tylko z kasowaniem na końcu</li>
 <li><input type="checkbox"> Jeśli coś się wysypało: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#-troubleshooting">Troubleshooting labu 3.2</a></li>
 </ul>
 
-<nav class="pagenav bottom"><a href="../05/prolog.html">← Spotkanie 5: Warsztat rzemieślnika II</a><a href="../index.html">Strona główna</a><span></span></nav>
+<nav class="pagenav bottom"><a href="../05/prolog.html">← Spotkanie 5: Warsztat rzemieślnika II</a><a href="../index.html">Strona główna</a><a href="../07/prolog.html">Spotkanie 7: Portal gracza →</a></nav>
 <div class="sig"><div><div class="sig-name">Marcin Biszczanik</div><div class="sig-motto">Złożone systemy. Ludzki język.</div></div><a class="sig-url" href="https://www.linkedin.com/in/marcin-biszczanik">in/marcin-biszczanik</a></div>
 </main><script>(() => {
   const button = document.querySelector('.theme-toggle');
