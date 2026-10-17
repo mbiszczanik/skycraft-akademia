@@ -577,7 +577,7 @@ details[open] > summary {
 </ul>
 </li>
 <li><input type="checkbox"> <strong>12.</strong> Aplikacja → <em>Settings → Environment variables</em>: <code>WORLD_SERVER_URL</code> = <code>http://&lt;adres z kroku 4&gt;:8085</code>, <code>APP_VERSION</code> = <code>1</code>; <em>Apply</em>; przeglądarka pod adresem <em>Default domain</em> z <em>Overview</em>. <code>WEBSITES_PORT</code> nie dodajesz: w aplikacji z kreatora port ustawiłeś przy kontenerze w kroku 11, a obraz słucha na 8080, który App Service znajduje sam → <a href="https://learn.microsoft.com/en-us/azure/app-service/configure-common">MS Learn: ustawienia aplikacji</a><ul>
-<li>ma wyjść: panel: „niezalogowany”, serwer świata offline; pierwsze uruchomienie trwa do kilku minut, bo App Service pobiera obraz</li>
+<li>ma wyjść: panel: „niezalogowany”, serwer świata offline; pierwsze uruchomienie trwa ok. półtorej minuty, bo App Service pobiera obraz</li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>13.</strong> Aplikacja → <em>Settings → Networking</em> → <em>Outbound traffic configuration</em> → <em>Virtual network integration</em>: <code>prod-skycraft-swc-vnet</code>, podsieć <code>AppServiceSubnet</code>; po minucie odświeżasz panel; potem sieć <code>prod-skycraft-swc-vnet</code> → <em>Subnets</em> → <code>AppServiceSubnet</code> → <em>Subnet delegation</em> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.4-app-service/lab-guide-3.4.md#step-3410-vnet-integration-conceptualsetup">3.4.10</a> · <a href="https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration">MS Learn: VNet integration</a><ul>
@@ -1047,7 +1047,7 @@ output panelUrl string = &#39;https://${panel.outputs.defaultHostName}&#39;
 <tr>
 <td>ACI <em>Running</em>, przeglądarka czeka i nic</td>
 <td>port 80 zamiast 8080 w kreatorze albo <code>https://</code> zamiast <code>http://</code></td>
-<td><code>http://&lt;FQDN&gt;:8080</code>; kontener → <em>Properties</em> pokazuje porty; zły port: porty zmienisz tylko ponownym wdrożeniem, więc najprościej skasować kontener i utworzyć go od nowa. Nowy kontener pod tą samą nazwą DNS dostaje nowy adres, a stary siedzi jeszcze kilka minut w pamięci nazw Twojego komputera: wejdź wtedy po adresie IP z <em>Overview</em></td>
+<td><code>http://&lt;FQDN&gt;:8080</code>; kontener → <em>Properties</em> pokazuje porty; zły port: porty zmienisz tylko ponownym wdrożeniem, więc najprościej skasować kontener i utworzyć go od nowa. Nowy kontener pod tą samą nazwą DNS dostaje nowy adres, a stary siedzi jeszcze do pięciu minut w pamięci nazw Twojego komputera: wejdź wtedy po adresie IP z <em>Overview</em></td>
 <td><a href="prolog.html#2-aci-i-app-service-ten-sam-obraz-dwa-sposoby-uruchomienia">koncept 2</a></td>
 </tr>
 <tr>
@@ -1077,7 +1077,7 @@ output panelUrl string = &#39;https://${panel.outputs.defaultHostName}&#39;
 <tr>
 <td>App Service nie pobiera obrazu, w <em>Log stream</em> <code>ImagePullUnauthorizedFailure</code> i <code>Image pull failed with forbidden or unauthorized</code></td>
 <td>brak roli AcrPull, rola na złym zakresie albo tożsamość nie jest wybrana w ustawieniach kontenera</td>
-<td>IAM rejestru: AcrPull dla <code>platform-skycraft-swc-id-panel</code>; aplikacja → <em>Deployment Center</em>: <em>Managed identity</em> i ta tożsamość; po zmianie roli odczekaj kilka minut</td>
+<td>IAM rejestru: AcrPull dla <code>platform-skycraft-swc-id-panel</code>; aplikacja → <em>Deployment Center</em>: <em>Managed identity</em> i ta tożsamość; po zmianie roli odczekaj do 10 minut</td>
 <td><a href="prolog.html#3-to%C5%BCsamo%C5%9B%C4%87-zarz%C4%85dzana-zamiast-has%C5%82a-do-rejestru">koncept 3</a></td>
 </tr>
 <tr>
