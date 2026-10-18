@@ -576,7 +576,7 @@ details[open] > summary {
 <li>ma wyjść: <em>Deployment succeeded</em>; w grupie prod plan B1 i aplikacja</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>12.</strong> Aplikacja → <em>Settings → Environment variables</em>: <code>WORLD_SERVER_URL</code> = <code>http://&lt;adres z kroku 4&gt;:8085</code>, <code>APP_VERSION</code> = <code>1</code>; <em>Apply</em>; przeglądarka pod adresem <em>Default domain</em> z <em>Overview</em>. <code>WEBSITES_PORT</code> nie dodajesz: w aplikacji z kreatora port ustawiłeś przy kontenerze w kroku 11, a obraz słucha na 8080, który App Service znajduje sam → <a href="https://learn.microsoft.com/en-us/azure/app-service/configure-common">MS Learn: ustawienia aplikacji</a><ul>
+<li><input type="checkbox"> <strong>12.</strong> Aplikacja → <em>Settings → Environment variables</em>: <code>WORLD_SERVER_URL</code> = <code>http://&lt;adres z kroku 4&gt;:8085</code>, <code>APP_VERSION</code> = <code>1</code>; <em>Apply</em>; przeglądarka pod adresem <em>Default domain</em> z <em>Overview</em>. <code>WEBSITES_PORT</code> nie dodajesz: w aplikacji z kreatora to ustawienie nie działa, a ruch z zewnątrz idzie na port 80 albo 8080, więc obraz słuchający na 8080 go dostaje → <a href="https://learn.microsoft.com/en-us/azure/app-service/configure-common">MS Learn: ustawienia aplikacji</a><ul>
 <li>ma wyjść: panel: „niezalogowany”, serwer świata offline; pierwsze uruchomienie trwa ok. półtorej minuty, bo App Service pobiera obraz</li>
 </ul>
 </li>
@@ -1047,7 +1047,7 @@ output panelUrl string = &#39;https://${panel.outputs.defaultHostName}&#39;
 <tr>
 <td>ACI <em>Running</em>, przeglądarka czeka i nic</td>
 <td>port 80 zamiast 8080 w kreatorze albo <code>https://</code> zamiast <code>http://</code></td>
-<td><code>http://&lt;FQDN&gt;:8080</code>; kontener → <em>Properties</em> pokazuje porty; zły port: porty zmienisz tylko ponownym wdrożeniem, więc najprościej skasować kontener i utworzyć go od nowa. Nowy kontener pod tą samą nazwą DNS dostaje nowy adres, a stary siedzi jeszcze do pięciu minut w pamięci nazw Twojego komputera: wejdź wtedy po adresie IP z <em>Overview</em></td>
+<td><code>http://&lt;FQDN&gt;:8080</code>; kontener → <em>Properties</em> pokazuje porty; zły port: porty zmienisz tylko ponownym wdrożeniem, więc najprościej skasować kontener i utworzyć go od nowa. Nowy kontener pod tą samą nazwą DNS może dostać nowy adres (na próbie dostał), a stary siedzi jeszcze do pięciu minut w pamięci nazw Twojego komputera: wejdź wtedy po adresie IP z <em>Overview</em></td>
 <td><a href="prolog.html#2-aci-i-app-service-ten-sam-obraz-dwa-sposoby-uruchomienia">koncept 2</a></td>
 </tr>
 <tr>
@@ -1075,15 +1075,15 @@ output panelUrl string = &#39;https://${panel.outputs.defaultHostName}&#39;
 <td><a href="prolog.html#3-to%C5%BCsamo%C5%9B%C4%87-zarz%C4%85dzana-zamiast-has%C5%82a-do-rejestru">koncept 3</a></td>
 </tr>
 <tr>
-<td>App Service nie pobiera obrazu, w <em>Log stream</em> <code>ImagePullUnauthorizedFailure</code> i <code>Image pull failed with forbidden or unauthorized</code></td>
-<td>brak roli AcrPull, rola na złym zakresie albo tożsamość nie jest wybrana w ustawieniach kontenera</td>
-<td>IAM rejestru: AcrPull dla <code>platform-skycraft-swc-id-panel</code>; aplikacja → <em>Deployment Center</em>: <em>Managed identity</em> i ta tożsamość; po zmianie roli odczekaj do 10 minut</td>
+<td>App Service nie pobiera obrazu, w <em>Log stream</em> <code>ImagePullUnauthorizedFailure</code> i <code>Image pull failed with forbidden or unauthorized</code> (tak na próbie wyglądał slot bez tożsamości)</td>
+<td>tożsamość nie jest przypięta do aplikacji (tak było na slocie na próbie), nie ma roli AcrPull obejmującej rejestr albo rola jest nadana przed chwilą</td>
+<td>IAM rejestru: AcrPull dla <code>platform-skycraft-swc-id-panel</code>; aplikacja → <em>Deployment Center</em>: <em>Managed identity</em> i ta tożsamość; po zmianie roli odczekaj do 10 minut; tożsamość zarządzana według dokumentacji może czekać nawet do ok. 24 godzin</td>
 <td><a href="prolog.html#3-to%C5%BCsamo%C5%9B%C4%87-zarz%C4%85dzana-zamiast-has%C5%82a-do-rejestru">koncept 3</a></td>
 </tr>
 <tr>
 <td>Panel dalej offline po VNet integration</td>
 <td>zły adres w <code>WORLD_SERVER_URL</code> (inny niż <code>worldVmPrivateIp</code>), brak <code>http://</code> albo portu; integracja z inną podsiecią; maszyna zatrzymana przez auto-shutdown o 22:00</td>
-<td>ustawienie co do znaku: <code>http://10.2.2.x:8085</code>; <em>Networking</em> aplikacji pokazuje podsieć; <em>Overview</em> maszyny: <em>Running</em>. Po włączeniu integracji panel potrzebuje ok. 45 sekund: App Service sam wymienia kontener, nie restartujesz go ręcznie</td>
+<td>ustawienie co do znaku: <code>http://10.2.2.x:8085</code>; <em>Networking</em> aplikacji pokazuje podsieć; <em>Overview</em> maszyny: <em>Running</em>. Po włączeniu integracji panel potrzebuje ok. 45 sekund: App Service sam restartuje aplikację, nie robisz tego ręcznie</td>
 <td><a href="prolog.html#4-vnet-integration-panel-widzi-sie%C4%87-prywatn%C4%85">koncept 4</a></td>
 </tr>
 <tr>
@@ -1117,7 +1117,7 @@ output panelUrl string = &#39;https://${panel.outputs.defaultHostName}&#39;
 <td><a href="prolog.html#5-easy-auth-kto-wchodzi-decyduje-entra">koncept 5</a></td>
 </tr>
 <tr>
-<td>Po load game logowanie kończy się <code>AADSTS700054</code> (<code>response_type &#39;id_token&#39; is not enabled</code>)</td>
+<td>Po load game logowanie kończy się błędem <code>AADSTS700054</code></td>
 <td>rejestracja nie wydaje tokenów ID, a panel z kodu nie ma sekretu</td>
 <td>krok 20: <em>Authentication</em> → <em>ID tokens</em> zaznaczone, <em>Save</em>; odśwież stronę</td>
 <td><a href="prolog.html#5-easy-auth-kto-wchodzi-decyduje-entra">koncept 5</a></td>
@@ -1218,7 +1218,7 @@ output panelUrl string = &#39;https://${panel.outputs.defaultHostName}&#39;
 <h3 id="sq1-lista-wpuszczonych-graczy">SQ1: Lista wpuszczonych graczy</h3>
 <p><strong>Cel:</strong> zobaczyć, że o tym, kto wchodzi do panelu, decyduje Entra, a nie kod aplikacji.
 <strong>Kroki:</strong> <em>Microsoft Entra ID → Enterprise applications</em> → aplikacja o nazwie panelu → <em>Properties</em> → <em>Assignment required?: Yes</em> → <em>Save</em>; <em>Users and groups</em> → <em>Add user/group</em> → tylko Ty. Kolega z pary próbuje wejść do Twojego panelu. Potem spróbuj dodać grupę <code>SkyCraft-Developers</code> ze spotkania 1 i przeczytaj, co mówi portal.
-<strong>Jak sprawdzić:</strong> Ty wchodzisz; kolega zatrzymuje się na stronie Microsoftu z błędem <code>AADSTS50105</code>, który mówi, że administrator zablokował aplikację dla osób bez przypisanego dostępu. W komunikacie widać jego nazwę w Twoim katalogu, tę z <code>#EXT#</code> w środku, a nie adres, który panel pokazał mu po zalogowaniu: ta sama osoba, dwa zapisy. Przy grupie: przypisanie grupy do aplikacji wymaga licencji Entra ID P1 albo P2, a na darmowym Entra ID dodajesz osoby pojedynczo — <a href="https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal#prerequisites">tak mówi dokumentacja</a>. Tego jednego nie sprawdziliśmy przed zajęciami, bo nasz tenant testowy ma licencję płatną. Ustawienie żyje w tenancie, więc save game go nie rusza.</p>
+<strong>Jak sprawdzić:</strong> Ty wchodzisz; kolega zatrzymuje się na stronie Microsoftu z błędem <code>AADSTS50105</code>, który mówi, że administrator zablokował aplikację dla osób bez przypisanego dostępu. W komunikacie widać jego nazwę w Twoim katalogu, tę z <code>#EXT#</code> w środku, a nie adres, który panel pokazał mu po zalogowaniu: ta sama osoba, dwa zapisy. Przy grupie: przypisanie grupy do aplikacji wymaga licencji Entra ID P1 albo P2 — <a href="https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal#prerequisites">tak mówi dokumentacja</a> — więc na darmowym Entra ID dodajesz osoby pojedynczo. Tego jednego nie sprawdziliśmy przed zajęciami, bo nasz tenant testowy ma licencję płatną. Ustawienie żyje w tenancie, więc save game go nie rusza.</p>
 <h3 id="sq2-container-apps-z-tego-samego-obrazu">SQ2: Container Apps z tego samego obrazu</h3>
 <p><strong>Cel:</strong> trzeci sposób uruchomienia tego samego obrazu i skalowanie liczbą żądań zamiast procesora.
 <strong>Kroki:</strong> wg 3.3.6-3.3.9, w wariancie prod: <em>Container Apps → Create</em>, grupa <code>prod-skycraft-swc-rg</code>, nazwa <code>prod-skycraft-swc-ca-panel</code>, nowe środowisko <code>prod-skycraft-swc-cae</code> (<em>Consumption only</em>); kontener: obraz <code>panel:v1</code> z Twojego rejestru; jeśli kreator pozwala logować się do rejestru tożsamością, wybierz <code>platform-skycraft-swc-id-panel</code> (tego kreatora nie przeklikaliśmy przed zajęciami); 0,5 vCPU i 1 GiB, zmienna <code>WORLD_SERVER_URL</code> jak w bloku 3; <em>Ingress</em>: włączony, ruch z dowolnego miejsca, port docelowy 8080; skalowanie 1-3 repliki z regułą HTTP na 10 równoczesnych żądań.
