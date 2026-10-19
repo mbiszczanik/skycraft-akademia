@@ -524,7 +524,7 @@ details[open] > summary {
 <p>Laby: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md">Lab 1.2: RBAC</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md">Lab 1.3: governance</a></p>
 <h2 id="blok-1-grupy-zasobów-i-tagi-45-min">Blok 1: grupy zasobów i tagi (45 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>1.</strong> Trzy grupy zasobów wg konwencji: <code>dev-skycraft-swc-rg</code>, <code>prod-skycraft-swc-rg</code>, <code>platform-skycraft-swc-rg</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-121-create-development-resource-group">1.2.1</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-122-create-production-resource-group">1.2.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-123-create-shared-services-resource-group">1.2.3</a><ul>
+<li><input type="checkbox"> <strong>1.</strong> Trzy grupy zasobów wg konwencji: <code>dev-skycraft-swc-rg</code>, <code>prod-skycraft-swc-rg</code>, <code>platform-skycraft-swc-rg</code>, wszystkie w Twoim regionie ze spotkania 1 (lab podaje Sweden Central). Nazwy wpisujesz bez zmian, z <code>swc</code>, jak w prologu spotkania 1 → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-121-create-development-resource-group">1.2.1</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-122-create-production-resource-group">1.2.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-123-create-shared-services-resource-group">1.2.3</a><ul>
 <li>ma wyjść: trzy grupy zasobów widoczne na liście Resource groups</li>
 </ul>
 </li>
@@ -645,7 +645,7 @@ details[open] > summary {
 </ul>
 <h2 id="side-questy">Side questy</h2>
 <p>Zadania dla tych, którzy skończyli blok przed czasem, i do samodzielnej pracy po zajęciach. Każdy side quest jest niezależny od rdzenia. Kolumna „Po bloku” mówi, od kiedy da się go zacząć. Zrobione side questy pokaż prowadzącemu na następnym spotkaniu.</p>
-<p>Uwaga: policy z side questów 2, 4 i 6 zostają na subskrypcji. Jeśli któraś zablokuje coś na spotkaniu 3 (sieci w Sweden Central, tagi na zasobach), to jest to lekcja, nie awaria: sprawdź komunikat i popraw przypisanie.</p>
+<p>Uwaga: policy z side questów 2, 4 i 6 zostają na subskrypcji. Jeśli któraś zablokuje coś na spotkaniu 3 (sieci w Twoim regionie, tagi na zasobach), to jest to lekcja, nie awaria: sprawdź komunikat i popraw przypisanie.</p>
 <table>
 <thead>
 <tr>
@@ -712,8 +712,8 @@ details[open] > summary {
 <strong>Jak sprawdzić:</strong> przypisanie pojawia się i znika w portalu w widoku Access control (IAM). Porównaj liczbę kliknięć z wariantem portalowym.</p>
 <h3 id="sq2-policy-dozwolone-lokalizacje">SQ2: Policy „dozwolone lokalizacje”</h3>
 <p><strong>Cel:</strong> druga reguła, tym razem o regionie, i pierwsza kolizja z własnym nawykiem.
-<strong>Kroki:</strong> przypisz wbudowaną policy <em>Allowed locations</em> na subskrypcji, dozwolone: Sweden Central i North Europe; spróbuj utworzyć grupę zasobów w West Europe.
-<strong>Jak sprawdzić:</strong> wdrożenie zostaje odrzucone, a komunikat wskazuje nazwę przypisania. Zanotuj, czym ta odmowa różni się od odmowy z braku uprawnień RBAC.</p>
+<strong>Kroki:</strong> przypisz wbudowaną policy <em>Allowed locations</em> na subskrypcji, z nazwą przypisania <code>Restrict-Azure-Regions</code>. Jako dozwolone wybierz dwa regiony z listy, którą zapisałeś na spotkaniu 1: swój region i jeden inny z tej listy. Jeśli na liście są tylko dwa regiony, dopuść sam swój region. Jeśli listy nie znalazłeś, zapytaj prowadzącego, zanim zaczniesz. Lab każe wybrać Sweden Central i North Europe, ale Ty bierzesz regiony tylko ze swojej listy. Regiony, które dopuściłeś, wpisz też w opis przypisania i w komunikat o niezgodności, bo lab podaje w nich tamte dwa. Potem spróbuj utworzyć w <code>dev-skycraft-swc-rg</code> sieć wirtualną w regionie ze swojej listy, którego nie dopuściłeś. Jeśli przypisałeś policy z kroku 1.3.7, nadaj sieci tag <code>Project</code> = <code>SkyCraft</code>, żeby to nie ona odrzuciła wdrożenie. Grupa zasobów do tego testu się nie nadaje, bo ta policy nie sprawdza grup zasobów. 
+<strong>Jak sprawdzić:</strong> wdrożenie zostaje odrzucone. Zapisz komunikat odmowy i sprawdź, czy mówi o Twoim przypisaniu. Jeśli sieć jednak powstała, usuń ją i powiedz o tym prowadzącemu. Zanotuj, czym ta odmowa różni się od odmowy z braku uprawnień RBAC.</p>
 <h3 id="sq3-azure-advisor-i-pierwsze-rekomendacje">SQ3: Azure Advisor i pierwsze rekomendacje</h3>
 <p><strong>Cel:</strong> zobaczyć, co Azure sam podpowiada, zanim jeszcze cokolwiek kosztuje.
 <strong>Kroki:</strong> otwórz Advisor, przejrzyj pięć kategorii, wejdź w dowolną rekomendację i przeczytaj uzasadnienie; utwórz regułę alertu dla kategorii Cost.

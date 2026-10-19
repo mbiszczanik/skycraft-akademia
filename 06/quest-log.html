@@ -598,8 +598,8 @@ details[open] > summary {
 <li>ma wyjść: trzy ceny zapisane; koszt dzisiejszej maszyny za 4 h to kilkanaście centów</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>17.</strong> <em>Cost Management → Cost analysis</em>, zakres <code>prod-skycraft-swc-rg</code>, widok <em>Daily</em>, grupowanie <em>Resource</em> → <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/quick-acm-cost-analysis">MS Learn: Cost analysis</a><ul>
-<li>ma wyjść: wczoraj: <code>prod-skycraft-swc-lb</code> i <code>-lb-pip</code> (jeśli zrobiłeś w domu load i save game); dziś pusto, bo dane idą z opóźnieniem (na subskrypcji studenckiej nawet do trzech dni, więc wczorajszych pozycji też może jeszcze nie być)</li>
+<li><input type="checkbox"> <strong>17.</strong> <em>Cost Management → Cost analysis</em>, zakres <code>prod-skycraft-swc-rg</code>, widok <em>Daily</em>, grupowanie <em>Resource</em>. Od tego kroku nie zależy żaden następny krok. Pusty wykres to jeszcze nie błąd (wynik niżej). Jeśli portal zamiast widoku pokaże komunikat o błędzie, skopiuj albo przepisz dokładny komunikat i idź dalej: prowadzący pokaże ten widok na swojej subskrypcji → <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/quick-acm-cost-analysis">MS Learn: Cost analysis</a><ul>
+<li>ma wyjść: wczoraj: <code>prod-skycraft-swc-lb</code> i <code>-lb-pip</code> (jeśli zrobiłeś w domu load i save game); dziś pusto, bo dane idą z opóźnieniem (na subskrypcji studenckiej nawet do trzech dni, więc wczorajszych pozycji też może jeszcze nie być); albo zapisany komunikat, którym portal odmówił</li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>18.</strong> Rachunek na kartce: hub 0,60 + prod z maszyną ok. 56 USD miesięcznie wobec budżetu 50 USD ze spotkania 2; ile dni niezakasowanego prod zjada budżet, a ile kosztują cztery spotkania z maszyną (6-9) po 4 godziny, z save game po każdym<ul>
@@ -812,7 +812,7 @@ output serverUrl string = &#39;http://${lbPip.outputs.ipAddress}:8085&#39;
 <td><a href="prolog.html#5-serwer-w-kodzie-co-wraca-po-load-game">koncept 5</a></td>
 </tr>
 <tr>
-<td>Maszyna zatrzymała się sama o 22:00, a Cost analysis dalej pokazuje prod</td>
+<td>Maszyna zatrzymała się sama o 22:00, a prod dalej kosztuje</td>
 <td>auto-shutdown zatrzymuje obliczenia; dysk, load balancer i adres płacą dalej</td>
 <td>auto-shutdown to pas bezpieczeństwa; save game to sprzątanie</td>
 <td><a href="prolog.html#4-auto-shutdown-i-koszt-dzia%C5%82aj%C4%85cej-maszyny">koncept 4</a></td>
@@ -824,7 +824,7 @@ output serverUrl string = &#39;http://${lbPip.outputs.ipAddress}:8085&#39;
 <li><input type="checkbox"> <code>.\save-game.ps1</code>; <code>az group list</code> nie pokazuje <code>prod-skycraft-swc-rg</code> (zostają <code>platform-skycraft-swc-rg</code>, pusta <code>dev-skycraft-swc-rg</code> ze spotkania 2 i <code>NetworkWatcherRG</code>)</li>
 <li><input type="checkbox"> Zostaje: hub z blokadami na sieci i strefie publicznej, dwie strefy DNS z jednym linkiem, zasób <code>platform-skycraft-swc-ssh</code> (nic nie kosztuje)</li>
 <li><input type="checkbox"> Kto zrobił side quest 2: Bastion <strong>i jego adres publiczny</strong> skasowane (<code>az network bastion list -o table</code> pusto, <code>az network public-ip list -g platform-skycraft-swc-rg -o table</code> bez adresu Bastionu); to jedyne zasoby z dzisiaj, których save game nie sprząta</li>
-<li><input type="checkbox"> Cost Management → <em>Cost analysis</em>: po dniu lub dwóch <code>prod-skycraft-swc-world-vm</code> i dysk z dzisiejszą datą: kilkadziesiąt centów</li>
+<li><input type="checkbox"> Za kilka dni, gdy dojdą dane o kosztach, Cost Management → <em>Cost analysis</em>: <code>prod-skycraft-swc-world-vm</code> i dysk z dzisiejszą datą: kilkadziesiąt centów. To podgląd kosztów, nie warunek sprzątania: sprzątanie potwierdza <code>az group list</code> z pierwszego punktu</li>
 <li><input type="checkbox"> Repozytorium wypchnięte: <code>modules/vm.bicep</code>, <code>scripts/install-world.sh</code>, zmieniony <code>main.bicep</code> i <code>prod.bicepparam</code></li>
 <li><input type="checkbox"> Plik <code>.pem</code> nie został na komputerze sali; wylogowanie z portalu Azure i z GitHuba w VS Code</li>
 </ul>
@@ -910,7 +910,7 @@ output serverUrl string = &#39;http://${lbPip.outputs.ipAddress}:8085&#39;
 <!-- zgloszenie:end --><h2 id="przed-spotkaniem-7">Przed spotkaniem 7</h2>
 <ul>
 <li><input type="checkbox"> Repozytorium <code>skycraft-platform</code> ma <code>modules/vm.bicep</code>, <code>scripts/install-world.sh</code>, <code>main.bicep</code> z kluczem <code>existing</code> i modułem <code>worldVm</code>, <code>shutdownEmail</code> w <code>prod.bicepparam</code>; wypchnięte</li>
-<li><input type="checkbox"> Prod skasowany: w Cost Management widać maszynę i dysk tylko z dzisiejszą datą; zasób <code>platform-skycraft-swc-ssh</code> stoi w platform</li>
+<li><input type="checkbox"> Prod skasowany: <code>az group list</code> nie pokazuje <code>prod-skycraft-swc-rg</code>; zasób <code>platform-skycraft-swc-ssh</code> stoi w platform</li>
 <li><input type="checkbox"> Raz w domu, w tej kolejności: <code>load-game.ps1</code>, przeglądarka pod adresem z <code>serverUrl</code>, <code>save-game.ps1</code>; spotkanie 7 zaczyna się od load game i nie ma na to bufora</li>
 <li><input type="checkbox"> Kto nie skończył bloku 5: moduł i zmiany w <code>main.bicep</code> wg sekcji „Moduł maszyny” w domu, potem cykl z punktu wyżej</li>
 <li><input type="checkbox"> Do przeczytania: prolog spotkania 7 „Portal gracza” i „Sprawdź się” na końcu</li>

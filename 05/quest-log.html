@@ -772,7 +772,7 @@ az resource list --resource-group $prodRg --query &#39;[].{Nazwa:name, Typ:type}
 <p>Od dziś sprzątanie to save game. Prod z load balancerem kosztuje ok. 22 USD miesięcznie; hub ze strefami ok. 0,60 USD.</p>
 <ul>
 <li><input type="checkbox"> <code>save-game.ps1</code> uruchomiony raz jeszcze; <code>az group list</code> nie pokazuje <code>prod-skycraft-swc-rg</code> (zostają hub, pusta <code>dev-skycraft-swc-rg</code> i <code>NetworkWatcherRG</code>)</li>
-<li><input type="checkbox"> Cost Management → <em>Cost analysis</em>: następnego dnia <code>prod-skycraft-swc-lb</code> i <code>-lb-pip</code> mają tylko dzisiejszą datę, za 2-3 godziny pracy: grosze</li>
+<li><input type="checkbox"> Za kilka dni, gdy dojdą dane o kosztach, Cost Management → <em>Cost analysis</em>: <code>prod-skycraft-swc-lb</code> i <code>-lb-pip</code> z kosztami z każdego dnia, w którym działały, także z poprzednich spotkań i z load game w domu, bo Cost Management pokazuje też koszty usuniętych zasobów ; za dzisiejsze 2-3 godziny pracy: grosze. To podgląd kosztów, nie warunek sprzątania: sprzątanie potwierdza <code>az group list</code> z punktu wyżej</li>
 <li><input type="checkbox"> Zostaje: hub z blokadami <code>CanNotDelete</code> na sieci i strefie publicznej (<code>az lock list -g platform-skycraft-swc-rg -o table</code>; save game ich nie ruszał), dwie strefy DNS z jednym linkiem; peering <code>hub-to-prod</code> w hubie jest <em>Disconnected</em> do następnego load game, który go nadpisze</li>
 <li><input type="checkbox"> Repozytorium wypchnięte: <code>main.bicep</code>, <code>prod.bicepparam</code>, <code>modules/</code> (sześć plików), <code>save-game.ps1</code>, <code>load-game.ps1</code> i <code>README.md</code></li>
 <li><input type="checkbox"> Wylogowanie z portalu Azure i z konta GitHub w VS Code na komputerze sali</li>
@@ -859,7 +859,7 @@ az resource list --resource-group $prodRg --query &#39;[].{Nazwa:name, Typ:type}
 <!-- zgloszenie:end --><h2 id="przed-spotkaniem-6">Przed spotkaniem 6</h2>
 <ul>
 <li><input type="checkbox"> Repozytorium <code>skycraft-platform</code> ma <code>main.bicep</code>, <code>prod.bicepparam</code>, sześć modułów i oba skrypty; link zapisany</li>
-<li><input type="checkbox"> Prod skasowany: w Cost Management widać tylko strefy DNS i hub</li>
+<li><input type="checkbox"> Prod skasowany: <code>az group list</code> nie pokazuje <code>prod-skycraft-swc-rg</code>, a w <code>platform-skycraft-swc-rg</code> zostają hub i strefy DNS</li>
 <li><input type="checkbox"> Raz w domu, w tej kolejności: <code>load-game.ps1</code>, sprawdzenie w portalu, <code>save-game.ps1</code>; spotkanie 6 zaczyna się od load game i nie ma na to bufora</li>
 <li><input type="checkbox"> Do przeczytania: prolog spotkania 6 „Serwer gry” i „Sprawdź się” na końcu</li>
 <li><input type="checkbox"> Opcjonalnie: side quest 1 albo 4</li>
