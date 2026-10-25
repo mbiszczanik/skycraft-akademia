@@ -525,8 +525,8 @@ details[open] > summary {
 <p>Laby: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md">Lab 3.1: infrastruktura jako kod</a></p>
 <h2 id="blok-1-eksport-arm-z-portalu-30-min">Blok 1: eksport ARM z portalu (30 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>1.</strong> Eksport grupy <code>prod-skycraft-swc-rg</code> jako szablon ARM, pobranie ZIP i otwarcie <code>template.json</code> w VS Code → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-311-export-resource-group-as-arm-template">3.1.1</a><ul>
-<li>ma wyjść: katalog z <code>template.json</code> i <code>parameters.json</code>; w <code>resources</code> widzisz sieć, trzy NSG i strefę DNS ze spotkania 3</li>
+<li><input type="checkbox"> <strong>1.</strong> Eksport grupy <code>prod-skycraft-swc-rg</code> jako szablon ARM (<em>Automation → Export template</em>, zakładka <em>ARM template</em>), pobranie plików i otwarcie <code>template.json</code> w VS Code. <em>Download</em> zapisuje sam <code>template.json</code>; <code>parameters.json</code> pobierasz tym samym przyciskiem z zakładki <em>Parameters</em>. ZIP-a, o którym pisze lab, nie ma  → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-311-export-resource-group-as-arm-template">3.1.1</a><ul>
+<li>ma wyjść: dwa pliki, <code>template.json</code> i <code>parameters.json</code>; w <code>resources</code> widzisz sieć z czterema podsieciami i peeringiem oraz trzy NSG z regułami. Stref DNS tu nie ma: są w <code>platform-skycraft-swc-rg</code></li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>2.</strong> Anatomia eksportu: cztery sekcje szablonu, siedem pól zasobu VNet, funkcje <code>parameters()</code>, <code>resourceId()</code> i <code>concat()</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-312-analyze-exported-arm-template-structure">3.1.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-313-identify-key-arm-template-components">3.1.3</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-314-understand-arm-template-functions">3.1.4</a><ul>
@@ -552,7 +552,7 @@ details[open] > summary {
 <h2 id="blok-3-dekompilacja-40-min">Blok 3: dekompilacja (40 min)</h2>
 <ul>
 <li><input type="checkbox"> <strong>6.</strong> Dekompilacja własnego eksportu: <code>az bicep decompile --file template.json</code>, otwarcie <code>template.bicep</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-318-decompile-arm-template-to-bicep">3.1.8</a><ul>
-<li>ma wyjść: plik <code>template.bicep</code> i ostrzeżenie <em>best-effort</em> w konsoli</li>
+<li>ma wyjść: plik <code>template.bicep</code>, a w konsoli ostrzeżenie <em>best-effort</em> i około trzydziestu błędów <code>BCP080</code> (cykl) i <code>BCP062</code>. Dekompilator wpisuje w tablice <code>securityRules</code>, <code>subnets</code> i <code>virtualNetworkPeerings</code> linie <code>id: &lt;zasób&gt;.id</code>, które odwołują się do tych samych reguł, podsieci i peeringów zadeklarowanych osobno niżej. Usuń te linie (w eksporcie prod jest ich 11): <code>az bicep build --file template.bicep</code> przejdzie wtedy z samymi ostrzeżeniami</li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>7.</strong> Przegląd zdekompilowanego kodu: nazwy parametrów, hardkody, brak opisów, kolejność zasobów → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-319-analyze-decompiled-bicep">3.1.9</a><ul>
@@ -575,7 +575,7 @@ details[open] > summary {
 </ul>
 </li>
 <li><input type="checkbox"> <strong>11.</strong> What-if bez wdrożenia: plik <code>platform.bicepparam</code> (<code>using &#39;modules/network.bicep&#39;</code>, wartości huba), potem <code>az deployment group what-if --resource-group platform-skycraft-swc-rg --parameters platform.bicepparam</code> → <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-what-if">MS Learn: what-if</a><ul>
-<li>ma wyjść: wynik <em>NoChange</em> dla sieci albo <em>Modify</em> wyłącznie na tagach; każdy inny wynik oznacza różnicę między kodem a portalem, którą trzeba znaleźć</li>
+<li>ma wyjść: <em>Modify</em> na sieci huba, w którym jedyną prawdziwą różnicą jest tag: <code>Environment</code> <code>&quot;Platform&quot;</code> → <code>&quot;platform&quot;</code> (moduł z labu pisze środowisko małą literą). Pozostałe linie biorą się z tego, co zapisuje portal, a czego moduł nie opisuje: <code>-</code> przy <code>encryption</code> i <code>virtualNetworkPeerings</code> oraz w obu podsieciach zamiana <code>addressPrefixes</code> na <code>addressPrefix</code> z tym samym zakresem . <em>Create</em> albo zmiana zakresu adresów oznacza różnicę, którą trzeba znaleźć</li>
 </ul>
 </li>
 </ul>
@@ -637,7 +637,13 @@ details[open] > summary {
 <td>Dekompilacja ostrzega <em>best-effort</em></td>
 <td>tak działa zawsze: dekompilator nie zna Twoich intencji, tylko wynik</td>
 <td>to jest cały blok 3; ostrzeżenie zostaje, kod sprzątasz</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-318-decompile-arm-template-to-bicep">3.1.8</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Dekompilacja albo <code>az bicep build</code> zgłasza <code>BCP080</code> (<em>involved in a cycle</em>) i <code>BCP062</code></td>
+<td>dekompilator wpisuje w tablice <code>securityRules</code>, <code>subnets</code> i <code>virtualNetworkPeerings</code> odwołania <code>id: &lt;zasób&gt;.id</code> do reguł, podsieci i peeringów, które deklaruje też osobno</td>
+<td>usuń te linie <code>id:</code> w tablicach; reszta pliku zostaje</td>
+<td><a href="https://github.com/mbiszczanik/skycraft/issues/354">skycraft#354</a></td>
 </tr>
 <tr>
 <td>What-if pokazuje <em>Create</em> zamiast <em>NoChange</em></td>
@@ -646,8 +652,8 @@ details[open] > summary {
 <td><a href="prolog.html#4-modu%C5%82y-zakres-wdro%C5%BCenia-i-what-if">koncept 4</a></td>
 </tr>
 <tr>
-<td>What-if pokazuje <em>Modify</em> i wymienia tylko tagi</td>
-<td>tagi w kodzie różnią się od tych z portalu, np. <code>Owner</code> albo wielkość liter w <code>Environment</code></td>
+<td>What-if pokazuje <em>Modify</em> z tagami i liniami <code>-</code> przy <code>encryption</code>, <code>virtualNetworkPeerings</code> oraz <code>addressPrefixes</code> w podsieciach</td>
+<td>tagi w kodzie różnią się od tych z portalu (wielkość liter w <code>Environment</code>, <code>Owner</code>); resztę portal zapisuje inaczej niż moduł, zakres adresów się nie zmienia</td>
 <td>to poprawny wynik dnia: sieć jest ta sama, tagi ujednolicisz na spotkaniu 5</td>
 <td><a href="prolog.html#4-modu%C5%82y-zakres-wdro%C5%BCenia-i-what-if">koncept 4</a></td>
 </tr>
@@ -722,18 +728,18 @@ details[open] > summary {
 <h3 id="sq1-linter-i-bicepconfigjson">SQ1: Linter i <code>bicepconfig.json</code></h3>
 <p><strong>Cel:</strong> zobaczyć, ile z Twoich uwag z bloku 3 maszyna znalazłaby sama.
 <strong>Kroki:</strong> w folderze <code>skycraft-platform</code> utwórz <code>bicepconfig.json</code> z sekcją <code>analyzers.core.rules</code>; włącz jako <code>error</code> reguły <code>no-hardcoded-location</code>, <code>no-unused-params</code> i <code>secure-parameter-default</code>; uruchom <code>az bicep build</code> na zdekompilowanym <code>template.bicep</code> sprzed sprzątania.
-<strong>Jak sprawdzić:</strong> build zatrzymuje się na hardkodach <code>location</code>, które w bloku 3 zaznaczyłeś ręcznie. Dopisz <code>bicepconfig.json</code> do repozytorium: od spotkania 5 każdy Twój plik przechodzi przez te same reguły.</p>
+<strong>Jak sprawdzić:</strong> build zatrzymuje się na hardkodach <code>location</code>, które w bloku 3 zaznaczyłeś ręcznie (obok nich zostają błędy <code>BCP080</code> z bloku 3, jeśli nie usunąłeś linii <code>id:</code>). Dopisz <code>bicepconfig.json</code> do repozytorium: od spotkania 5 każdy Twój plik przechodzi przez te same reguły. Wzorzec <code>*.json</code> z kroku 12 ukrywa ten plik przed gitem, więc dopisz do <code>.gitignore</code> linię <code>!bicepconfig.json</code>.</p>
 <h3 id="sq2-azure-verified-modules-zamiast-własnego-modułu">SQ2: Azure Verified Modules zamiast własnego modułu</h3>
 <p><strong>Cel:</strong> poznać moduł, którego użyłbyś w pracy zamiast pisać własny.
 <strong>Kroki:</strong> utwórz <code>hub-avm.bicep</code>, w którym <code>module vnet &#39;br/public:avm/res/network/virtual-network:&lt;najnowsza wersja&gt;&#39;</code> dostaje te same wartości co Twój moduł z bloku 4 (nazwa, <code>10.0.0.0/16</code>, dwie podsieci, tagi); zbuduj plik i uruchom what-if na <code>platform-skycraft-swc-rg</code>.
-<strong>Jak sprawdzić:</strong> what-if daje <em>NoChange</em> albo <em>Modify</em> na tagach, tak jak Twój moduł. Porównaj liczbę parametrów obu modułów i odpowiedz sobie, kiedy warto brać AVM (zasoby z dużą liczbą opcji, wymagania zgodności), a kiedy własny plik jest czytelniejszy (dwie podsieci i tyle).</p>
+<strong>Jak sprawdzić:</strong> what-if daje <em>Modify</em> jak przy Twoim module, ale nie identyczny: AVM ma własne wartości domyślne, więc w obu podsieciach chce zmienić <code>privateEndpointNetworkPolicies</code> z <code>Disabled</code> na <code>Enabled</code> i zdjąć <code>defaultOutboundAccess</code> . Znajdź w opisie modułu AVM parametry, które to ustawiają. Porównaj liczbę parametrów obu modułów i odpowiedz sobie, kiedy warto brać AVM (zasoby z dużą liczbą opcji, wymagania zgodności), a kiedy własny plik jest czytelniejszy (dwie podsieci i tyle).</p>
 <h3 id="sq3-dekompilacja-huba-i-porównanie-z-własnym-modułem">SQ3: Dekompilacja huba i porównanie z własnym modułem</h3>
 <p><strong>Cel:</strong> ocenić, kto napisał lepszy kod: dekompilator czy Ty.
-<strong>Kroki:</strong> wyeksportuj <code>platform-skycraft-swc-rg</code> tak jak w bloku 1, zdekompiluj jak w bloku 3; otwórz obok siebie <code>template.bicep</code> z eksportu i <code>modules/network.bicep</code> z bloku 4.
+<strong>Kroki:</strong> wyeksportuj <code>platform-skycraft-swc-rg</code> tak jak w bloku 1 (portal ostrzega <em>ExportTemplateCompletedWithErrors</em> o rekordach <code>NAPTR</code>, których strefa nie ma; reszta eksportu jest kompletna ), zdekompiluj jak w bloku 3 i usuń linie <code>id:</code> tak samo; otwórz obok siebie <code>template.bicep</code> z eksportu i <code>modules/network.bicep</code> z bloku 4.
 <strong>Jak sprawdzić:</strong> wypisz trzy rzeczy, które dekompilator zrobił gorzej (typowo: nazwy parametrów, brak pętli po podsieciach, hardkody) i jedną, którą zrobił lepiej albo o której zapomniałeś (typowo: właściwość podsieci, której nie było w labie, np. <code>privateEndpointNetworkPolicies</code>). Tę jedną dopisz do swojego modułu.</p>
 <h3 id="sq4-ten-sam-bicep-w-cloud-shell-bez-vs-code">SQ4: ten sam Bicep w Cloud Shell, bez VS Code</h3>
 <p><strong>Cel:</strong> przekonać się, że narzędzie nie jest warunkiem: Bicep to plik tekstowy i jedno polecenie.
-<strong>Kroki:</strong> otwórz Cloud Shell (Bash) w portalu; jeśli otwierasz go pierwszy raz albo otwiera się w PowerShell, przygotuj go według sekcji <a href="#cloud-shell-pierwsze-uruchomienie">„Cloud Shell: pierwsze uruchomienie”</a>. <code>code first-resource.bicep</code> otwiera wbudowany edytor; przepisz plik z bloku 2 z pamięci, zapisz, uruchom <code>az bicep build --file first-resource.bicep</code> i <code>cat first-resource.json | head -40</code>.
+<strong>Kroki:</strong> otwórz Cloud Shell (Bash) w portalu; jeśli otwierasz go pierwszy raz albo otwiera się w PowerShell, przygotuj go według sekcji <a href="#cloud-shell-pierwsze-uruchomienie">„Cloud Shell: pierwsze uruchomienie”</a>. <code>code first-resource.bicep</code> otwiera wbudowany edytor; przepisz plik z bloku 2 z pamięci, zapisz, uruchom <code>az bicep build --file first-resource.bicep</code> (<code>az bicep version</code> może najpierw odpowiedzieć <em>Bicep CLI not found</em>: <code>az bicep build</code> sam go doinstaluje ) i <code>cat first-resource.json | head -40</code>.
 <strong>Jak sprawdzić:</strong> JSON po buildzie jest identyczny z tym z sali (porównaj liczbę linii i sekcję <code>resources</code> od razu: oba pliki znikną po zamknięciu okna albo po 20 minutach bez aktywności w Cloud Shell).  Zanotuj, czego zabrakło bez rozszerzenia VS Code: podpowiedzi wersji API, podkreśleń błędów przed buildem, Copilota.</p>
 <!-- ankieta:start -->
 <h2 id="na-koniec-mikroankieta">Na koniec: mikroankieta</h2>
