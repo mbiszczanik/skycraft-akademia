@@ -519,7 +519,7 @@ details[open] > summary {
 <li>Wykonać <strong>load game</strong>: odtworzyć <code>prod</code> jednym wdrożeniem i wskazać, co wróciło inne</li>
 </ol>
 <blockquote>
-<p><strong>SkyCraft Choice: cała platforma sieciowa w jednym <code>main.bicep</code>, governance zostaje w portalu, prod kasujemy na koniec zajęć.</strong> Lab 3.1 stawia trzy grupy i spoke Development; u nas są dwie grupy i prod, bo tylko to istnieje po spotkaniu 3. Role, policy, blokada i budżet ze spotkania 2 nie wchodzą do kodu (side quest 2): blokady <code>CanNotDelete</code> stoją od spotkania 3 na sieci huba i strefie publicznej, więc save game ich nie rusza, a hub nigdy nie jest kasowany. Od dziś prod żyje tylko w czasie zajęć: kosztuje ok. 22 USD miesięcznie, gdy stoi, i ok. 0,60 USD, gdy stoi tylko hub ze strefami. Alternatywa w produkcji: deployment stacks (side quest 4) albo Terraform ze stanem, w obu przypadkach z pipeline&#39;em, który robi what-if na każdym pull requeście.</p>
+<p><strong>SkyCraft Choice: cała platforma sieciowa w jednym <code>main.bicep</code>, governance zostaje w portalu, prod kasujemy na koniec zajęć.</strong> Lab 3.1 stawia trzy grupy i spoke Development; u nas są dwie grupy i prod, bo tylko to istnieje po spotkaniu 3. Role, policy, blokada i budżet ze spotkania 2 nie wchodzą do kodu (side quest 2): blokady <code>CanNotDelete</code> stoją od spotkania 3 na sieci huba i strefie publicznej, więc save game ich nie rusza, a hub nigdy nie jest kasowany. Od dziś prod żyje tylko w czasie zajęć: kosztuje ok. 22 USD miesięcznie, gdy stoi, i ok. 1 USD, gdy stoi tylko hub ze strefami. Alternatywa w produkcji: deployment stacks (side quest 4) albo Terraform ze stanem, w obu przypadkach z pipeline&#39;em, który robi what-if na każdym pull requeście.</p>
 </blockquote>
 <!-- quest-log:start -->
 <p>Laby: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md">Lab 3.1: infrastruktura jako kod</a></p>
@@ -708,9 +708,9 @@ az resource list --resource-group $prodRg --query &#39;[].{Nazwa:name, Typ:type}
 <td><a href="prolog.html#1-existing-i-przejmowanie-zasob%C3%B3w-kod-opisuje-to-co-ju%C5%BC-stoi">koncept 1</a></td>
 </tr>
 <tr>
-<td>What-if pokazuje <code>- properties.serviceEndpoints</code> na <code>WorldSubnet</code> i <code>DatabaseSubnet</code> albo Twoją regułę z ASG jako usuniętą z NSG</td>
-<td>zrobiłeś side quest 4 (service endpoints) albo 1 (ASG) ze spotkania 3, a kod z labu tego nie opisuje; podsieci i reguły NSG kod zapisuje w całości, więc czego w nim nie ma, to zniknie</td>
-<td>to dryf, nie szum: wdrożenie zdejmie endpointy i regułę. Albo dopisz je do kodu (<code>serviceEndpoints</code> w <code>modules/network.bicep</code>, reguła z <code>sourceApplicationSecurityGroups</code> w <code>modules/nsg.bicep</code>), albo świadomie przyjmij, że po spotkaniu 5 platforma wygląda tak, jak opisuje kod</td>
+<td>What-if pokazuje <code>- properties.serviceEndpoints</code> na <code>WorldSubnet</code> i <code>DatabaseSubnet</code></td>
+<td>zrobiłeś side quest 4 (service endpoints) ze spotkania 3, a kod z labu tego nie opisuje; podsieci i reguły NSG kod zapisuje w całości, więc czego w nim nie ma, to zniknie</td>
+<td>to dryf, nie szum: wdrożenie zdejmie endpointy. Albo dopisz je do kodu (<code>serviceEndpoints</code> w <code>modules/network.bicep</code>), albo świadomie przyjmij, że po spotkaniu 5 platforma wygląda tak, jak opisuje kod</td>
 <td><a href="prolog.html#1-existing-i-przejmowanie-zasob%C3%B3w-kod-opisuje-to-co-ju%C5%BC-stoi">koncept 1</a></td>
 </tr>
 <tr>
@@ -769,7 +769,7 @@ az resource list --resource-group $prodRg --query &#39;[].{Nazwa:name, Typ:type}
 </tr>
 </tbody></table>
 <h2 id="sprzątanie-10-min-wszyscy">Sprzątanie (10 min, wszyscy)</h2>
-<p>Od dziś sprzątanie to save game. Prod z load balancerem kosztuje ok. 22 USD miesięcznie; hub ze strefami ok. 0,60 USD.</p>
+<p>Od dziś sprzątanie to save game. Prod z load balancerem kosztuje ok. 22 USD miesięcznie; hub ze strefami ok. 1 USD.</p>
 <ul>
 <li><input type="checkbox"> <code>save-game.ps1</code> uruchomiony raz jeszcze; <code>az group list</code> nie pokazuje <code>prod-skycraft-swc-rg</code> (zostają hub, pusta <code>dev-skycraft-swc-rg</code> i <code>NetworkWatcherRG</code>)</li>
 <li><input type="checkbox"> Za kilka dni, gdy dojdą dane o kosztach, Cost Management → <em>Cost analysis</em>: <code>prod-skycraft-swc-lb</code> i <code>-lb-pip</code> z kosztami z każdego dnia, w którym działały, także z poprzednich spotkań i z load game w domu, bo Cost Management pokazuje też koszty usuniętych zasobów ; za dzisiejsze 2-3 godziny pracy: grosze. To podgląd kosztów, nie warunek sprzątania: sprzątanie potwierdza <code>az group list</code> z punktu wyżej</li>

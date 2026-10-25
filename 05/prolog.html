@@ -622,7 +622,7 @@ az deployment sub create   --location swedencentral --template-file main.bicep -
 <hr>
 <h2 id="5-save-game-i-load-game-co-wraca-takie-samo-a-co-inne">5. Save game i load game: co wraca takie samo, a co inne</h2>
 <p><strong>Co to jest.</strong> Save game to skasowanie grupy prod, gdy platforma jest w całości w kodzie; load game to jej odtworzenie jednym wdrożeniem <code>main.bicep</code>. Obie rzeczy robią skrypty z quest logu: <code>save-game.ps1</code> kasuje link strefy prywatnej do prod i grupę prod; <code>load-game.ps1</code> pokazuje what-if, wdraża i wypisuje wyjścia. Hub ze strefami DNS nie bierze w tym udziału: stoi cały czas, z blokadami na sieci i strefie publicznej.</p>
-<p><strong>Jaki problem rozwiązuje.</strong> Pieniądze i nawyk. Prod z load balancerem kosztuje ok. 22 USD miesięcznie, hub ze strefami ok. 0,60 USD; między spotkaniami prod nie robi nic, więc płacisz za czekanie. Nawyk jest ważniejszy: od dziś każde spotkanie zaczyna się od load game, a kończy save game, i po czterech takich cyklach nie boisz się skasować niczego, bo wiesz, że wróci.</p>
+<p><strong>Jaki problem rozwiązuje.</strong> Pieniądze i nawyk. Prod z load balancerem kosztuje ok. 22 USD miesięcznie, hub ze strefami ok. 1 USD; między spotkaniami prod nie robi nic, więc płacisz za czekanie. Nawyk jest ważniejszy: od dziś każde spotkanie zaczyna się od load game, a kończy save game, i po czterech takich cyklach nie boisz się skasować niczego, bo wiesz, że wróci.</p>
 <p><strong>Jak działa.</strong> Idempotencja ze spotkania 4 w praktyce: wdrożenie tego samego szablonu na pustą grupę daje tę samą platformę. „Tę samą” znaczy: to, co opisuje kod. To, co przydziela Azure, wraca nowe.</p>
 <table>
 <thead>
