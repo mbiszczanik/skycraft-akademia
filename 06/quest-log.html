@@ -537,14 +537,14 @@ details[open] > summary {
 <li>ma wyjść: zasób <code>platform-skycraft-swc-ssh</code> w grupie platform z kluczem publicznym; <code>.pem</code> u Ciebie, nie na dysku sali</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>4.</strong> Sprawdzenie w portalu: <code>prod-skycraft-swc-lb</code> → <em>Backend pools</em> → <code>prod-skycraft-swc-lb-be-world</code> pusta; <code>skycraft.example.com</code> → rekord <code>play</code> wskazuje na adres z wyjścia <code>publicIp</code><ul>
+<li><input type="checkbox"> <strong>4.</strong> Sprawdzenie w portalu: <code>prod-skycraft-swc-lb</code> → <em>Backend pools</em> → <code>prod-skycraft-swc-lb-be-world</code> i <code>prod-skycraft-swc-lb-be-outbound</code> puste; <code>skycraft.example.com</code> → rekord <code>play</code> wskazuje na adres z wyjścia <code>publicIp</code><ul>
 <li>ma wyjść: brama stoi i czeka na serwer, dokładnie jak na końcu spotkania 3</li>
 </ul>
 </li>
 </ul>
 <h2 id="blok-2-serwer-w-portalu-35-min">Blok 2: serwer w portalu (35 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>5.</strong> Kreator VM, zakładka <em>Basics</em>: grupa <code>prod-skycraft-swc-rg</code>, nazwa <code>prod-skycraft-swc-world-vm</code>, region <em>Sweden Central</em>, <em>Availability options: No infrastructure redundancy required</em>, <em>Security type</em> bez zmian (Trusted launch), obraz <em>Ubuntu Server 22.04 LTS - x64 Gen2</em>, rozmiar <code>Standard_B2ls_v2</code> (<em>See all sizes</em>, gdy nie ma na liście), <em>Authentication type: SSH public key</em>, użytkownik <code>azureuser</code>, <em>SSH public key source: Use existing key stored in Azure</em>, klucz <code>platform-skycraft-swc-ssh</code>, <em>Public inbound ports: None</em> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-328-create-worldserver-vm">3.2.8</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-322-create-authserver-vm-via-azure-portal">3.2.2</a><ul>
+<li><input type="checkbox"> <strong>5.</strong> Kreator VM, zakładka <em>Basics</em>: grupa <code>prod-skycraft-swc-rg</code>, nazwa <code>prod-skycraft-swc-world-vm</code>, region <em>Sweden Central</em>, <em>Availability options: No infrastructure redundancy required</em>, <em>Security type</em> bez zmian (Trusted launch), obraz <em>Ubuntu Server 22.04 LTS - x64 Gen2</em> (krótka lista ma tylko 24.04: <em>See all images</em> → <em>Ubuntu 22.04 LTS - all plans including Ubuntu Pro</em> → <em>Select</em> → <em>Ubuntu Server 22.04 LTS - x64 Gen2</em>) , rozmiar <code>Standard_B2ls_v2</code> (<em>See all sizes</em>, gdy nie ma na liście), <em>Authentication type: SSH public key</em>, użytkownik <code>azureuser</code>, <em>SSH public key source: Use existing key stored in Azure</em>, klucz <code>platform-skycraft-swc-ssh</code>, <em>Public inbound ports: None</em> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-328-create-worldserver-vm">3.2.8</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-322-create-authserver-vm-via-azure-portal">3.2.2</a><ul>
 <li>ma wyjść: zakładka <em>Basics</em> bez czerwonych pól; żadnego portu otwartego na świat</li>
 </ul>
 </li>
@@ -552,11 +552,11 @@ details[open] > summary {
 <li>ma wyjść: dysk OS 30 GiB Standard SSD, ginie razem z maszyną</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>7.</strong> Zakładka <em>Networking</em>: sieć <code>prod-skycraft-swc-vnet</code>, podsieć <code>WorldSubnet (10.2.2.0/24)</code>, <em>Public IP: None</em>, <em>NIC network security group: None</em> (NSG jest na podsieci), <em>Delete NIC when VM is deleted</em> zaznaczone, <em>Load balancing: Yes</em>, <em>Azure load balancer</em>, <code>prod-skycraft-swc-lb</code>, pula <code>prod-skycraft-swc-lb-be-world</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-3210-configure-worldserver-networking">3.2.10</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-324-configure-authserver-networking">3.2.4</a><ul>
+<li><input type="checkbox"> <strong>7.</strong> Zakładka <em>Networking</em>: kreator proponuje nową sieć, a po wyborze naszej nową podsieć; zmieniasz obie : sieć <code>prod-skycraft-swc-vnet</code>, podsieć <code>WorldSubnet - 10.2.2.0/24</code>, <em>Public IP: None</em>, <em>NIC network security group: None</em> (NSG jest na podsieci), <em>Delete NIC when VM is deleted</em> zaznaczasz (domyślnie jest puste), <em>Load balancing options: Azure load balancer</em>, <em>Select a load balancer</em>: <code>prod-skycraft-swc-lb</code>, <em>Select a backend pool</em>: <code>prod-skycraft-swc-lb-be-world</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-3210-configure-worldserver-networking">3.2.10</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-324-configure-authserver-networking">3.2.4</a><ul>
 <li>ma wyjść: maszyna bez publicznego adresu, NIC w puli world</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>8.</strong> Zakładka <em>Management</em>: <em>Auto-shutdown: Enable</em>, godzina <code>22:00</code>, strefa <em>(UTC+01:00) ... W. Europe Standard Time</em>, <em>Send notification before shutdown: Yes</em>, e-mail: Twój adres; tożsamość systemowa jak w labie; <em>Monitoring</em>: <em>Boot diagnostics: Disable</em> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-3211-configure-worldserver-management">3.2.11</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-325-configure-authserver-management">3.2.5</a><ul>
+<li><input type="checkbox"> <strong>8.</strong> Zakładka <em>Management</em>: <em>Enable auto-shutdown</em>, <em>Shutdown time</em> <code>10:00 PM</code> (domyślnie 7:00 PM), <em>Time zone</em> zostaje <em>(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</em>, czyli <em>W. Europe Standard Time</em>, <em>Notification before shutdown</em> zaznaczone, e-mail: Twój adres (kreator wpisuje adres konta) ; <em>Enable system assigned managed identity</em> zostaw puste: dziś nic jej nie używa, a moduł z bloku 5 jej nie ma; zakładka <em>Monitoring</em>: <em>Boot diagnostics: Disabled</em> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-3211-configure-worldserver-management">3.2.11</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-325-configure-authserver-management">3.2.5</a><ul>
 <li>ma wyjść: auto-shutdown 22:00 z powiadomieniem; bez konta storage na diagnostykę</li>
 </ul>
 </li>
@@ -564,8 +564,8 @@ details[open] > summary {
 <li>ma wyjść: <em>Deployment succeeded</em>; w grupie prod przybyły maszyna, NIC i dysk</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>10.</strong> Weryfikacja: <em>Overview</em> maszyny: <em>Running</em>, rozmiar B2ls_v2, <em>Public IP address</em> puste; <em>Networking</em>: adres prywatny <code>10.2.2.x</code>; <code>prod-skycraft-swc-lb</code> → <em>Backend pools</em> → <code>-lb-be-world</code>: jedna instancja; maszyna → <em>Operations → Auto-shutdown</em>: 22:00 → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-3213-verify-both-vms">3.2.13</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-327-verify-authserver-vm-deployment">3.2.7</a><ul>
-<li>ma wyjść: serwer stoi w puli, ale sonda jeszcze go nie widzi, bo nic nie słucha na 8085</li>
+<li><input type="checkbox"> <strong>10.</strong> Weryfikacja: <em>Overview</em> maszyny: <em>Running</em>, rozmiar B2ls_v2, <em>Public IP address</em> puste; <em>Networking</em>: adres prywatny <code>10.2.2.x</code>; <code>prod-skycraft-swc-lb</code> → <em>Backend pools</em> → <code>-lb-be-world</code>: jedna instancja; maszyna → <em>Operations → Auto-shutdown</em>: 22:00. Potem wyjście do internetu: kreator wkłada kartę tylko do jednej puli , więc <code>prod-skycraft-swc-lb</code> → <em>Backend pools</em> → <code>prod-skycraft-swc-lb-be-outbound</code> → <em>IP configurations</em> → <em>+ Add</em>, zaznacz <code>prod-skycraft-swc-world-vm</code>, <em>Add</em>, <em>Save</em>  → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-3213-verify-both-vms">3.2.13</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#step-327-verify-authserver-vm-deployment">3.2.7</a><ul>
+<li>ma wyjść: serwer stoi w obu pulach; sonda jeszcze go nie widzi, bo nic nie słucha na 8085</li>
 </ul>
 </li>
 </ul>
@@ -588,17 +588,17 @@ details[open] > summary {
 </ul>
 </li>
 <li><input type="checkbox"> <strong>15.</strong> Drugi Run Command: <code>curl -s ifconfig.me; echo; ss -ltn | grep 8085</code><ul>
-<li>ma wyjść: pierwsza linia to adres load balancera (maszyna bez publicznego adresu wychodzi na świat adresem bramy), druga to gniazdo nasłuchujące na 8085</li>
+<li>ma wyjść: pierwsza linia to adres load balancera (maszyna bez publicznego adresu wychodzi na świat przez regułę wychodzącą, adresem bramy), druga to gniazdo nasłuchujące na 8085</li>
 </ul>
 </li>
 </ul>
 <h2 id="blok-4-koszt-i-pas-bezpieczeństwa-20-min">Blok 4: koszt i pas bezpieczeństwa (20 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>16.</strong> Maszyna → <em>Availability + scale → Size</em>: kolumna <em>Cost/month</em> dla <code>B2ls_v2</code>, <code>B2s_v2</code> i <code>D2s_v3</code>; przeliczasz: cena miesięczna ÷ 730 h × 4 h zajęć → <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/bsv2-series">MS Learn: rozmiary serii B</a><ul>
+<li><input type="checkbox"> <strong>16.</strong> Maszyna → <em>Availability + scale → Size</em>: kolumna <em>Cost per month</em> dla <code>B2ls_v2</code>, <code>B2s_v2</code> i <code>D2s_v3</code> (<code>D2s_v3</code> bywa w grupie <em>Size not available</em>, cenę pokazuje i tam) ; przeliczasz: cena miesięczna ÷ 730 h × 4 h zajęć → <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/bsv2-series">MS Learn: rozmiary serii B</a><ul>
 <li>ma wyjść: trzy ceny zapisane; koszt dzisiejszej maszyny za 4 h to kilkanaście centów</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>17.</strong> <em>Cost Management → Cost analysis</em>, zakres <code>prod-skycraft-swc-rg</code>, widok <em>Daily</em>, grupowanie <em>Resource</em>. Od tego kroku nie zależy żaden następny krok. Pusty wykres to jeszcze nie błąd (wynik niżej). Jeśli portal zamiast widoku pokaże komunikat o błędzie, skopiuj albo przepisz dokładny komunikat i idź dalej: prowadzący pokaże ten widok na swojej subskrypcji → <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/quick-acm-cost-analysis">MS Learn: Cost analysis</a><ul>
+<li><input type="checkbox"> <strong>17.</strong> <em>Cost Management → Cost analysis</em>, zakres <code>prod-skycraft-swc-rg</code>, widok <em>Daily costs</em> (grupuje po zasobie od razu) . Od tego kroku nie zależy żaden następny krok. Pusty wykres to jeszcze nie błąd (wynik niżej). Jeśli portal zamiast widoku pokaże komunikat o błędzie, skopiuj albo przepisz dokładny komunikat i idź dalej: prowadzący pokaże ten widok na swojej subskrypcji → <a href="https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/quick-acm-cost-analysis">MS Learn: Cost analysis</a><ul>
 <li>ma wyjść: wczoraj: <code>prod-skycraft-swc-lb</code> i <code>-lb-pip</code> (jeśli zrobiłeś w domu load i save game); dziś pusto, bo dane idą z opóźnieniem (na subskrypcji studenckiej nawet do trzech dni, więc wczorajszych pozycji też może jeszcze nie być); albo zapisany komunikat, którym portal odmówił</li>
 </ul>
 </li>
@@ -613,16 +613,16 @@ details[open] > summary {
 <li>ma wyjść: plik w <code>scripts/</code>; <code>main.bicep</code> wczyta go funkcją <code>loadTextContent</code></li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>20.</strong> <code>modules/vm.bicep</code> z komentarza-promptu w Copilocie (treść promptu w sekcji „Moduł maszyny” poniżej): NIC w puli, maszyna z kluczem z parametru, Run Command jako zasób, harmonogram auto-shutdown; przegląd wg listy kontrolnej ze spotkania 4 i listy w sekcji „Moduł maszyny”; <code>az bicep build --file modules/vm.bicep</code> → <a href="https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines">MS Learn: Microsoft.Compute/virtualMachines w Bicepie</a><ul>
+<li><input type="checkbox"> <strong>20.</strong> <code>modules/vm.bicep</code> z komentarza-promptu w Copilocie (treść promptu w sekcji „Moduł maszyny” poniżej): NIC w pulach <code>be-world</code> i <code>be-outbound</code>, maszyna z kluczem z parametru, Run Command jako zasób, harmonogram auto-shutdown; przegląd wg listy kontrolnej ze spotkania 4 i listy w sekcji „Moduł maszyny”; <code>az bicep build --file modules/vm.bicep</code> → <a href="https://learn.microsoft.com/en-us/azure/templates/microsoft.compute/virtualmachines">MS Learn: Microsoft.Compute/virtualMachines w Bicepie</a><ul>
 <li>ma wyjść: build przechodzi; cztery zasoby, <code>deleteOption: &#39;Delete&#39;</code> na dysku i NIC, bez publicznego adresu, bez hasła</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>21.</strong> <code>main.bicep</code>: zasób <code>existing</code> klucza <code>platform-skycraft-swc-ssh</code> w <code>platformRg</code>, moduł <code>worldVm</code> w <code>prodRg</code> (<code>sshPublicKey: sshKey.properties.publicKey</code>, <code>subnetId</code> z <code>prodVnet.outputs.vnetId</code>, <code>backendPoolId</code> z wyjścia modułu load balancera, <code>installScript</code> z <code>loadTextContent</code>), parametr <code>shutdownEmail</code>, wyjście <code>serverUrl</code>; <code>shutdownEmail</code> w <code>prod.bicepparam</code>; <code>az bicep build --file main.bicep</code> → <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/existing-resource">MS Learn: existing w Bicepie</a><ul>
+<li><input type="checkbox"> <strong>21.</strong> <code>main.bicep</code>: zasób <code>existing</code> klucza <code>platform-skycraft-swc-ssh</code> w <code>platformRg</code>, moduł <code>worldVm</code> w <code>prodRg</code> (<code>sshPublicKey: sshKey.properties.publicKey</code>, <code>subnetId</code> z <code>prodVnet.outputs.vnetId</code>, <code>backendPoolId</code> i <code>outboundPoolId</code> z wyjścia modułu load balancera, <code>installScript</code> z <code>loadTextContent</code>), parametr <code>shutdownEmail</code>, wyjście <code>serverUrl</code>; <code>shutdownEmail</code> w <code>prod.bicepparam</code>; <code>az bicep build --file main.bicep</code> → <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/existing-resource">MS Learn: existing w Bicepie</a><ul>
 <li>ma wyjść: build przechodzi; jedenaście wywołań modułów; sprawdziłeś, że Twój <code>loadbalancer.bicep</code> ma wyjście z identyfikatorem load balancera (w labie <code>loadBalancerId</code>)</li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>22.</strong> <code>az deployment sub what-if --location swedencentral --template-file main.bicep --parameters prod.bicepparam</code>; czytasz wynik dla maszyny z portalu<ul>
-<li>ma wyjść: <em>Create</em> dla <code>prod-skycraft-swc-world-vm-nic</code> i <code>install-world</code>, <em>Modify</em> na maszynie (inny NIC, inna nazwa dysku) i na harmonogramie: to szum z nazw nadanych przez portal, nie przejmujesz; save game i load game postawią maszynę z kodu</li>
+<li>ma wyjść: <em>Create</em> dla <code>prod-skycraft-swc-world-vm-nic</code> i <code>install-world</code>, <em>Modify</em> na maszynie (inny NIC, inna nazwa dysku, inny zapis obrazu: kreator bierze Ubuntu 22.04 z oferty <code>ubuntu-22_04-lts</code>, moduł z <code>0001-com-ubuntu-server-jammy</code>) i na harmonogramie : to szum z kreatora, nie przejmujesz; save game i load game postawią maszynę z kodu</li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>23.</strong> <code>.\save-game.ps1</code> (ok. 5 min: grupa z maszyną, dyskiem i kartą kasuje się dłużej niż pusty prod), potem <code>.\load-game.ps1</code> (ok. 3 min: maszyna i Run Command powstają równolegle z siecią); w przeglądarce adres z wyjścia <code>serverUrl</code><ul>
@@ -674,9 +674,9 @@ ss -ltn | grep 8085
 <p>Wzorzec dla kroków 20 i 21. Komentarz-prompt na górze <code>modules/vm.bicep</code> ma powiedzieć Copilotowi wszystko, czego nie zgadnie:</p>
 <pre><code class="language-bicep">// Moduł maszyny wirtualnej SkyCraft (world server) do wdrożenia w grupie prod.
 // Parametry: vmName, location, tags, vmSize (domyślnie Standard_B2ls_v2), adminUsername (domyślnie azureuser),
-// sshPublicKey (string), subnetId, backendPoolId, installScript (string), shutdownTime (domyślnie &#39;2200&#39;),
+// sshPublicKey (string), subnetId, backendPoolId, outboundPoolId, installScript (string), shutdownTime (domyślnie &#39;2200&#39;),
 // shutdownTimeZone (domyślnie &#39;W. Europe Standard Time&#39;), shutdownEmail.
-// Cztery zasoby: (1) NIC &#39;${vmName}-nic&#39; z jednym ipconfig w podsieci subnetId i w puli backendPoolId, bez publicznego adresu;
+// Cztery zasoby: (1) NIC &#39;${vmName}-nic&#39; z jednym ipconfig w podsieci subnetId i w pulach backendPoolId i outboundPoolId, bez publicznego adresu;
 // (2) maszyna Linux z obrazu Canonical 0001-com-ubuntu-server-jammy 22_04-lts-gen2, dysk OS &#39;${vmName}-osdisk&#39; StandardSSD_LRS
 // z deleteOption Delete, NIC z deleteOption Delete, logowanie tylko kluczem (disablePasswordAuthentication),
 // Trusted Launch (secure boot i vTPM), boot diagnostics wyłączone;
@@ -690,7 +690,7 @@ ss -ltn | grep 8085
 <li>obraz <code>22_04-lts-gen2</code>, nie <code>24_04</code> i nie Gen1: Trusted Launch wymaga Gen2</li>
 <li><code>deleteOption: &#39;Delete&#39;</code> na dysku OS i na NIC (to samo, co <em>Delete with VM</em> w kreatorze)</li>
 <li><code>linuxConfiguration.disablePasswordAuthentication: true</code>; klucz w <code>ssh.publicKeys</code> ze ścieżką <code>/home/${adminUsername}/.ssh/authorized_keys</code></li>
-<li>w NIC nie ma <code>publicIPAddress</code>; jest <code>loadBalancerBackendAddressPools</code> z <code>backendPoolId</code></li>
+<li>w NIC nie ma <code>publicIPAddress</code>; jest <code>loadBalancerBackendAddressPools</code> z <code>backendPoolId</code> i <code>outboundPoolId</code> (bez drugiej puli maszyna nie wyjdzie do internetu)</li>
 <li><code>runCommands</code> ma <code>parent: vm</code> i <code>source.script: installScript</code>; <code>treatFailureAsDeploymentFailure: true</code>, żeby błąd skryptu zatrzymał load game</li>
 <li>harmonogram ma <code>targetResourceId: vm.id</code>; bez tego Azure nie wie, którą maszynę zatrzymać</li>
 <li>żadnej nazwy, regionu ani adresu e-mail na sztywno</li>
@@ -714,6 +714,7 @@ module worldVm &#39;modules/vm.bicep&#39; = {
     sshPublicKey: sshKey.properties.publicKey
     subnetId: &#39;${prodVnet.outputs.vnetId}/subnets/WorldSubnet&#39;
     backendPoolId: &#39;${lb.outputs.loadBalancerId}/backendAddressPools/${prodPrefix}-lb-be-world&#39;
+    outboundPoolId: &#39;${lb.outputs.loadBalancerId}/backendAddressPools/${prodPrefix}-lb-be-outbound&#39;
     installScript: replace(loadTextContent(&#39;scripts/install-world.sh&#39;), &#39;\r&#39;, &#39;&#39;)
     shutdownEmail: shutdownEmail
   }
@@ -764,6 +765,12 @@ output serverUrl string = &#39;http://${lbPip.outputs.ipAddress}:8085&#39;
 <td><a href="prolog.html#3-serwer-za-load-balancerem-droga-pakietu-gracza">koncept 3</a></td>
 </tr>
 <tr>
+<td>Drugi Run Command: pierwsza linia pusta, <code>curl ifconfig.me</code> nic nie wypisał</td>
+<td>karta maszyny nie jest w puli <code>prod-skycraft-swc-lb-be-outbound</code> albo load balancer nie ma reguły wychodzącej; podsieć jest prywatna, więc innej drogi do internetu nie ma</td>
+<td><em>Backend pools</em> → <code>-lb-be-outbound</code> ma mieć Twoją maszynę; <em>Outbound rules</em> ma <code>prod-skycraft-swc-lb-outbound</code></td>
+<td><a href="prolog.html#3-serwer-za-load-balancerem-droga-pakietu-gracza">koncept 3</a></td>
+</tr>
+<tr>
 <td>Sonda zdrowa, a przeglądarka czeka i nic</td>
 <td>zły adres (stary, sprzed load game) albo <code>https://</code> zamiast <code>http://</code>; sieć uczelni blokuje wychodzący 8085</td>
 <td>adres z wyjścia <code>publicIp</code> dzisiejszego load game; <code>http://</code>; <code>Test-NetConnection</code> z telefonu w hotspocie pokazuje, czy to sieć sali</td>
@@ -794,9 +801,15 @@ output serverUrl string = &#39;http://${lbPip.outputs.ipAddress}:8085&#39;
 <td><a href="prolog.html#5-serwer-w-kodzie-co-wraca-po-load-game">koncept 5</a></td>
 </tr>
 <tr>
-<td>What-if pokazuje <em>Modify</em> na <code>prod-skycraft-swc-world-vm</code> z innym NIC i inną nazwą dysku oraz <em>Create</em> dla <code>prod-skycraft-swc-world-vm-nic</code></td>
-<td>maszyna z portalu ma NIC i dysk o nazwach nadanych przez portal; kod opisuje swoje</td>
+<td>What-if pokazuje <em>Modify</em> na <code>prod-skycraft-swc-world-vm</code> z innym NIC, inną nazwą dysku i innym obrazem oraz <em>Create</em> dla <code>prod-skycraft-swc-world-vm-nic</code></td>
+<td>maszyna z portalu ma NIC i dysk o nazwach nadanych przez portal i obraz z innej oferty; kod opisuje swoje</td>
 <td>to szum, nie dryf, i nie przejmujesz: <code>save-game.ps1</code>, potem <code>load-game.ps1</code> postawią maszynę z kodu</td>
+<td><a href="prolog.html#5-serwer-w-kodzie-co-wraca-po-load-game">koncept 5</a></td>
+</tr>
+<tr>
+<td>What-if albo <code>load-game.ps1</code> kończy się <code>&#39;charmap&#39; codec can&#39;t encode character</code></td>
+<td>wyjście <code>az</code> idzie do pliku zamiast do okna terminala, a szablon ma polskie litery ze skryptu instalacji</td>
+<td>uruchom skrypt w zwykłym oknie terminala, bez <code>&gt;</code> do pliku</td>
 <td><a href="prolog.html#5-serwer-w-kodzie-co-wraca-po-load-game">koncept 5</a></td>
 </tr>
 <tr>
@@ -881,12 +894,12 @@ output serverUrl string = &#39;http://${lbPip.outputs.ipAddress}:8085&#39;
 <strong>Jak sprawdzić:</strong> what-if pokazuje <code>+ zones: [&quot;2&quot;]</code> na maszynie, a wdrożenie kończy się błędem <code>PropertyChangeNotAllowed</code> z komunikatem <code>Changing property &#39;zones&#39; is not allowed.</code> (ten sam w prologu, koncept 5); dopiero save game i load game w domu stawiają maszynę w strefie 2. Po nich <code>az vm list -g prod-skycraft-swc-rg --query &quot;[].{Name:name,Zone:zones[0]}&quot; -o table</code> pokazuje <code>2</code>.</p>
 <h3 id="sq2-azure-bastion-jedno-logowanie-i-kasowanie">SQ2: Azure Bastion: jedno logowanie i kasowanie</h3>
 <p><strong>Cel:</strong> raz zobaczyć interaktywne wejście na maszynę bez publicznego adresu i policzyć, ile ono kosztuje.
-<strong>Kroki:</strong> wg 2.2.10 wdróż Bastion <code>platform-skycraft-swc-bas</code> (SKU Basic) do <code>AzureBastionSubnet</code> w hubie; to ok. 10 min i ok. 0,19 USD za każdą godzinę życia. Maszyna → <em>Connect → Bastion</em>: użytkownik <code>azureuser</code>, <em>SSH Private Key from Local File</em>, Twój <code>.pem</code>; w sesji <code>systemctl status skycraft-world</code> i <code>curl localhost:8085</code>. Potem <em>Disconnect</em> i <strong>skasuj Bastion razem z jego adresem publicznym</strong>: <code>az network bastion delete -g platform-skycraft-swc-rg -n platform-skycraft-swc-bas</code>, a potem <code>az network public-ip delete -g platform-skycraft-swc-rg -n &lt;nazwa adresu Bastionu&gt;</code> (adres powstał przy wdrożeniu Bastionu i zostaje po nim; <code>az network public-ip list -g platform-skycraft-swc-rg -o table</code> pokazuje, co zostało).
+<strong>Kroki:</strong> wg 2.2.10 wdróż Bastion <code>platform-skycraft-swc-bas</code> (SKU Basic) do <code>AzureBastionSubnet</code> w hubie; kreator proponuje <em>Premium</em> i nową sieć, więc zmieniasz na <em>Basic</em> i <code>platform-skycraft-swc-vnet</code> ; wdrożenie to ok. 10 min i ok. 0,19 USD za każdą godzinę życia. Maszyna → <em>Connect → Bastion</em>: użytkownik <code>azureuser</code>, <em>SSH Private Key from Local File</em>, Twój <code>.pem</code>; w sesji <code>systemctl status skycraft-world</code> i <code>curl localhost:8085</code>. Potem <em>Disconnect</em> i <strong>skasuj Bastion razem z jego adresem publicznym</strong>: <code>az network bastion delete -g platform-skycraft-swc-rg -n platform-skycraft-swc-bas</code>, a potem <code>az network public-ip delete -g platform-skycraft-swc-rg -n &lt;nazwa adresu Bastionu&gt;</code> (adres powstał przy wdrożeniu Bastionu, kreator nazywa go <code>platform-skycraft-swc-vnet-IPv4</code>, i zostaje po nim; samo kasowanie Bastionu pyta o potwierdzenie i trwa kilka minut; <code>az network public-ip list -g platform-skycraft-swc-rg -o table</code> pokazuje, co zostało).
 <strong>Jak sprawdzić:</strong> przed wyjściem <code>az network bastion list -o table</code> jest puste, a <code>az network public-ip list -g platform-skycraft-swc-rg -o table</code> nie pokazuje adresu Bastionu. Oba zasoby stoją w grupie platform, więc save game ich nie skasuje: sam Bastion zostawiony na miesiąc zjada cały budżet ze spotkania 2 trzy razy, a sierocy adres publiczny to ok. 3,65 USD miesięcznie po cichu.</p>
 <h3 id="sq3-dysk-danych-przez-run-command">SQ3: Dysk danych przez Run Command</h3>
 <p><strong>Cel:</strong> dysk zarządzany jako osobny zasób i system plików bez logowania na maszynę.
-<strong>Kroki:</strong> wg 3.2.14 dołącz dysk <code>prod-skycraft-swc-world-vm-data</code>, 64 GiB Standard SSD, LUN 0. Zamiast Bastionu z 3.2.15 uruchom przez Run Command skrypt: <code>set -e; DEV=/dev/disk/azure/scsi1/lun0; parted -s $DEV mklabel gpt mkpart data ext4 0% 100%; sleep 2; mkfs.ext4 -F ${DEV}-part1; mkdir -p /data; echo &quot;$(blkid -s UUID -o value ${DEV}-part1) /data ext4 defaults,nofail 0 2&quot; &gt;&gt; /etc/fstab; mount -a; df -h /data</code>. Drugi Run Command wg 3.2.16: <code>df -h /data; cat /etc/fstab | grep data</code>.
-<strong>Jak sprawdzić:</strong> <code>df -h /data</code> pokazuje ok. 63G wolnego; po <code>az vm restart</code> dysk wraca zamontowany. Dysk ginie z grupą przy save game; w kodzie go nie opisujemy (to zadanie domowe dla chętnych: <code>Microsoft.Compute/disks</code> plus <code>dataDisks</code> w maszynie).</p>
+<strong>Kroki:</strong> wg 3.2.14 dołącz dysk <code>prod-skycraft-swc-world-vm-data</code>, 64 GiB Standard SSD, LUN 0. Zamiast Bastionu z 3.2.15 uruchom przez Run Command skrypt: <code>set -e; DEV=/dev/disk/azure/scsi1/lun0; parted -s $DEV mklabel gpt mkpart data ext4 0% 100%; sleep 2; mkfs.ext4 -F ${DEV}-part1; mkdir -p /data; echo &quot;UUID=$(blkid -s UUID -o value ${DEV}-part1) /data ext4 defaults,nofail 0 2&quot; &gt;&gt; /etc/fstab; mount -a; findmnt /data; df -h /data</code>. Drugi Run Command wg 3.2.16: <code>df -h /data; cat /etc/fstab | grep data</code>.
+<strong>Jak sprawdzić:</strong> <code>df -h /data</code> pokazuje <code>/dev/sda1</code> o rozmiarze ok. 63G, a nie <code>/dev/root</code> (wtedy dysk nie jest zamontowany); po <code>az vm restart</code> dysk wraca zamontowany. Dysk ginie z grupą przy save game; w kodzie go nie opisujemy (to zadanie domowe dla chętnych: <code>Microsoft.Compute/disks</code> plus <code>dataDisks</code> w maszynie).</p>
 <h3 id="sq4-resize-w-rodzinie-bsv2">SQ4: Resize w rodzinie Bsv2</h3>
 <p><strong>Cel:</strong> zobaczyć, że rozmiar to właściwość, którą zmienia się w miejscu, i że usługa wraca sama.
 <strong>Kroki:</strong> <code>az vm list-skus --location swedencentral --size Standard_B2 --resource-type virtualMachines -o table</code> (3.2.25); w portalu <em>Size</em> → <code>Standard_B2s_v2</code> → <em>Resize</em> (3.2.26); maszyna restartuje się bez deallocate, bo obie wielkości są w tej samej rodzinie; po minucie odśwież stronę serwera w przeglądarce; potem z powrotem na <code>Standard_B2ls_v2</code> (3.2.27).
