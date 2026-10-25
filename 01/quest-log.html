@@ -554,8 +554,8 @@ details[open] > summary {
 <li>ma wyjść: gość widoczny na liście All Users z typem Guest</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>7.</strong> Cykl życia konta: reset hasła Chromie, blokada logowania Khadgara i odblokowanie (Users → użytkownik → Reset password / Edit properties); walidacja według checklisty labu, w portalu i w Cloud Shell (PowerShell; przy pierwszym uruchomieniu zobacz <a href="#cloud-shell-pierwsze-uruchomienie">sekcję niżej</a>). W Cloud Shell z kroku 1 checklisty uruchamiasz tylko <code>Connect-MgGraph</code>, potem kroki 2 i 3. <code>Get-MgUser</code> i <code>Test-Lab.ps1</code> dziś pomijasz, bo wymagają modułu <code>Microsoft.Graph.Users</code>, którego Cloud Shell nie ma (<a href="https://github.com/mbiszczanik/skycraft/issues/375">skycraft#375</a>).  Jeśli Cloud Shell się nie uruchomi albo któreś z tych poleceń skończy się błędem, skopiuj dokładny komunikat i zrób walidację w samym portalu. → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-checklist-1.1.md">lab-checklist-1.1</a><ul>
-<li>ma wyjść: hasło Chromie zresetowane, konto Khadgara odblokowane; na liście All users widać trzech użytkowników z labu i gościa, a w Groups trzy grupy SkyCraft z jednym członkiem każda; w Cloud Shell krok 2 checklisty wypisuje te trzy grupy, a krok 3 pokazuje Malfuriona w <code>SkyCraft-Admins</code>, albo masz zapisany komunikat, którym Cloud Shell odmówił</li>
+<li><input type="checkbox"> <strong>7.</strong> Cykl życia konta: reset hasła Chromie, blokada logowania Khadgara i odblokowanie (Users → użytkownik → Reset password / Edit properties); walidacja w portalu według checklisty labu. Polecenia PowerShell z checklisty dziś pomijasz: część z nich uruchomisz w Cloud Shell w side queście 6. → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-checklist-1.1.md">lab-checklist-1.1</a><ul>
+<li>ma wyjść: hasło Chromie zresetowane, konto Khadgara odblokowane; na liście All users widać trzech użytkowników z labu i gościa, a w Groups trzy grupy SkyCraft z jednym członkiem każda</li>
 </ul>
 </li>
 </ul>
@@ -575,12 +575,9 @@ details[open] > summary {
 <p><strong>Twój region.</strong> Z tej listy wybierasz region, w którym przez cały kurs stawiasz zasoby. Jeśli na liście jest Sweden Central, Twoim regionem jest Sweden Central. Jeśli go tam nie ma, Twoim regionem jest pierwszy region z listy. Jeśli listy nie znalazłeś, zostajesz przy Sweden Central, dopóki prowadzący nie powie inaczej. Od dziś wszędzie, gdzie lab albo quest log każe wybrać Sweden Central, wybierasz swój region.</p>
 <p><strong>Gdy coś się nie zgadza.</strong> Jeśli nazwa tenanta to nazwa Twojej uczelni albo na liście ról nie ma <em>Global Administrator</em>, nie rób kroków labu w tym tenancie i od razu powiedz prowadzącemu. Dopóki nie masz własnego tenanta, kroki z użytkownikami, grupami i gościem śledzisz na ekranie prowadzącego. Zaproszenie od kolegi, dla którego jesteś Illidanem, przyjmujesz tak jak wszyscy.</p>
 <h2 id="cloud-shell-pierwsze-uruchomienie">Cloud Shell: pierwsze uruchomienie</h2>
-<p>Cloud Shell to terminal w przeglądarce, który otwierasz ikoną w górnym pasku portalu.  Za pierwszym razem przygotuj go w dwóch krokach.</p>
-<ol>
-<li><strong>Zarejestruj dostawcę zasobów, jeśli nie jest zarejestrowany.</strong> Cloud Shell działa dopiero wtedy, gdy na subskrypcji jest zarejestrowany dostawca <code>Microsoft.CloudShell</code>, a rejestrujesz go raz na subskrypcję. Otwórz Subscriptions → Twoja subskrypcja → Settings → Resource providers i wpisz w wyszukiwarkę <code>cloudshell</code>. Jeśli <code>Microsoft.CloudShell</code> ma już status <em>Registered</em>, przejdź do kroku 2. Jeśli nie, zaznacz go i kliknij <em>Register</em>. </li>
-<li><strong>Wybierz sesję bez konta magazynu.</strong> Przy pierwszym starcie Cloud Shell pyta o powłokę: wybierz PowerShell. Na ekranie powitalnym zaznacz <strong>No storage account required</strong> i wybierz z listy swoją subskrypcję. Potwierdź przyciskiem <em>Apply</em>.</li>
-</ol>
-<p>W takiej sesji nie zakładasz konta magazynu, ale pliki, które w niej zapiszesz, znikają wkrótce po zamknięciu okna.  Na dzisiejszą walidację to wystarczy, bo niczego nie musisz zachować.</p>
+<p>Cloud Shell to terminal w przeglądarce, który otwierasz ikoną w górnym pasku portalu.  Przy pierwszym starcie pyta o powłokę: wybierz PowerShell. Na ekranie powitalnym zostaw zaznaczone <strong>No storage account required</strong> i wybierz z listy swoją subskrypcję. Potwierdź przyciskiem <em>Apply</em>. </p>
+<p>Dostawcy zasobów <code>Microsoft.CloudShell</code> nie musisz rejestrować ręcznie: przy pierwszym starcie portal robi to sam, a terminal działa, zanim rejestracja się skończy. </p>
+<p>W takiej sesji nie zakładasz konta magazynu, ale pliki, które w niej zapiszesz, znikają wkrótce po zamknięciu okna.  Side questowi 6 to nie przeszkadza, bo niczego nie musisz w nim zachować.</p>
 <h2 id="gdy-coś-nie-działa">Gdy coś nie działa</h2>
 <p>Skrót. Pełne opisy w sekcji <em>Troubleshooting</em> lab guide&#39;a, mechanizmy w prologu.</p>
 <table>
@@ -629,10 +626,16 @@ details[open] > summary {
 <td><a href="prolog.html#2-dwa-systemy-uprawnie%C5%84-entra-id-i-azure-rbac">koncept 2</a></td>
 </tr>
 <tr>
-<td>Skrypt labu 1.1 zatrzymuje się w Cloud Shell od razu po uruchomieniu</td>
+<td>Skrypt labu 1.1 kończy się w Cloud Shell od razu błędem <code>The module &#39;Microsoft.Graph.Users&#39; cannot be found.</code></td>
 <td>Cloud Shell ma tylko część modułów Microsoft Graph, a skrypty labu 1.1 wymagają też modułu <code>Microsoft.Graph.Users</code>, którego tam nie ma</td>
-<td>nie instaluj modułu w Cloud Shell; walidację zrób według checklisty (krok 7), a side quest 1 na własnym komputerze; komunikat skryptu zapisz i pokaż prowadzącemu</td>
+<td>nie instaluj modułu w Cloud Shell; walidację zrób w portalu (krok 7), a side quest 1 na własnym komputerze</td>
 <td><a href="https://github.com/mbiszczanik/skycraft/issues/375">skycraft#375</a></td>
+</tr>
+<tr>
+<td><code>Connect-MgGraph</code> kończy się w Cloud Shell błędem <code>Authentication timed out after 120 seconds due to inactivity</code></td>
+<td>polecenie nie loguje Cię samo: czeka, aż wpiszesz kod na stronie logowania, i czeka tylko 120 sekund</td>
+<td>uruchom polecenie jeszcze raz (strzałka w górę i Enter), od razu otwórz w nowej karcie stronę z komunikatu i wpisz nowy kod</td>
+<td><a href="#sq6-pierwsze-polecenia-w-cloud-shell">SQ6</a></td>
 </tr>
 <tr>
 <td>Na własnym komputerze okno PowerShell zamyka się samo, gdy skrypt labu nie połączy się z Microsoft Graph</td>
@@ -700,6 +703,14 @@ details[open] > summary {
 <td>10 min</td>
 <td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-guide-1.1.md#-section-3-manage-user-properties-and-licenses-30-minutes">Step 1.1.11</a></td>
 </tr>
+<tr>
+<td>6</td>
+<td>Pierwsze polecenia w Cloud Shell</td>
+<td>2</td>
+<td>⭐</td>
+<td>10 min</td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.1-entra-users-groups/lab-checklist-1.1.md">lab-checklist-1.1</a></td>
+</tr>
 </tbody></table>
 <h3 id="sq1-użytkownicy-i-grupy-z-powershella">SQ1: Użytkownicy i grupy z PowerShella</h3>
 <p><strong>Cel:</strong> to samo, co zrobiłeś w portalu, jednym skryptem. Pierwszy kontakt z automatyzacją, która wraca na spotkaniu 4.
@@ -727,6 +738,15 @@ details[open] > summary {
 <p><strong>Cel:</strong> zobaczyć, co tenant ma za darmo, i zadać pierwsze pytanie asystentowi AI w portalu.
 <strong>Kroki:</strong> Entra ID → Licenses → All products (zanotuj, co jest dostępne); w portalu kliknij ikonę Copilot i zapytaj: „Which users in my tenant are guests?”. Porównaj odpowiedź z listą użytkowników.
 <strong>Jak sprawdzić:</strong> odpowiedź Copilota zgadza się z tym, co widzisz w Users. Jeśli nie, zanotuj rozbieżność: to pierwsze „zweryfikuj, co wygenerował Copilot” w semestrze.</p>
+<h3 id="sq6-pierwsze-polecenia-w-cloud-shell">SQ6: Pierwsze polecenia w Cloud Shell</h3>
+<p><strong>Cel:</strong> zobaczyć grupy z labu z wiersza poleceń zamiast z portalu i poznać terminal, który wraca na kolejnych spotkaniach.
+<strong>Kroki:</strong> otwórz Cloud Shell tak, jak opisuje sekcja <a href="#cloud-shell-pierwsze-uruchomienie">„Cloud Shell: pierwsze uruchomienie”</a>. Z checklisty labu uruchamiasz z kroku 1 tylko <code>Connect-MgGraph</code>, potem kroki 2 i 3. <code>Get-MgUser</code> pomijasz, bo wymaga modułu <code>Microsoft.Graph.Users</code>, którego Cloud Shell nie ma. </p>
+<ol>
+<li>Uruchom <code>Connect-MgGraph</code> z kroku 1 checklisty. Cloud Shell nie loguje Cię nim sam: wypisuje adres strony i jednorazowy kod.  Od razu otwórz tę stronę w nowej karcie, wpisz kod i zaloguj się kontem, na którym masz subskrypcję. Masz na to 120 sekund. Jeśli nie zdążysz, uruchom polecenie jeszcze raz i wpisz nowy kod.</li>
+<li>Jeśli po zalogowaniu strona pokaże coś, czego tu nie opisano, przepisz dokładny komunikat i pokaż prowadzącemu.</li>
+<li>Wróć do Cloud Shell i uruchom kroki 2 i 3 checklisty.</li>
+</ol>
+<p><strong>Jak sprawdzić:</strong> krok 2 wypisuje trzy grupy SkyCraft, a krok 3 pokazuje Malfuriona w <code>SkyCraft-Admins</code>.</p>
 <!-- ankieta:start -->
 <h2 id="na-koniec-mikroankieta">Na koniec: mikroankieta</h2>
 <p>Minuta: pięć pytań do kliknięcia i jedno zdanie. Ankieta jest anonimowa, a na początku następnego spotkania usłyszysz, co zmieniam po Waszych odpowiedziach.</p>
