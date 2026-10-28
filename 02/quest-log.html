@@ -521,56 +521,56 @@ details[open] > summary {
 <p><strong>SkyCraft Choice: role dla grup na grupach zasobów, nie dla osób na subskrypcji.</strong> Illidan dostaje <em>Reader</em> na jednej grupie zasobów. Jedna policy, jedna blokada, jeden budżet: minimum, które widać w działaniu, wszystko za zero. Alternatywa w produkcji: management groups nad wieloma subskrypcjami, role własne zamiast wbudowanych, PIM z dostępem na czas i zatwierdzeniem, inicjatywy policy z automatyczną remediacją.</p>
 </blockquote>
 <!-- quest-log:start -->
-<p>Laby: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md">Lab 1.2: RBAC</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md">Lab 1.3: governance</a></p>
+<p>Laby: <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md">Lab 1.2: RBAC</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md">Lab 1.3: governance</a></p>
 <h2 id="blok-1-grupy-zasobów-i-tagi-40-min">Blok 1: grupy zasobów i tagi (40 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>1.</strong> Trzy grupy zasobów wg konwencji: <code>dev-skycraft-swc-rg</code>, <code>prod-skycraft-swc-rg</code>, <code>platform-skycraft-swc-rg</code>, wszystkie w Twoim regionie ze spotkania 1 (lab podaje Sweden Central). Nazwy wpisujesz bez zmian, z <code>swc</code>, jak w prologu spotkania 1 → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-121-create-development-resource-group">1.2.1</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-122-create-production-resource-group">1.2.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-123-create-shared-services-resource-group">1.2.3</a><ul>
+<li><input type="checkbox"> <strong>1.</strong> Trzy grupy zasobów wg konwencji: <code>dev-skycraft-swc-rg</code>, <code>prod-skycraft-swc-rg</code>, <code>platform-skycraft-swc-rg</code>, wszystkie w Twoim regionie ze spotkania 1 (lab podaje Sweden Central). Nazwy wpisujesz bez zmian, z <code>swc</code>, jak w prologu spotkania 1. Na karcie <em>Tags</em> lab każe od razu dodać cztery tagi: <code>Environment</code> (Development, Production albo Platform), <code>Project</code> = <code>SkyCraft</code>, <code>CostCenter</code> = <code>MSDN</code> i <code>Owner</code>. W <code>Owner</code> wpisz swój login, nie wartość z labu → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-121-create-development-resource-group">1.2.1</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-122-create-production-resource-group">1.2.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-123-create-shared-services-resource-group">1.2.3</a><ul>
 <li>ma wyjść: trzy grupy zasobów widoczne na liście Resource groups</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>2.</strong> Cztery tagi na każdej grupie zasobów: <code>Project</code>, <code>Environment</code>, <code>CostCenter</code>, <code>Owner</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-131-apply-tags-to-resource-groups">1.3.1</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-132-tag-production-resource-group">1.3.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-133-tag-platform-services-resource-group">1.3.3</a><ul>
+<li><input type="checkbox"> <strong>2.</strong> Sprawdzasz cztery tagi na każdej grupie zasobów: <code>Project</code>, <code>Environment</code>, <code>CostCenter</code>, <code>Owner</code>. Jeśli dodałeś je w kroku 1, przycisk <em>Apply</em> jest wyszarzony i tak ma być; brakujące tagi dodajesz tutaj → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-131-apply-tags-to-resource-groups">1.3.1</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-132-tag-production-resource-group">1.3.2</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-133-tag-platform-services-resource-group">1.3.3</a><ul>
 <li>ma wyjść: każda z trzech grup ma cztery tagi</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>3.</strong> Przegląd zasobów po tagu w usłudze Tags (<code>Project</code> = <code>SkyCraft</code>) → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-134-view-resources-by-tag">1.3.4</a><ul>
+<li><input type="checkbox"> <strong>3.</strong> Przegląd zasobów po tagu w usłudze Tags (<code>Project</code> = <code>SkyCraft</code>) → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-134-view-resources-by-tag">1.3.4</a><ul>
 <li>ma wyjść: usługa Tags pokazuje trzy grupy zasobów pod tagiem SkyCraft</li>
 </ul>
 </li>
 </ul>
 <h2 id="blok-2-role-50-min">Blok 2: role (50 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>4.</strong> Rola Owner na subskrypcji dla Malfuriona, czyli dla użytkownika, nie dla grupy (tak jak w labie), i weryfikacja przypisania. Tę rolę znajdziesz w zakładce <em>Privileged administrator roles</em>. Po wyborze Malfuriona kreator otwiera zakładkę <em>Conditions</em> z zaznaczoną najwęższą opcją: wybierz <em>Allow user to assign all roles (highly privileged)</em>.  → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-124-assign-owner-role-to-admin-user">1.2.4</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-125-verify-role-assignment">1.2.5</a><ul>
+<li><input type="checkbox"> <strong>4.</strong> Rola Owner na subskrypcji dla Malfuriona, czyli dla użytkownika, nie dla grupy (tak jak w labie), i weryfikacja przypisania. Tę rolę znajdziesz w zakładce <em>Privileged administrator roles</em>. Po wyborze Malfuriona kreator otwiera zakładkę <em>Conditions</em> z zaznaczoną najwęższą opcją: wybierz <em>Allow user to assign all roles (highly privileged)</em>.  → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-124-assign-owner-role-to-admin-user">1.2.4</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-125-verify-role-assignment">1.2.5</a><ul>
 <li>ma wyjść: Malfurion ma rolę Owner na subskrypcji</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>5.</strong> Contributor dla <code>SkyCraft-Developers</code> na <code>dev-skycraft-swc-rg</code>, Reader dla <code>SkyCraft-Testers</code> na <code>dev-skycraft-swc-rg</code> i <code>prod-skycraft-swc-rg</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-126-assign-contributor-role-to-developers-group-dev-environment">1.2.6</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-127-assign-reader-role-to-testers-group-dev-environment">1.2.7</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-128-assign-reader-role-to-testers-production-environment">1.2.8</a><ul>
+<li><input type="checkbox"> <strong>5.</strong> Contributor dla <code>SkyCraft-Developers</code> na <code>dev-skycraft-swc-rg</code>, Reader dla <code>SkyCraft-Testers</code> na <code>dev-skycraft-swc-rg</code> i <code>prod-skycraft-swc-rg</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-126-assign-contributor-role-to-developers-group-dev-environment">1.2.6</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-127-assign-reader-role-to-testers-group-dev-environment">1.2.7</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-128-assign-reader-role-to-testers-production-environment">1.2.8</a><ul>
 <li>ma wyjść: Developers mają Contributor na dev, Testers Reader na dev i prod</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>6.</strong> Illidan: Reader wyłącznie na <code>platform-skycraft-swc-rg</code> (domknięcie gościa ze spotkania 1) → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-129-assign-limited-access-to-external-partner">1.2.9</a><ul>
+<li><input type="checkbox"> <strong>6.</strong> Illidan: Reader wyłącznie na <code>platform-skycraft-swc-rg</code> (domknięcie gościa ze spotkania 1) → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-129-assign-limited-access-to-external-partner">1.2.9</a><ul>
 <li>ma wyjść: Illidan widzi tylko <code>platform-skycraft-swc-rg</code>, nie dev ani prod</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>7.</strong> Check access dla Khadgara i Chromie, przegląd wszystkich przypisań na subskrypcji → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-1210-check-access-for-developer">1.2.10</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-1211-check-access-for-tester">1.2.11</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-1212-view-all-role-assignments">1.2.12</a><ul>
+<li><input type="checkbox"> <strong>7.</strong> Check access dla Khadgara i Chromie, przegląd wszystkich przypisań na subskrypcji → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-1210-check-access-for-developer">1.2.10</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-1211-check-access-for-tester">1.2.11</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#step-1212-view-all-role-assignments">1.2.12</a><ul>
 <li>ma wyjść: Check access pokazuje role odziedziczone z grup, nie nadane bezpośrednio</li>
 </ul>
 </li>
 </ul>
 <h2 id="blok-3-policy-blokada-budżet-45-min">Blok 3: policy, blokada, budżet (45 min)</h2>
 <ul>
-<li><input type="checkbox"> <strong>8.</strong> Policy „Require a tag on resource groups” z parametrem <code>Environment</code>, efekt Deny, zakres subskrypcji → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-135-assign-a-built-in-policy-require-tag-on-resource-groups">1.3.5</a><ul>
+<li><input type="checkbox"> <strong>8.</strong> Policy „Require a tag on resource groups” z parametrem <code>Environment</code>, efekt Deny, zakres subskrypcji → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-135-assign-a-built-in-policy-require-tag-on-resource-groups">1.3.5</a><ul>
 <li>ma wyjść: policy przypisana na subskrypcji</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>9.</strong> Test policy: próba utworzenia grupy zasobów bez tagu i z tagiem, odczytanie komunikatu odmowy → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-136-test-the-policy">1.3.6</a><ul>
+<li><input type="checkbox"> <strong>9.</strong> Test policy: próba utworzenia grupy zasobów bez tagu i z tagiem, odczytanie komunikatu odmowy → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-136-test-the-policy">1.3.6</a><ul>
 <li>ma wyjść: grupa bez tagu odrzucona, z tagiem <code>Environment</code> przechodzi</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>10.</strong> Blokada <code>CanNotDelete</code> na <code>platform-skycraft-swc-rg</code> i próba usunięcia grupy. W oknie <em>Add lock</em> typ blokady startuje od <em>Read-only</em>, więc przestaw go na <em>Delete</em>. Odmowę usunięcia grupy zobaczysz w powiadomieniach (ikona dzwonka), nie na stronie grupy.  → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1312-apply-cannotdelete-lock-to-platform-resource-group">1.3.12</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1311-test-the-lock">1.3.11</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1310-apply-cannotdelete-lock-to-production-resource-group">1.3.10</a><ul>
+<li><input type="checkbox"> <strong>10.</strong> Blokada <code>CanNotDelete</code> na <code>platform-skycraft-swc-rg</code> i próba usunięcia grupy. W oknie <em>Add lock</em> typ blokady startuje od <em>Read-only</em>, więc przestaw go na <em>Delete</em>. Odmowę usunięcia grupy zobaczysz w powiadomieniach (ikona dzwonka), nie na stronie grupy.  → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1313-apply-cannotdelete-lock-to-platform-resource-group">1.3.13</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1312-test-the-lock">1.3.12</a>, wg <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1311-apply-cannotdelete-lock-to-production-resource-group">1.3.11</a><ul>
 <li>ma wyjść: usunięcie <code>platform-skycraft-swc-rg</code> zablokowane komunikatem o blokadzie; <code>prod</code> bez blokady, bo od spotkania 3 sprzątamy w nim zasoby; na spotkaniu 3 przeniesiesz tę blokadę z grupy na sieć huba i strefę publiczną</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>11.</strong> Budżet na <code>prod-skycraft-swc-rg</code> z alertami 50/80/100 procent. Jeśli na spotkaniu 1 portal odrzucił budżet subskrypcji, załóż go najpierw według kroków 1.3.14 i 1.3.15, z wartościami ze spotkania 1: kwota 50 USD zamiast 100 USD z labu, progi 50/80/100 procent jak w labie, a wszystkie alerty tylko na Twój e-mail (lab przy 100 procent dodaje Malfuriona). Budżet powstaje dopiero na końcu kroku 1.3.15, więc nie przerywaj po 1.3.14. Od budżetu nie zależy żaden dalszy krok: jeśli portal go nie przyjmie, skopiuj albo przepisz dokładny komunikat i idź dalej, a prowadzący pokaże budżet na swojej subskrypcji → <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1316-create-resource-group-budget">1.3.16</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1314-create-a-subscription-budget">1.3.14</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1315-configure-budget-alerts">1.3.15</a><ul>
+<li><input type="checkbox"> <strong>11.</strong> Budżet na <code>prod-skycraft-swc-rg</code> z alertami 50/80/100 procent. Jeśli na spotkaniu 1 portal odrzucił budżet subskrypcji, załóż go najpierw według kroków 1.3.15 i 1.3.16, z wartościami ze spotkania 1: kwota 50 USD zamiast 100 USD z labu, progi 50/80/100 procent jak w labie, a wszystkie alerty tylko na Twój e-mail. Budżet powstaje dopiero na końcu kroku 1.3.16, więc nie przerywaj po 1.3.15. Od budżetu nie zależy żaden dalszy krok: jeśli portal go nie przyjmie, skopiuj albo przepisz dokładny komunikat i idź dalej, a prowadzący pokaże budżet na swojej subskrypcji → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1317-create-resource-group-budget">1.3.17</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1315-create-a-subscription-budget">1.3.15</a> · <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#step-1316-configure-budget-alerts">1.3.16</a><ul>
 <li>ma wyjść: budżet grupy zasobów z trzema progami alertów (i budżet subskrypcji, jeśli nie powstał na spotkaniu 1) albo zapisany komunikat, którym portal go odrzucił</li>
 </ul>
 </li>
@@ -579,7 +579,7 @@ details[open] > summary {
 <p>Kroki poniżej mijasz świadomie. Jeśli lab guide każe Ci coś zrobić, a nie ma tego na liście wyżej, to jest to jeden z nich.</p>
 <ul>
 <li><strong>Lab 1.2:</strong> 1.2.13 · jeśli starczy czasu (Check access (1.2.10-1.2.11) pokazuje to samo szybciej)</li>
-<li><strong>Lab 1.3:</strong> 1.3.7, 1.3.9, 1.3.17 · jeśli starczy czasu (powtórzenie mechanizmu z 1.3.5; wynik pojawia się z opóźnieniem; bez płatnych zasobów wykres jest pusty; wraca na spotkaniu 3); 1.3.8 · side quest 2; 1.3.13 · do domu; 1.3.14-1.3.15 · spotkanie 1 (kto nie ma budżetu subskrypcji ze spotkania 1, zakłada go w kroku 11); 1.3.18-1.3.21 · side quest 3; 1.3.22 · side quest 4</li>
+<li><strong>Lab 1.3:</strong> 1.3.7, 1.3.19-1.3.21 · side quest 3; 1.3.8, 1.3.10, 1.3.18 · jeśli starczy czasu (zmienia subskrypcję na spotkanie 3: zasób bez tagu <code>Project</code> zostanie odrzucony; wynik pojawia się z opóźnieniem; bez płatnych zasobów wykres jest pusty; wraca na spotkaniu 3); 1.3.9 · side quest 2; 1.3.14 · do domu; 1.3.15-1.3.16 · spotkanie 1 (kto nie ma budżetu subskrypcji ze spotkania 1, zakłada go w kroku 11); 1.3.22 · side quest 4</li>
 </ul>
 <p>Lab 1.2 numeruje kroki 1.2.1-1.2.13 kolejno, bez przeskoków; Section 6 „Understanding Role Assignment Properties” to sam tekst, bez numerowanego kroku (nie ma 1.2.14). Lab 1.3 numeruje kroki 1.3.1-1.3.22 kolejno, bez przeskoków.</p>
 <!-- quest-log:end --><h2 id="cloud-shell-pierwsze-uruchomienie">Cloud Shell: pierwsze uruchomienie</h2>
@@ -601,19 +601,13 @@ details[open] > summary {
 <td>Brak przycisku <em>Add role assignment</em></td>
 <td>masz Contributor, nie Owner ani User Access Administrator</td>
 <td>działaj jako właściciel subskrypcji (Twoje konto studenckie nim jest)</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#-troubleshooting">1.2, Issue 1</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#-troubleshooting">1.2, Issue 1</a></td>
 </tr>
 <tr>
 <td>Rola nadana, użytkownik nie widzi zasobu</td>
 <td>inny zakres albo stary token</td>
 <td><em>Check access</em>, potem wyloguj i zaloguj użytkownika</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#-troubleshooting">1.2, Issue 3</a></td>
-</tr>
-<tr>
-<td>Nagłówek checklisty labu 1.2 mówi <code>rg-skycraft-shared</code></td>
-<td>literówka w labie; instrukcja powyżej tworzy <code>platform-skycraft-swc-rg</code></td>
-<td>trzymaj się <code>platform-skycraft-swc-rg</code>, tak jak reszta kursu</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/issues/131">skycraft#131</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#-troubleshooting">1.2, Issue 3</a></td>
 </tr>
 <tr>
 <td>Policy „nie działa”</td>
@@ -632,6 +626,30 @@ details[open] > summary {
 <td>tagi nie dziedziczą się na zasoby</td>
 <td>taguj zasoby; docelowo policy z efektem <em>Modify</em> (side quest 6)</td>
 <td><a href="prolog.html#4-koszty-bud%C5%BCet-alert-i-to-czego-one-nie-robi%C4%85">koncept 4</a></td>
+</tr>
+<tr>
+<td>Okno usuwania pokazuje pole <em>Attempt override of delete lock</em></td>
+<td>portal pozwala obejść blokadę przy usuwaniu, a lab o tym nie mówi</td>
+<td>nie zaznaczaj tego pola: zaznaczone usuwa mimo blokady</td>
+<td><a href="https://github.com/mbiszczanik/skycraft/issues/432">skycraft#432</a></td>
+</tr>
+<tr>
+<td>Grupa akcji (side quest 3) nie powstaje, a powiadomienie mówi, że subskrypcja nie jest zarejestrowana dla <code>microsoft.insights</code></td>
+<td>na nowej subskrypcji dostawca zasobów <code>Microsoft.Insights</code> bywa niezarejestrowany, a portal sam go nie rejestruje</td>
+<td><em>Subscriptions</em> → Twoja subskrypcja → <em>Settings</em> → <em>Resource providers</em> → <code>Microsoft.Insights</code> → <em>Register</em>, potem utwórz grupę jeszcze raz</td>
+<td><a href="https://github.com/mbiszczanik/skycraft/issues/402">skycraft#402</a></td>
+</tr>
+<tr>
+<td>Grupa akcji odrzucona komunikatem o dozwolonych regionach</td>
+<td>pole <em>Region</em> startuje od East US, a Twoja policy z side questa 2 tego regionu nie dopuszcza</td>
+<td>w polu <em>Region</em> wybierz swój region</td>
+<td><a href="https://github.com/mbiszczanik/skycraft/issues/331">skycraft#331</a></td>
+</tr>
+<tr>
+<td><em>Cost analysis</em> na nowej subskrypcji pokazuje <em>Unable to load</em></td>
+<td>na subskrypcji założonej tego samego dnia widok kosztów nie ma jeszcze danych</td>
+<td>nic nie naprawiasz; wróć do widoku na kolejnym spotkaniu</td>
+<td><a href="https://github.com/mbiszczanik/skycraft/issues/402">skycraft#402</a></td>
 </tr>
 </tbody></table>
 <h2 id="sprzątanie-dziś-nic">Sprzątanie: dziś nic</h2>
@@ -660,7 +678,7 @@ details[open] > summary {
 <td>2</td>
 <td>⭐⭐</td>
 <td>20 min</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#-section-5-verify-and-test-access-20-minutes">Lab 1.2, Section 5</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#-section-5-verify-and-test-access-20-minutes">Lab 1.2, Section 5</a></td>
 </tr>
 <tr>
 <td>2</td>
@@ -668,7 +686,7 @@ details[open] > summary {
 <td>3</td>
 <td>⭐</td>
 <td>15 min</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#-section-2-implement-azure-policy-60-minutes">Lab 1.3, Step 1.3.8</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#-section-2-implement-azure-policy-60-minutes">Lab 1.3, Step 1.3.9</a></td>
 </tr>
 <tr>
 <td>3</td>
@@ -676,7 +694,7 @@ details[open] > summary {
 <td>1</td>
 <td>⭐</td>
 <td>15 min</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#-section-5-use-azure-advisor-30-minutes">Lab 1.3, Section 5</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#-section-5-use-azure-advisor-30-minutes">Lab 1.3, Section 5</a></td>
 </tr>
 <tr>
 <td>4</td>
@@ -684,7 +702,7 @@ details[open] > summary {
 <td>3</td>
 <td>⭐</td>
 <td>10 min</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#-section-6-understand-management-groups-15-minutes">Lab 1.3, Section 6</a></td>
+<td><a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.3-governance/lab-guide-1.3.md#-section-6-understand-management-groups-15-minutes">Lab 1.3, Section 6</a></td>
 </tr>
 <tr>
 <td>5</td>
@@ -709,7 +727,7 @@ details[open] > summary {
 <strong>Jak sprawdzić:</strong> przypisanie pojawia się i znika w portalu w widoku Access control (IAM). Porównaj liczbę kliknięć z wariantem portalowym.</p>
 <h3 id="sq2-policy-dozwolone-lokalizacje">SQ2: Policy „dozwolone lokalizacje”</h3>
 <p><strong>Cel:</strong> druga reguła, tym razem o regionie, i pierwsza kolizja z własnym nawykiem.
-<strong>Kroki:</strong> przypisz wbudowaną policy <em>Allowed locations</em> na subskrypcji, z nazwą przypisania <code>Restrict-Azure-Regions</code>. Jako dozwolone wybierz dwa regiony z listy, którą zapisałeś na spotkaniu 1: swój region i jeden inny z tej listy. Jeśli na liście są tylko dwa regiony, dopuść sam swój region. Jeśli listy nie znalazłeś, zapytaj prowadzącego, zanim zaczniesz. Lab każe wybrać Sweden Central i North Europe, ale Ty bierzesz regiony tylko ze swojej listy. Regiony, które dopuściłeś, wpisz też w opis przypisania i w komunikat o niezgodności, bo lab podaje w nich tamte dwa. Potem spróbuj utworzyć w <code>dev-skycraft-swc-rg</code> sieć wirtualną w regionie ze swojej listy, którego nie dopuściłeś. Kreator sieci pokaże ten region w grupie <em>Ineligible</em>, ale pozwoli go wybrać.  Jeśli przypisałeś policy z kroku 1.3.7, nadaj sieci tag <code>Project</code> = <code>SkyCraft</code>, żeby to nie ona odrzuciła wdrożenie. Grupa zasobów do tego testu się nie nadaje, bo ta policy nie sprawdza grup zasobów. 
+<strong>Kroki:</strong> przypisz wbudowaną policy <em>Allowed locations</em> na subskrypcji, z nazwą przypisania <code>Restrict-Azure-Regions</code>. Jako dozwolone wybierz dwa regiony z listy, którą zapisałeś na spotkaniu 1: swój region i jeden inny z tej listy. Jeśli na liście są tylko dwa regiony, dopuść sam swój region. Jeśli listy nie znalazłeś, zapytaj prowadzącego, zanim zaczniesz. Lab każe wybrać Sweden Central i North Europe, ale Ty bierzesz regiony tylko ze swojej listy. Regiony, które dopuściłeś, wpisz też w opis przypisania i w komunikat o niezgodności, bo lab podaje w nich tamte dwa. Potem spróbuj utworzyć w <code>dev-skycraft-swc-rg</code> sieć wirtualną w regionie ze swojej listy, którego nie dopuściłeś. Kreator sieci pokaże ten region w grupie <em>Ineligible</em>, ale pozwoli go wybrać.  Jeśli przypisałeś policy z kroku 1.3.8, nadaj sieci tag <code>Project</code> = <code>SkyCraft</code>, żeby to nie ona odrzuciła wdrożenie. Grupa zasobów do tego testu się nie nadaje, bo ta policy nie sprawdza grup zasobów. 
 <strong>Jak sprawdzić:</strong> wdrożenie zostaje odrzucone, ale dopiero po <em>Create</em>, bo <em>Review + create</em> przechodzi. Okno ze szczegółami błędu bywa puste. Wtedy kliknij powiadomienie <em>Deployment validation failed</em>: otworzy się dziennik aktywności grupy. W zdarzeniu <em>Validate Deployment</em> z błędem otwórz zakładkę JSON i znajdź pole <code>statusMessage</code>.  Zapisz komunikat odmowy i sprawdź, czy mówi o Twoim przypisaniu: powodem ma być Twój komunikat o niezgodności. Jeśli komunikat mówi, że region nie przyjmuje nowych klientów (<em>not accepting new customers</em>), to odmówił Microsoft, nie Twoja policy: wybierz inny region i spróbuj jeszcze raz.  Jeśli sieć jednak powstała, usuń ją i powiedz o tym prowadzącemu. Zanotuj, czym ta odmowa różni się od odmowy z braku uprawnień RBAC.</p>
 <h3 id="sq3-azure-advisor-i-pierwsze-rekomendacje">SQ3: Azure Advisor i pierwsze rekomendacje</h3>
 <p><strong>Cel:</strong> zobaczyć, co Azure sam podpowiada, zanim jeszcze cokolwiek kosztuje.
@@ -749,7 +767,7 @@ details[open] > summary {
 <li><input type="checkbox"> Sprawdź na stronie <a href="https://www.microsoftazuresponsorships.com/">Microsoft Azure Sponsorships</a>, ile kredytu zostało po dwóch spotkaniach (powinien zostać prawie cały). </li>
 <li><input type="checkbox"> Jeśli w side queście rozszerzyłeś policy „wymagany tag” na wszystkie zasoby, zawęź ją z powrotem do grup zasobów, inaczej sieci ze spotkania 3 dostaną odmowę</li>
 <li><input type="checkbox"> Do przeczytania: prolog spotkania 3 „Fundamenty i mury świata” (sieci, NSG, DNS, load balancer) i „Sprawdź się” na końcu</li>
-<li><input type="checkbox"> Jeśli coś się wysypało: <a href="https://github.com/mbiszczanik/skycraft/blob/ae56ac29b37a792e58cafefa3f170256be49f2dd/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#-troubleshooting">Troubleshooting labu 1.2</a></li>
+<li><input type="checkbox"> Jeśli coś się wysypało: <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-1-identities-governance/1.2-rbac/lab-guide-1.2.md#-troubleshooting">Troubleshooting labu 1.2</a></li>
 </ul>
 
 <nav class="pagenav bottom"><a href="../01/prolog.html">← Spotkanie 1: Założenie studia</a><a href="../index.html">Strona główna</a><a href="../03/prolog.html">Spotkanie 3: Fundamenty i mury świata →</a></nav>
