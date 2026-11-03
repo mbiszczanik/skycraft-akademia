@@ -552,7 +552,7 @@ details[open] > summary {
 <h2 id="blok-3-dekompilacja-40-min">Blok 3: dekompilacja (40 min)</h2>
 <ul>
 <li><input type="checkbox"> <strong>6.</strong> Dekompilacja własnego eksportu: <code>az bicep decompile --file template.json</code>, otwarcie <code>template.bicep</code> → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-318-decompile-arm-template-to-bicep">3.1.8</a><ul>
-<li>ma wyjść: plik <code>template.bicep</code>, a w konsoli ostrzeżenie <em>best-effort</em> i około trzydziestu błędów <code>BCP080</code> (cykl) i <code>BCP062</code>. Dekompilator wpisuje w tablice <code>securityRules</code>, <code>subnets</code> i <code>virtualNetworkPeerings</code> linie <code>id: &lt;zasób&gt;.id</code>, które odwołują się do tych samych reguł, podsieci i peeringów zadeklarowanych osobno niżej. Usuń te linie (w eksporcie prod jest ich 11): <code>az bicep build --file template.bicep</code> przejdzie wtedy z samymi ostrzeżeniami</li>
+<li>ma wyjść: plik <code>template.bicep</code>, a w konsoli ostrzeżenie <em>best-effort</em>, kilkadziesiąt błędów <code>BCP080</code> (cykl), <code>BCP062</code> i <code>BCP079</code> oraz kod 1. Dekompilator wpisuje w tablice linie <code>id: &lt;zasób&gt;.id</code> albo <code>id: &#39;${&lt;zasób&gt;.id}/...&#39;</code>, które odwołują się do zasobów zadeklarowanych osobno w tym samym pliku. Usuń wszystkie takie linie: <code>Get-Content template.bicep | Where-Object { $_ -notmatch &#39;^\s+id: (\w+\.id|&#39;&#39;\$\{\w+\.id\}/.*&#39;&#39;)\s*$&#39; } | Set-Content template.clean.bicep -Encoding utf8</code>. Potem <code>az bicep build --file template.clean.bicep --outfile template.clean.json</code> kończy się kodem 0, z samymi ostrzeżeniami</li>
 </ul>
 </li>
 <li><input type="checkbox"> <strong>7.</strong> Przegląd zdekompilowanego kodu: nazwy parametrów, hardkody, brak opisów, kolejność zasobów → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-319-analyze-decompiled-bicep">3.1.9</a><ul>
@@ -640,9 +640,9 @@ details[open] > summary {
 <td></td>
 </tr>
 <tr>
-<td>Dekompilacja albo <code>az bicep build</code> zgłasza <code>BCP080</code> (<em>involved in a cycle</em>) i <code>BCP062</code></td>
-<td>dekompilator wpisuje w tablice <code>securityRules</code>, <code>subnets</code> i <code>virtualNetworkPeerings</code> odwołania <code>id: &lt;zasób&gt;.id</code> do reguł, podsieci i peeringów, które deklaruje też osobno</td>
-<td>usuń te linie <code>id:</code> w tablicach; reszta pliku zostaje</td>
+<td>Dekompilacja albo <code>az bicep build</code> zgłasza <code>BCP080</code> (<em>involved in a cycle</em>), <code>BCP062</code> albo <code>BCP079</code></td>
+<td>dekompilator wpisuje w tablice odwołania <code>id: &lt;zasób&gt;.id</code>, a w delegacji podsieci i w load balancerze odwołania <code>id: &#39;${&lt;zasób&gt;.id}/...&#39;</code>, do zasobów, które deklaruje też osobno</td>
+<td>usuń oba rodzaje linii <code>id:</code> poleceniem z kroku 6 tego quest logu; reszta pliku zostaje</td>
 <td><a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-3-compute/3.1-infrastructure-as-code/lab-guide-3.1.md#step-318-decompile-arm-template-to-bicep">3.1.8</a></td>
 </tr>
 <tr>
