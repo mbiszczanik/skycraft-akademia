@@ -584,7 +584,7 @@ details[open] > summary {
 <li>ma wyjść: plan B1; panel: serwer świata online; podsieć ma delegację <code>Microsoft.Web/serverFarms</code>, dodaną przez portal</li>
 </ul>
 </li>
-<li><input type="checkbox"> <strong>14.</strong> Aplikacja → <em>Settings → Configuration → General settings</em>: <em>HTTPS Only: On</em> (sprawdzasz: kreator włącza to domyślnie; po każdej zmianie tego ustawienia przekierowanie zaczyna działać po około minucie), <em>Minimum Inbound TLS Version: 1.2</em> (sprawdzasz); rejestr → <em>Access keys</em> → <em>Admin user</em> wyłączony; aplikacja → <em>Overview</em> → <em>Restart</em>, a po restarcie odświeżasz panel → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-3-compute/3.4-app-service/lab-guide-3.4.md#step-3411-https-only">3.4.11</a><ul>
+<li><input type="checkbox"> <strong>14.</strong> Aplikacja → <em>Settings → Configuration → General settings</em>: <em>HTTPS Only: On</em> (sprawdzasz: kreator włącza to domyślnie; po włączeniu tego ustawienia przekierowanie na <code>https://</code> zaczyna działać po kilku sekundach, a po wyłączeniu zwykły <code>http://</code> przez około minutę odpowiada błędem 503), <em>Minimum Inbound TLS Version: 1.2</em> (sprawdzasz); rejestr → <em>Access keys</em> → <em>Admin user</em> wyłączony; aplikacja → <em>Overview</em> → <em>Restart</em>, a po restarcie odświeżasz panel → <a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-3-compute/3.4-app-service/lab-guide-3.4.md#step-3411-https-only">3.4.11</a><ul>
 <li>ma wyjść: <code>http://</code> przekierowuje na <code>https://</code>; rejestr bez hasła admina, a panel po restarcie działa dalej, bo pobiera obraz tożsamością</li>
 </ul>
 </li>
