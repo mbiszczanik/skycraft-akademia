@@ -743,7 +743,7 @@ output serverUrl string = &#39;http://${lbPip.outputs.ipAddress}:8085&#39;
 <tr>
 <td>Kreator: <code>Standard_B2ls_v2</code> niedostępny albo wdrożenie kończy się <code>SkuNotAvailable</code> / <code>QuotaExceeded</code></td>
 <td>limit vCPU serii B w subskrypcji albo brak rozmiaru w regionie</td>
-<td><em>Subscriptions → Usage + quotas</em>: <code>B2ls_v2</code> i <code>B2s_v2</code> liczą się do <em>Standard Bsv2 Family</em>, a <code>B2als_v2</code> do <em>Standard Basv2 Family</em>. Przy <code>QuotaExceeded</code> bierzesz <code>Standard_B2als_v2</code> (wariant AMD, inna rodzina, czyli inny limit); przy samym <code>SkuNotAvailable</code> wystarczy <code>Standard_B2s_v2</code> z tej samej rodziny</td>
+<td><em>Subscriptions → Usage + quotas</em>: <code>B2ls_v2</code> i <code>B2s_v2</code> liczą się do <em>Standard Bsv2 Family</em>, a <code>B2als_v2</code> do <em>Standard Basv2 Family</em>. Przy <code>QuotaExceeded</code> bierzesz <code>Standard_B2als_v2</code> (wariant AMD, inna rodzina, czyli inny limit); przy <code>SkuNotAvailable</code> sprawdź dostępne rozmiary; <code>Standard_B2s_v2</code> jest kandydatem, ale ta sama rodzina nie gwarantuje dostępności</td>
 <td><a href="https://github.com/mbiszczanik/skycraft/blob/0e4bc1c05db91a2a90098f82e34080d264639d22/module-3-compute/3.2-virtual-machines/lab-guide-3.2.md#-troubleshooting">Lab 3.2, Issue 1</a></td>
 </tr>
 <tr>
@@ -760,8 +760,8 @@ output serverUrl string = &#39;http://${lbPip.outputs.ipAddress}:8085&#39;
 </tr>
 <tr>
 <td><em>Health Probe Status</em> zostaje na 0, choć Run Command pokazał <code>active</code></td>
-<td>sonda pyta port 8085, a usługa słucha gdzie indziej; albo NIC nie jest w puli; albo reguła NSG na 8085 zniknęła</td>
-<td>drugi Run Command z <code>ss -ltn</code>: ma być <code>0.0.0.0:8085</code>; <em>Backend pools</em> → <code>-lb-be-world</code> ma mieć Twoją maszynę; <code>prod-skycraft-swc-world-nsg</code> ma regułę 110 na 8085</td>
+<td>sonda pyta port 8085, a usługa słucha gdzie indziej; albo NIC nie jest w puli; albo NSG blokuje sondy</td>
+<td>drugi Run Command z <code>ss -ltn</code>: ma być <code>0.0.0.0:8085</code>; <em>Backend pools</em> → <code>-lb-be-world</code> ma mieć Twoją maszynę. Sprawdź, czy reguły odmowy o wyższym priorytecie nie przesłaniają domyślnej <code>AllowAzureLoadBalancerInBound</code>. Reguła 110 dopuszcza graczy, a nie zastępuje osobnego sprawdzenia sond</td>
 <td><a href="prolog.html#3-serwer-za-load-balancerem-droga-pakietu-gracza">koncept 3</a></td>
 </tr>
 <tr>
@@ -902,7 +902,7 @@ output serverUrl string = &#39;http://${lbPip.outputs.ipAddress}:8085&#39;
 <strong>Jak sprawdzić:</strong> <code>df -h /data</code> pokazuje <code>/dev/sda1</code> o rozmiarze ok. 63G, a nie <code>/dev/root</code> (wtedy dysk nie jest zamontowany); po <code>az vm restart</code> dysk wraca zamontowany. Dysk ginie z grupą przy save game; w kodzie go nie opisujemy (to zadanie domowe dla chętnych: <code>Microsoft.Compute/disks</code> plus <code>dataDisks</code> w maszynie).</p>
 <h3 id="sq4-resize-w-rodzinie-bsv2">SQ4: Resize w rodzinie Bsv2</h3>
 <p><strong>Cel:</strong> zobaczyć, że rozmiar to właściwość, którą zmienia się w miejscu, i że usługa wraca sama.
-<strong>Kroki:</strong> <code>az vm list-skus --location swedencentral --size Standard_B2 --resource-type virtualMachines -o table</code> (3.2.25); w portalu <em>Size</em> → <code>Standard_B2s_v2</code> → <em>Resize</em> (3.2.26); maszyna restartuje się bez deallocate, bo obie wielkości są w tej samej rodzinie; po minucie odśwież stronę serwera w przeglądarce; potem z powrotem na <code>Standard_B2ls_v2</code> (3.2.27).
+<strong>Kroki:</strong> <code>az vm list-skus --location swedencentral --size Standard_B2 --resource-type virtualMachines -o table</code> (3.2.25); potem sprawdź opcje zmiany rozmiaru tej maszyny: <code>az vm list-vm-resize-options -g prod-skycraft-swc-rg -n prod-skycraft-swc-world-vm -o table</code>. W portalu <em>Size</em> wybierz <code>Standard_B2s_v2</code>, jeśli jest dostępny, i <em>Resize</em> (3.2.26). Sama rodzina nie gwarantuje zmiany bez dealokacji: gdy rozmiaru nie obsługuje bieżący klaster sprzętowy, może być potrzebne <em>Stop</em> w portalu przed zmianą, a potem <em>Start</em>. Zmiana rozmiaru uruchomionej maszyny powoduje restart. Po uruchomieniu odśwież stronę serwera w przeglądarce; potem wróć do <code>Standard_B2ls_v2</code> (3.2.27).
 <strong>Jak sprawdzić:</strong> strona serwera wraca po restarcie bez Twojego udziału (<code>systemctl enable</code> z instalacji); <em>Size</em> pokazuje cenę obu rozmiarów, różnica to koszt 4 GB RAM.</p>
 <!-- ankieta:start -->
 <h2 id="na-koniec-mikroankieta">Na koniec: mikroankieta</h2>

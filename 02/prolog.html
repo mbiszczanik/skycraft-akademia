@@ -580,7 +580,7 @@ details[open] > summary {
 <td>włączenie diagnostyki na każdej maszynie</td>
 </tr>
 </tbody></table>
-<p>Efekty <code>Modify</code> i <code>DeployIfNotExists</code> działają dopiero po fakcie na istniejących zasobach i wymagają zadania naprawczego (remediation task) oraz tożsamości zarządzanej z odpowiednią rolą. Ocena zgodności odświeża się co około 24 godziny albo na żądanie.</p>
+<p>Efekt <code>Modify</code> może zmienić żądanie tworzenia lub aktualizacji zasobu, zanim obsłuży je usługa. Dla zasobów już istniejących ocena zgodności tylko wykrywa brak: do poprawienia go służy zadanie naprawcze (remediation task), korzystające z tożsamości zarządzanej z odpowiednią rolą. Efekt <code>DeployIfNotExists</code> sprawdza wymagany zasób poboczny po obsłużeniu tworzenia lub aktualizacji; gdy go brakuje, może go wdrożyć przez tożsamość zarządzaną. Naprawa wcześniej istniejących zasobów też wymaga zadania naprawczego. Ocena zgodności odświeża się co około 24 godziny albo na żądanie.</p>
 <p>Tagi nie dziedziczą się z grupy zasobów na zasoby. To najczęstsze zaskoczenie tego spotkania: otagowana grupa nie sprawia, że maszyna w środku ma tag. W produkcji rozwiązuje to policy z efektem <code>Modify</code>. Limit wynosi 50 tagów na zasób, klucz do 512 znaków, wartość do 256.</p>
 <p>Blokady mają dwa poziomy: <code>CanNotDelete</code> (można zmieniać, nie można usuwać) i <code>ReadOnly</code> (nie można nic zmieniać). Dziedziczą się w dół i obowiązują każdego, także Ownera. <code>ReadOnly</code> bywa zdradliwy, bo część operacji, które wyglądają na odczyt, technicznie modyfikuje zasób: lista kluczy konta storage to operacja <code>POST</code>, więc blokada <code>ReadOnly</code> ją zatrzyma.</p>
 <p><strong>Typowe błędy.</strong></p>
