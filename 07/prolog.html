@@ -597,7 +597,7 @@ details[open] > summary {
 <li>Przekonanie, że goście nie wejdą. Wejdą, jeśli są w tenancie, a aplikacja nie wymaga przypisania.</li>
 <li><em>Allow unauthenticated access</em> zostawione po teście. Moduł przepuszcza wtedy żądania bez logowania.</li>
 <li>Nowy adres aplikacji bez dopisania go w rejestracji. Logowanie kończy się błędem AADSTS50011.</li>
-<li>Rejestracja bez tokenów ID, a aplikacja bez sekretu. Logowanie kończy się błędem AADSTS700054.</li>
+<li>Rejestracja bez tokenów ID, a aplikacja bez sekretu. Logowanie kończy się stroną „HTTP ERROR 401” na adresie <code>/.auth/login/aad/callback</code>.</li>
 </ul>
 <p><strong>Na egzaminie AZ-104.</strong> Samego Easy Auth w zakresie egzaminu nie ma. Są w nim sprawy, które dziś dotykasz przy okazji: goście i ich dostęp („Użytkownik z firmy partnerskiej ma logować się swoim kontem. Co zrobić?”: zaprosić go jako gościa B2B) oraz licencje Entra ID („Dostęp do aplikacji ma dostać cała grupa. Czego potrzeba?”: licencji P1 dla przypisania grupy).</p>
 <hr>
