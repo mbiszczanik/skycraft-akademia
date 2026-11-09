@@ -654,7 +654,7 @@ details[open] > summary {
 <p>Kroki poniżej mijasz świadomie. Jeśli lab guide każe Ci coś zrobić, a nie ma tego na liście wyżej, to jest to jeden z nich.</p>
 <ul>
 <li><strong>Lab 3.3:</strong> 3.3.6-3.3.9 · side quest 2</li>
-<li><strong>Lab 3.4:</strong> 3.4.3-3.4.4 · pomijamy (obraz z bloku 2 zastępuje statyczny <code>index.html</code> i wdrożenie paczki ZIP); 3.4.12 · side quest 3; 3.4.13 · spotkanie 8</li>
+<li><strong>Lab 3.4:</strong> 3.4.3-3.4.4, 3.4.12 · pomijamy (obraz z bloku 2 zastępuje statyczny <code>index.html</code> i wdrożenie paczki ZIP); 3.4.13 · spotkanie 8</li>
 </ul>
 <p>Laby 3.3 i 3.4 numerują kroki ciągle (3.3.1-3.3.9 i 3.4.1-3.4.13) i nie mają luk. Dziś rdzeń to 3.3.1-3.3.5 i 3.4.1-3.4.11 bez 3.4.3-3.4.4, wszystko w wariancie platform/prod. Sekcję 1 labu 3.4 (tiery planów) czytasz w domu.</p>
 <!-- quest-log:end --><h2 id="dockerfile">Dockerfile</h2>
@@ -1224,7 +1224,7 @@ if (-not $planId) {
 </ul>
 <h2 id="side-questy">Side questy</h2>
 <p>Zadania dla tych, którzy skończyli blok przed czasem, i do samodzielnej pracy po zajęciach. Każdy side quest jest niezależny od rdzenia. Kolumna „Po bloku” mówi, od kiedy da się go zacząć. Zrobione side questy pokaż prowadzącemu na następnym spotkaniu.</p>
-<p>Uwaga o kosztach: side quest 2 stoi w prod i znika z save game; side questy 1 i 3 zmieniają tenant i rekordy u rejestratora domeny, więc nic nie kosztują; side quest 4 buduje obraz w GitHubie, a w Azure dokłada tylko jeden tag w rejestrze.</p>
+<p>Uwaga o kosztach: side quest 2 stoi w prod i znika z save game; side quest 1 zmienia tenant, więc nic nie kosztuje; side quest 3 buduje obraz w GitHubie, a w Azure dokłada tylko jeden tag w rejestrze.</p>
 <table>
 <thead>
 <tr>
@@ -1254,14 +1254,6 @@ if (-not $planId) {
 </tr>
 <tr>
 <td>3</td>
-<td>Własna domena z GitHub Student Pack</td>
-<td>5</td>
-<td>⭐⭐⭐</td>
-<td>30 min</td>
-<td><a href="https://github.com/mbiszczanik/skycraft/blob/21592e703746a3193c5d8b06c129da5f2db88908/module-3-compute/3.4-app-service/lab-guide-3.4.md#step-3412-custom-dns-conceptual">Lab 3.4, Step 3.4.12</a></td>
-</tr>
-<tr>
-<td>4</td>
 <td>Własny obraz przez GitHub Actions</td>
 <td>2</td>
 <td>⭐⭐⭐</td>
@@ -1277,11 +1269,7 @@ if (-not $planId) {
 <p><strong>Cel:</strong> trzeci sposób uruchomienia tego samego obrazu i skalowanie liczbą żądań zamiast procesora.
 <strong>Kroki:</strong> wg 3.3.6-3.3.9, w wariancie prod: <em>Container Apps → Create</em>, grupa <code>prod-skycraft-swc-rg</code> i region <em>Sweden Central</em> (kreator podsuwa pierwszą grupę z listy i inny region), nazwa <code>prod-skycraft-swc-ca-panel</code>, nowe środowisko <code>prod-skycraft-swc-cae</code>, w nim <em>Monitoring</em> → <em>Don&#39;t save logs</em>; jeśli pole nazwy środowiska pokazuje <em>Failed to validate Container App Environment name</em>, subskrypcja nie ma jeszcze dostawcy Container Apps: <code>az provider register -n Microsoft.App --wait</code> (ok. minuty), potem zamknij kreator i otwórz go od nowa; kontener: obraz <code>panel:v1</code> z Twojego rejestru, <em>Authentication type: Managed identity</em>; Twojej tożsamości <code>platform-skycraft-swc-id-panel</code> tu nie wybierzesz: kreator bierze tożsamość systemową środowiska i sam nadaje jej rolę <em>AcrPull</em> na rejestrze; 0,5 vCPU i 1 GiB (domyślnie), zmienna <code>WORLD_SERVER_URL</code> jak w bloku 3; <em>Ingress</em>: zaznaczony, <em>Accepting traffic from anywhere</em> (domyślnie jest ruch tylko ze środowiska), port docelowy 8080. Kreator nie ma zakładki skalowania: po utworzeniu aplikacja → <em>Scale</em>: <em>Min replicas</em> 1, <em>Max replicas</em> 3 (domyślnie 0 i 10), reguła <code>http-scaler</code> na 10 równoczesnych żądań już tam jest → <em>Save as a new revision</em>.
 <strong>Jak sprawdzić:</strong> adres aplikacji z <em>Overview</em> pokazuje panel po <code>https://</code>; serwer świata offline, bo środowisko nie jest w sieci prod. Podsumowanie kreatora wymienia nowy obszar roboczy Log Analytics nawet przy <em>Don&#39;t save logs</em>, ale ten obszar nie powstaje; kreator zakłada za to pustą grupę <code>DefaultResourceGroup-SEC</code>, której save game nie kasuje: skasuj ją sam (<code>az group delete --name DefaultResourceGroup-SEC</code>). W IAM rejestru zostaje wtedy przypisanie <em>AcrPull</em> środowiska, którego już nie ma; skasuj je, tak jak ręczne przypisanie w kroku 25. Środowisko wydłuża save game: na próbie grupa prod kasowała się prawie pół godziny zamiast pięciu minut, więc rób ten side quest w domu albo zostaw na save game czas.</p>
-<h3 id="sq3-własna-domena-z-github-student-pack">SQ3: Własna domena z GitHub Student Pack</h3>
-<p><strong>Cel:</strong> prawdziwa domena i darmowy certyfikat zarządzany przez App Service.
-<strong>Kroki:</strong> weź domenę z jednej z ofert w GitHub Student Pack (aktywowałeś go na spotkaniu 1). Aplikacja → <em>Settings → Custom domains → Add custom domain</em>: <em>All other domain services</em>, <em>App Service Managed Certificate</em>, domena <code>panel.&lt;Twoja domena&gt;</code>. Portal pokaże dwa rekordy: TXT <code>asuid.panel</code> i CNAME <code>panel</code> wskazujący na <em>Default domain</em>. Wpisz je u rejestratora, <em>Validate</em>, <em>Add</em>. Na koniec dopisz w rejestracji aplikacji drugi <em>Redirect URI</em>: <code>https://panel.&lt;Twoja domena&gt;/.auth/login/aad/callback</code>.
-<strong>Jak sprawdzić:</strong> <code>https://panel.&lt;Twoja domena&gt;</code> otwiera panel z kłódką i logowaniem. Wiązanie domeny i certyfikat znikają z save game razem z aplikacją; rekordy u rejestratora zostają, więc po load game dodajesz domenę ponownie (albo opisujesz ją w kodzie: zadanie dla chętnych).</p>
-<h3 id="sq4-własny-obraz-przez-github-actions">SQ4: Własny obraz przez GitHub Actions</h3>
+<h3 id="sq3-własny-obraz-przez-github-actions">SQ3: Własny obraz przez GitHub Actions</h3>
 <p><strong>Cel:</strong> zbudować obraz z własnego <code>Dockerfile</code> tak, jak kurs zbudował swój: w chmurze GitHuba, bez Dockera na komputerze i bez ACR Tasks.
 <strong>Kroki:</strong> w repozytorium <code>skycraft-platform</code> plik <code>.github/workflows/panel-image.yml</code> z treścią niżej (w tagu wpisz swój login GitHub małymi literami); commit, push, a w GitHubie → <em>Actions</em> poczekaj, aż przebieg skończy się na zielono (sam plik workflow uruchamia przebieg tylko dlatego, że jest na liście <code>paths</code>). Pakiet powstaje jako prywatny: profil → <em>Packages</em> → <code>skycraft-panel</code> → <em>Package settings</em> → <em>Change visibility</em> → <em>Public</em>; bez tego import kończy się błędem <code>StatusCode: 401, Reason: Unauthorized</code>. Potem <code>az acr import --name platformskycraftswcacrNN --source ghcr.io/&lt;login&gt;/skycraft-panel:v2 --image panel:v2</code>.</p>
 <pre><code class="language-yaml">name: Panel image
